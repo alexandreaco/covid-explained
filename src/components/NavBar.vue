@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <nav class="nav-extended indigo darken-2">
+    <nav class="nav-extended teal lighten-2">
       <div class="nav-content">
         <router-link to="">
           <span class="nav-title">COVID EXPLAINED</span>
