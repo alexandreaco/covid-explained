@@ -9,8 +9,9 @@
               {{ post.title }}
             </router-link>
           </span>
-          <p>
-            {{ post.text }}
+          <p class="text-author">{{ post.author }}</p>
+          <p class="text-snippet">
+            {{ post.text | createSnippet }}
           </p>
         </div>
       </div>
@@ -24,7 +25,10 @@
               {{ post.title }}
             </router-link>
           </span>
-          <p>{{ post.text }}</p>
+          <p class="text-author">{{ post.author }}</p>
+          <p class="text-snippet">
+            {{ post.text | createSnippet }}
+          </p>
         </div>
       </div>
     </div>
@@ -37,7 +41,10 @@
               {{ post.title }}
             </router-link>
           </span>
-          <p>{{ post.text }}</p>
+          <p class="text-author">{{ post.author }}</p>
+          <p class="text-snippet">
+            {{ post.text | createSnippet }}
+          </p>
         </div>
       </div>
     </div>
@@ -50,7 +57,10 @@
               {{ post.title }}
             </router-link>
           </span>
-          <p>{{ post.text }}</p>
+          <p class="text-author">{{ post.author }}</p>
+          <p class="text-snippet">
+            {{ post.text | createSnippet }}
+          </p>
         </div>
       </div>
     </div>
@@ -63,7 +73,10 @@
               {{ post.title }}
             </router-link>
           </span>
-          <p>{{ post.text }}</p>
+          <p class="text-author">{{ post.author }}</p>
+          <p class="text-snippet">
+            {{ post.text | createSnippet }}
+          </p>
         </div>
       </div>
     </div>
@@ -86,7 +99,7 @@ export default {
           return post;
         }
       });
-      return questionPosts;
+      return questionPosts.slice(0, 2);
     },
     scenarioPosts: function() {
       let scenarioPosts = this.posts.filter(post => {
@@ -94,15 +107,16 @@ export default {
           return post;
         }
       });
-      return scenarioPosts;
+      return scenarioPosts.slice(0, 2);
     },
     definitionPosts: function() {
       let definitionPosts = this.posts.filter(post => {
         if (post.topic === 'definitions') {
           return post;
         }
+        definitionPosts;
       });
-      return definitionPosts;
+      return definitionPosts.slice(0, 2);
     },
     explainersPosts: function() {
       let explainersPosts = this.posts.filter(post => {
@@ -110,7 +124,7 @@ export default {
           return post;
         }
       });
-      return explainersPosts;
+      return explainersPosts.slice(0, 2);
     },
     newsPosts: function() {
       let newsPosts = this.posts.filter(post => {
@@ -118,11 +132,20 @@ export default {
           return post;
         }
       });
-      return newsPosts;
+      return newsPosts.slice(0, 2);
+    },
+  },
+  filters: {
+    createSnippet: function(value) {
+      if (!value) {
+        value = '';
+      } else if (value.length > 100) {
+        value = value.substring(0, 100) + '...';
+      }
+      return value;
     },
   },
   created() {
-    console.log('IN CREATED');
     db.collection('posts')
       .get()
       .then(snapshot => {
