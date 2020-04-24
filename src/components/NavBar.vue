@@ -2,14 +2,15 @@
   <div class="navbar">
     <nav class="nav-extended teal lighten-2">
       <div class="nav-content">
-        <router-link to="">
+        <router-link :to="{ name: 'Home' }">
           <span class="nav-title">COVID EXPLAINED</span>
         </router-link>
-        <!-- <a href="" class="btn-floating btn-large halfway-fab blue">
-          <router-link to="">
-            <i class="material-icons">add</i>
-          </router-link>
-        </a> -->
+        <router-link :to="{ name: 'AboutUs' }">
+          About Us
+        </router-link>
+        <router-link :to="{ name: 'ContactUs' }">
+          Contact Us
+        </router-link>
       </div>
     </nav>
   </div>
