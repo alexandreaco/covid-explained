@@ -5,13 +5,13 @@
       <div class="card" v-for="post in questionPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            <router-link to="">
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
               {{ post.title }}
             </router-link>
           </span>
-          <router-link to="">
-            {{ post.title }}
-          </router-link>
+          <p>
+            {{ post.text }}
+          </p>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
       <div class="card" v-for="post in scenarioPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            <router-link to="">
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
               {{ post.title }}
             </router-link>
           </span>
@@ -33,7 +33,7 @@
       <div class="card" v-for="post in definitionPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            <router-link to="">
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
               {{ post.title }}
             </router-link>
           </span>
@@ -46,7 +46,7 @@
       <div class="card" v-for="post in explainersPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            <router-link to="">
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
               {{ post.title }}
             </router-link>
           </span>
@@ -59,7 +59,7 @@
       <div class="card" v-for="post in newsPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            <router-link to="">
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
               {{ post.title }}
             </router-link>
           </span>
