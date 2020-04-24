@@ -11,6 +11,9 @@
         <router-link :to="{ name: 'ContactUs' }">
           Contact Us
         </router-link>
+        <router-link :to="{ name: 'AdminLogin' }">
+          Admin Login
+        </router-link>
       </div>
     </nav>
   </div>
