@@ -1,7 +1,7 @@
 <template>
   <div class="post">
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.text }}</p>
+    <h3 v-if="this.post">{{ post.title }}</h3>
+    <p v-if="this.post">{{ post.text }}</p>
   </div>
 </template>
 
@@ -20,7 +20,6 @@ export default {
       .doc(this.postId)
       .get()
       .then(doc => {
-        console.log('doc.data():', doc.data());
         let post = doc.data();
         post.id = doc.id;
         this.post = post;
