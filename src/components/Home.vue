@@ -195,6 +195,8 @@ export default {
 .card.post-card:hover {
   opacity: 0.5;
 }
+
+
 .card.topic-card h2 {
   font-size: 25px;
   padding: 8px;
