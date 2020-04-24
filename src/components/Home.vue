@@ -2,21 +2,27 @@
   <div class="home ">
     <div class="card">
       <h2 class="teal-text">QUESTIONS</h2>
-      <div class="card" v-for="post in questionPosts">
+      <div class="card" v-for="post in questionPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            {{ post.title }}
+            <router-link to="">
+              {{ post.title }}
+            </router-link>
           </span>
-          <p>{{ post.text }}</p>
+          <router-link to="">
+            {{ post.title }}
+          </router-link>
         </div>
       </div>
     </div>
     <div class="card">
       <h2 class="teal-text">SCENARIOS</h2>
-      <div class="card" v-for="post in scenarioPosts">
+      <div class="card" v-for="post in scenarioPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            {{ post.title }}
+            <router-link to="">
+              {{ post.title }}
+            </router-link>
           </span>
           <p>{{ post.text }}</p>
         </div>
@@ -24,10 +30,12 @@
     </div>
     <div class="card">
       <h2 class="teal-text">DEFINITIONS</h2>
-      <div class="card" v-for="post in definitionPosts">
+      <div class="card" v-for="post in definitionPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            {{ post.title }}
+            <router-link to="">
+              {{ post.title }}
+            </router-link>
           </span>
           <p>{{ post.text }}</p>
         </div>
@@ -35,10 +43,12 @@
     </div>
     <div class="card">
       <h2 class="teal-text">EXPLAINERS</h2>
-      <div class="card" v-for="post in explainersPosts">
+      <div class="card" v-for="post in explainersPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            {{ post.title }}
+            <router-link to="">
+              {{ post.title }}
+            </router-link>
           </span>
           <p>{{ post.text }}</p>
         </div>
@@ -46,10 +56,12 @@
     </div>
     <div class="card">
       <h2 class="teal-text">IN THE NEWS</h2>
-      <div class="card" v-for="post in newsPosts">
+      <div class="card" v-for="post in newsPosts" :key="post.id">
         <div class="card-content">
           <span class="card-title">
-            {{ post.title }}
+            <router-link to="">
+              {{ post.title }}
+            </router-link>
           </span>
           <p>{{ post.text }}</p>
         </div>
@@ -110,13 +122,14 @@ export default {
     },
   },
   created() {
+    console.log('IN CREATED');
     db.collection('posts')
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
           let post = doc.data();
           post.id = doc.id;
-          console.log('post:', post);
+          this.posts.push(post);
         });
       });
   },

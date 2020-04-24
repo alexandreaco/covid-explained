@@ -5,11 +5,11 @@
         <router-link to="">
           <span class="nav-title">COVID EXPLAINED</span>
         </router-link>
-        <a href="" class="btn-floating btn-large halfway-fab blue">
+        <!-- <a href="" class="btn-floating btn-large halfway-fab blue">
           <router-link to="">
             <i class="material-icons">add</i>
           </router-link>
-        </a>
+        </a> -->
       </div>
     </nav>
   </div>
