@@ -7,13 +7,9 @@
       <div class="card post-card" v-for="post in questionPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
-            <span class="card-title">
-              {{ post.title }}
-            </span>
+            <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">
-              {{ post.text | createSnippet }}
-            </p>
+            <p class="text-snippet">{{ post.text | createSnippet }}</p>
           </div>
         </router-link>
       </div>
@@ -25,37 +21,23 @@
       <div class="card post-card" v-for="post in scenarioPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
-            <span class="card-title">
-              {{ post.title }}
-            </span>
+            <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">
-              {{ post.text | createSnippet }}
-            </p>
+            <p class="text-snippet">{{ post.text | createSnippet }}</p>
           </div>
         </router-link>
       </div>
     </div>
     <div class="card topic-card teal lighten-5">
-      <router-link
-        :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
-      >
+      <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">
         <h2 class="teal-text">DEFINITIONS</h2>
       </router-link>
-      <div
-        class="card post-card"
-        v-for="post in definitionPosts"
-        :key="post.id"
-      >
+      <div class="card post-card" v-for="post in definitionPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
-            <span class="card-title">
-              {{ post.title }}
-            </span>
+            <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">
-              {{ post.text | createSnippet }}
-            </p>
+            <p class="text-snippet">{{ post.text | createSnippet }}</p>
           </div>
         </router-link>
       </div>
@@ -64,20 +46,12 @@
       <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">
         <h2 class="teal-text">EXPLAINERS</h2>
       </router-link>
-      <div
-        class="card post-card"
-        v-for="post in explainersPosts"
-        :key="post.id"
-      >
+      <div class="card post-card" v-for="post in explainersPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
-            <span class="card-title">
-              {{ post.title }}
-            </span>
+            <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">
-              {{ post.text | createSnippet }}
-            </p>
+            <p class="text-snippet">{{ post.text | createSnippet }}</p>
           </div>
         </router-link>
       </div>
@@ -89,13 +63,9 @@
       <div class="card post-card" v-for="post in newsPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
-            <span class="card-title">
-              {{ post.title }}
-            </span>
+            <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">
-              {{ post.text | createSnippet }}
-            </p>
+            <p class="text-snippet">{{ post.text | createSnippet }}</p>
           </div>
         </router-link>
       </div>
@@ -186,6 +156,7 @@ export default {
   grid-gap: 10px;
   margin-top: 30px;
   margin: 10px;
+  padding-left: 150px;
 }
 .home h2 {
   font-size: 1.5em;
