@@ -1,7 +1,9 @@
 <template>
-  <div class="home ">
+  <div class="home">
     <div class="card topic-card teal lighten-5">
-      <h2 class="teal-text topic">QUESTIONS</h2>
+      <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">
+        <h2 class="teal-text topic-title">QUESTIONS</h2>
+      </router-link>
       <div class="card post-card" v-for="post in questionPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
@@ -17,7 +19,9 @@
       </div>
     </div>
     <div class="card topic-card teal lighten-5">
-      <h2 class="teal-text">SCENARIOS</h2>
+      <router-link :to="{ name: 'Topic', params: { topicName: 'scenarios' } }">
+        <h2 class="teal-text">SCENARIOS</h2>
+      </router-link>
       <div class="card post-card" v-for="post in scenarioPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
@@ -33,7 +37,11 @@
       </div>
     </div>
     <div class="card topic-card teal lighten-5">
-      <h2 class="teal-text">DEFINITIONS</h2>
+      <router-link
+        :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
+      >
+        <h2 class="teal-text">DEFINITIONS</h2>
+      </router-link>
       <div
         class="card post-card"
         v-for="post in definitionPosts"
@@ -53,7 +61,9 @@
       </div>
     </div>
     <div class="card topic-card teal lighten-5">
-      <h2 class="teal-text">EXPLAINERS</h2>
+      <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">
+        <h2 class="teal-text">EXPLAINERS</h2>
+      </router-link>
       <div
         class="card post-card"
         v-for="post in explainersPosts"
@@ -73,7 +83,9 @@
       </div>
     </div>
     <div class="card topic-card teal lighten-5">
-      <h2 class="teal-text">IN THE NEWS</h2>
+      <router-link :to="{ name: 'Topic', params: { topicName: 'news' } }">
+        <h2 class="teal-text">IN THE NEWS</h2>
+      </router-link>
       <div class="card post-card" v-for="post in newsPosts" :key="post.id">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
@@ -196,12 +208,13 @@ export default {
   opacity: 0.5;
 }
 
-
 .card.topic-card h2 {
   font-size: 25px;
   padding: 8px;
   margin: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  background-color: rgb(166, 221, 219);
+  box-shadow: 1px 1px 4px 1px teal;
 }
 .card .card-content .card-title {
   font-size: 18px;

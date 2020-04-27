@@ -1,42 +1,32 @@
 <template>
-  <div class="contact-us">
-    <div class="transparent-background">
-      <h3>SEND US A NOTE</h3>
-      <div class="input-field col s6">
-        <i class="material-icons prefix">account_circle</i>
-        <input v-model="sender.name" id="name" type="text" class="validate" />
-        <label class="active" for="name">Name</label>
+  <div class="contact-us container">
+    <form class="card-panel" @submit.prevent="signup">
+      <h2 class="center teal-text">Contact Us</h2>
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" v-model="name" />
       </div>
-      <div class="input-field col s6">
-        <i class="material-icons prefix">phone</i>
-        <input
-          v-model="sender.email"
-          id="email"
-          type="email"
-          class="validate"
-        />
-        <label class="active" for="email">Email</label>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" v-model="email" />
       </div>
       <div class="row">
         <form class="col s12">
           <div class="row">
-            <div class="input-field col s12">
-              <i class="material-icons prefix">mode_edit</i>
-              <textarea
-                v-model="sender.message"
-                id="textarea1"
-                class="materialize-textarea"
-              ></textarea>
+            <div class="field">
               <label class="active" for="textarea1">Message</label>
+              <textarea v-model="sender.message" id="textarea1" class="materialize-textarea"></textarea>
             </div>
           </div>
         </form>
       </div>
-      <button class="btn waves-effect waves-light" type="submit" name="action">
-        Submit
-        <i class="material-icons right">send</i>
-      </button>
-    </div>
+      <div class="field center">
+        <button class="btn teal">
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -57,27 +47,15 @@ export default {
 
 <style>
 .contact-us {
-  text-align: center;
-  padding: 50px 150px;
-  background-color: #60a09e;
-  position: absolute;
-  top: 64px;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
+  max-width: 400px;
+  margin-top: 60px;
 }
-
-.transparent-background {
-  background-color: rgb(240, 255, 255, 0.25);
-  padding: 50px;
-  margin: 50px 10px 50px 0px;
-  min-height: 600px;
+.contact-us h2 {
+  font-size: 2.4em;
 }
-
-.input-field label {
-  color: rgb(172, 223, 221);
+.contact-us .field {
+  margin-bottom: 16px;
 }
-
 #textarea1 {
   height: 100px;
 }

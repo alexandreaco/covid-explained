@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Post from '@/components/Post';
+
+// Views:
 import Home from '@/components/Home';
+import Post from '@/components/Post';
+import Topic from '@/components/Topic';
 import AboutUs from '@/components/AboutUs';
 import ContactUs from '@/components/ContactUs';
 import AdminLogin from '@/components/AdminLogin';
@@ -35,6 +38,11 @@ export default new Router({
       path: '/post/:postId',
       name: 'Post',
       component: Post,
+    },
+    {
+      path: '/topic/:topicName',
+      name: 'Topic',
+      component: Topic,
     },
   ],
 });
