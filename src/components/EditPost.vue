@@ -98,7 +98,7 @@
           Submit Changes
           <i class="material-icons right">send</i>
         </button>
-        <button class="btn red">
+        <button class="btn red" @click="deletePost(postId)">
           Delete Post
           <i class="material-icons right">delete</i>
         </button>
@@ -161,7 +161,18 @@ export default {
       );
     },
 
-    deletePost() {},
+    deletePost(postId) {
+      db.collection('posts')
+        .doc(postId)
+        .delete()
+        .then(() => {
+          console.log('Document successfully deleted!');
+          this.$router.push({ name: 'Home' });
+        })
+        .catch(error => {
+          console.error('Error removing document: ', error);
+        });
+    },
     updatePostId() {
       this.postId = this.$route.params.postId;
       this.getPost();
