@@ -10,6 +10,8 @@ import ContactUs from '@/components/ContactUs';
 import AdminSignup from '@/components/AdminSignup';
 import AdminLogin from '@/components/AdminLogin';
 import EditPost from '@/components/EditPost';
+import AddPost from '@/components/AddPost';
+
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
 Vue.use(Router);
@@ -45,6 +47,11 @@ export default new Router({
       component: ContactUs,
     },
     {
+      path: '/post/add',
+      name: 'AddPost',
+      component: AddPost,
+    },
+    {
       path: '/post/:postId',
       name: 'Post',
       component: Post,
@@ -59,10 +66,5 @@ export default new Router({
       name: 'EditPost',
       component: EditPost,
     },
-    // {
-    //   path: '/post/add/',
-    //   name: 'AddPost',
-    //   component: AddPost,
-    // },
   ],
 });
