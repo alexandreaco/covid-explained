@@ -4,15 +4,22 @@
       <div v-if="this.post">
         <div class="post-title">
           <h3>{{ post.title }}</h3>
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <i
+            v-if="admin"
+            class="material-icons edit"
+            @click="redirectToEditPost(post.id)"
+            >edit</i
+          >
         </div>
         <div class="author-and-date">
           <p v-if="this.post.author">By {{ post.author }}</p>
-          <p v-if="this.post.createdAt">Posted on {{ new Date(post.createdAt.seconds) }}</p>
+          <p v-if="this.post.createdAt">
+            Posted on {{ new Date(post.createdAt.seconds) }}
+          </p>
         </div>
         <div class="text-and-img">
           <img :src="this.post.imgUrl" v-if="this.post.imgUrl" />
-          <p>{{ post.text }}</p>
+          {{ post.text }}
         </div>
       </div>
     </div>
@@ -31,6 +38,14 @@ export default {
       postId: this.$route.params.postId,
       post: null,
     };
+  },
+  computed: {
+    htmlText: function() {
+      console.log('this.post.text:', this.post.text);
+      var el = document.createElement('html');
+      el.innerHTML = this.post.text;
+      return 0;
+    },
   },
   methods: {
     redirectToEditPost(postId) {

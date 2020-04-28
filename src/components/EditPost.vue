@@ -14,25 +14,45 @@
         <label for="topic">Topic</label>
         <p>
           <label>
-            <input name="topic" type="radio" value="questions" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="questions"
+              v-model="topic"
+            />
             <span>QUESTIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="scenarios" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="scenarios"
+              v-model="topic"
+            />
             <span>SCENARIOS</span>
           </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="definitions" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="definitions"
+              v-model="topic"
+            />
             <span>DEFINITIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="explainers" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="explainers"
+              v-model="topic"
+            />
             <span>EXPLAINERS</span>
           </label>
         </p>
@@ -42,19 +62,33 @@
             <span>IN THE NEWS</span>
           </label>
         </p>
-        <!-- <label for="topic">Topic</label>
-        <input id="topic" type="text" v-model="topic" />-->
       </div>
       <div class="field">
-        <label for="imgUrl">Image URL</label>
-        <input id="imgUrl" type="text" v-model="imgUrl" />
+        <label for="imgUrl"
+          >Image: Be sure to first choose the file and then upload the image
+          before submitting changes.</label
+        >
+        <br />
+        <div class="image-buttons">
+          1. <input type="file" @change="onFileSelected" accept="image/*" /> 2.
+          <button @click="onUpload">Upload Image</button>
+        </div>
+
+        <br />
+        <label for="imgUrl">Image Preview</label>
+        <br />
+        <img :src="this.imgUrl" v-if="this.imgUrl" />
       </div>
       <div class="row">
         <form class="col s12">
           <div class="row">
             <div class="field">
               <label class="active" for="textarea1">Text</label>
-              <textarea v-model="text" id="textarea1" class="materialize-textarea"></textarea>
+              <textarea
+                v-model="text"
+                id="textarea1"
+                class="materialize-textarea"
+              ></textarea>
             </div>
           </div>
         </form>
@@ -74,18 +108,21 @@
 </template>
 <script>
 import db from '@/firebase/init';
+import firebase from 'firebase';
 
 export default {
   name: 'EditPost',
   data() {
     return {
+      selectedFile: null,
+      uploadValue: 0,
+      picture: null,
       postId: this.$route.params.postId,
       title: null,
       imgUrl: null,
       text: null,
       author: null,
       topic: null,
-      selected: '',
     };
   },
   watch: {
@@ -94,6 +131,36 @@ export default {
     },
   },
   methods: {
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+    },
+
+    onUpload() {
+      const storageRef = firebase
+        .storage()
+        .ref(`images/${this.selectedFile.name}`);
+      const task = storageRef.put(this.selectedFile);
+      task.on(
+        'state_changed',
+        snapshot => {
+          let percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.uploadValue = percentage;
+        },
+        error => {
+          console.error(error);
+        },
+        () => {
+          this.uploadValue = 100;
+          task.snapshot.ref.getDownloadURL().then(url => {
+            this.picture = url;
+            console.log('this.picture:', this.picture);
+            this.imgUrl = this.picture;
+          });
+        }
+      );
+    },
+
     deletePost() {},
     updatePostId() {
       this.postId = this.$route.params.postId;
@@ -104,7 +171,6 @@ export default {
         .doc(this.postId)
         .get()
         .then(doc => {
-          console.log('doc:', doc.data());
           this.title = doc.data().title;
           this.text = doc.data().text;
           this.author = doc.data().author;
@@ -160,5 +226,14 @@ export default {
 select {
   z-index: 1;
   background-color: thistle;
+}
+
+img {
+  max-width: 150px;
+  padding: 10px 10px 10px 0px;
+}
+
+.image-buttons {
+  padding: 5px 10px 10px 0px;
 }
 </style>

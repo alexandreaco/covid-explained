@@ -10,8 +10,11 @@ import ContactUs from '@/components/ContactUs';
 import AdminSignup from '@/components/AdminSignup';
 import AdminLogin from '@/components/AdminLogin';
 import EditPost from '@/components/EditPost';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
 Vue.use(Router);
+
+Vue.use(CKEditor);
 
 export default new Router({
   mode: 'history',
