@@ -45,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .contact-us {
   max-width: 400px;
   margin-top: 60px;

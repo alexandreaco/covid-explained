@@ -75,6 +75,7 @@
 
 <script>
 import db from '@/firebase/init';
+import firebase from 'firebase';
 export default {
   name: 'Home',
   data() {
@@ -136,6 +137,7 @@ export default {
     },
   },
   created() {
+    console.log('AUTH:', firebase.auth().currentUser);
     db.collection('posts')
       .get()
       .then(snapshot => {
@@ -149,7 +151,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .home {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

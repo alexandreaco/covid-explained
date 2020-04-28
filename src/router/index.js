@@ -7,7 +7,9 @@ import Post from '@/components/Post';
 import Topic from '@/components/Topic';
 import AboutUs from '@/components/AboutUs';
 import ContactUs from '@/components/ContactUs';
+import AdminSignup from '@/components/AdminSignup';
 import AdminLogin from '@/components/AdminLogin';
+import EditPost from '@/components/EditPost';
 
 Vue.use(Router);
 
@@ -23,6 +25,11 @@ export default new Router({
       path: '/about-us',
       name: 'AboutUs',
       component: AboutUs,
+    },
+    {
+      path: '/admin-signup',
+      name: 'AdminSignup',
+      component: AdminSignup,
     },
     {
       path: '/admin-login',
@@ -44,5 +51,15 @@ export default new Router({
       name: 'Topic',
       component: Topic,
     },
+    {
+      path: '/post/edit/:postId',
+      name: 'EditPost',
+      component: EditPost,
+    },
+    // {
+    //   path: '/post/add/',
+    //   name: 'AddPost',
+    //   component: AddPost,
+    // },
   ],
 });

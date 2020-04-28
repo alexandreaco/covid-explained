@@ -16,18 +16,13 @@
               <router-link :to="{ name: 'ContactUs' }">Contact Us</router-link>
             </a>
           </li>
-          <li>
-            <a href="#">
-              <router-link :to="{ name: 'AdminLogin' }">Admin Login</router-link>
-            </a>
-          </li>
         </ul>
       </div>
     </nav>
   </div>
 </template>
 
-<script>
+<script scoped>
 export default {
   name: 'NavBar',
   data() {
@@ -36,7 +31,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 nav .brand-logo {
   padding: 0 10px;
 }

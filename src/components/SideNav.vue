@@ -29,38 +29,64 @@
         </router-link>
       </li>
     </ul>
+    <ul>
+      <li v-if="!admin">
+        <a href="#">
+          <router-link class="white-text admin-links" :to="{ name: 'AdminLogin' }">Admin Log In</router-link>
+        </a>
+      </li>
+      <li v-if="!admin">
+        <a href="#">
+          <router-link class="white-text admin-links" :to="{ name: 'AdminSignup' }">Admin Sign Up</router-link>
+        </a>
+      </li>
+      <li v-if="admin">
+        <a href="#">
+          <a class="white-text admin-links" @click="logout">Log Out</a>
+        </a>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   data: () => {
     return {
-      showSidebar: false,
-      showLink: false,
+      admin: null,
     };
   },
   methods: {
-    showNav() {
-      if (this.showSidebar) {
-        this.showLink = false;
-        setTimeout(() => {
-          this.showSidebar = false;
-        }, 500);
-      } else {
-        this.showSidebar = true;
-        setTimeout(() => {
-          this.showLink = true;
-        }, 500);
-      }
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push(-1);
+        });
     },
+  },
+  created() {
+    let admin = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged(user => {
+      if (admin) {
+        this.admin = admin;
+      } else {
+        this.admin = null;
+      }
+    });
   },
 };
 </script>
 
 <style scoped>
 .container {
-  position: absolute;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   top: 0;
   left: 0;
   width: 150px;
@@ -69,9 +95,23 @@ export default {
   min-height: calc(100vh - 20px);
   background-color: rgb(25, 136, 134);
   z-index: 1;
+  bottom: 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container li:hover {
   opacity: 0.5;
+}
+.container li {
+  padding: 5px 0px;
+  margin: 0;
+}
+.admin-links {
+  font-size: 12px;
 }
 </style>
