@@ -1,42 +1,75 @@
 <template>
-  <div>
-    <div class="edit-post container">
-      <form class="card-panel" @submit.prevent="updatePost">
-        <h2 class="center teal-text">Edit Post</h2>
-        <div class="field">
-          <label for="title">Title</label>
-          <input id="title" type="text" v-model="title" />
-        </div>
-        <div class="field">
-          <label for="author">Author</label>
-          <input id="author" type="text" v-model="author" />
-        </div>
-        <div class="field">
-          <label for="topic">Topic</label>
-          <input id="topic" type="text" v-model="topic" />
-        </div>
-        <div class="field">
-          <label for="imgUrl">Image URL</label>
-          <input id="imgUrl" type="text" v-model="imgUrl" />
-        </div>
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="field">
-                <label class="active" for="textarea1">Text</label>
-                <textarea v-model="text" id="textarea1" class="materialize-textarea"></textarea>
-              </div>
+  <div class="edit-post container">
+    <form class="card-panel" @submit.prevent>
+      <h2 class="center teal-text">Edit Post</h2>
+      <div class="field">
+        <label for="title">Title</label>
+        <input id="title" type="text" v-model="title" />
+      </div>
+      <div class="field">
+        <label for="author">Author</label>
+        <input id="author" type="text" v-model="author" />
+      </div>
+      <div class="field">
+        <label for="topic">Topic</label>
+        <p>
+          <label>
+            <input name="topic" type="radio" value="questions" v-model="topic" />
+            <span>QUESTIONS</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input name="topic" type="radio" value="scenarios" v-model="topic" />
+            <span>SCENARIOS</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input name="topic" type="radio" value="definitions" v-model="topic" />
+            <span>DEFINITIONS</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input name="topic" type="radio" value="explainers" v-model="topic" />
+            <span>EXPLAINERS</span>
+          </label>
+        </p>
+        <p>
+          <label>
+            <input name="topic" type="radio" value="news" v-model="topic" />
+            <span>IN THE NEWS</span>
+          </label>
+        </p>
+        <!-- <label for="topic">Topic</label>
+        <input id="topic" type="text" v-model="topic" />-->
+      </div>
+      <div class="field">
+        <label for="imgUrl">Image URL</label>
+        <input id="imgUrl" type="text" v-model="imgUrl" />
+      </div>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="field">
+              <label class="active" for="textarea1">Text</label>
+              <textarea v-model="text" id="textarea1" class="materialize-textarea"></textarea>
             </div>
-          </form>
-        </div>
-        <div class="field center">
-          <button class="btn teal">
-            Submit
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-      </form>
-    </div>
+          </div>
+        </form>
+      </div>
+      <div class="field center">
+        <button class="btn teal" @click="updatePost">
+          Submit Changes
+          <i class="material-icons right">send</i>
+        </button>
+        <button class="btn red">
+          Delete Post
+          <i class="material-icons right">delete</i>
+        </button>
+      </div>
+    </form>
   </div>
 </template>
 <script>
@@ -52,6 +85,7 @@ export default {
       text: null,
       author: null,
       topic: null,
+      selected: '',
     };
   },
   watch: {
@@ -60,6 +94,7 @@ export default {
     },
   },
   methods: {
+    deletePost() {},
     updatePostId() {
       this.postId = this.$route.params.postId;
       this.getPost();
@@ -104,8 +139,11 @@ export default {
 </script>
 <style scoped>
 .edit-post {
-  max-width: 400px;
+  margin-left: 150px;
+  padding: 50px 0px 10px 150px;
+  /* max-width: 600px;
   margin-top: 60px;
+  margin-left: 150px; */
 }
 .edit-post h2 {
   font-size: 2.4em;
@@ -114,6 +152,13 @@ export default {
   margin-bottom: 16px;
 }
 #textarea1 {
-  height: 100px;
+  height: 300px;
+}
+.btn {
+  margin: 5px;
+}
+select {
+  z-index: 1;
+  background-color: thistle;
 }
 </style>
