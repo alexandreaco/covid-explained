@@ -44,12 +44,26 @@ export default {
       let postsFilteredByContent = this.posts.filter(post => {
         return post.text.toLowerCase().match(this.searchTerm.toLowerCase());
       });
-
-      const combinedArr = [...postsFilteredByTitle, ...postsFilteredByContent];
-      return combinedArr;
+      let combinedArr = [...postsFilteredByTitle, postsFilteredByContent];
+      let deduplicatedArr = this.deduplicateById(combinedArr);
+      return deduplicatedArr;
     },
   },
   methods: {
+    deduplicateById(arr) {
+      var obj = {};
+      var stop = arr.length;
+      for (var i = 0, len = stop; i < len; i++) {
+        obj[arr[i]['id']] = arr[i];
+      }
+      let arr2 = new Array();
+      for (var key in obj) {
+        if (key !== 'undefined') {
+          arr2.push(obj[key]);
+        }
+      }
+      return arr2;
+    },
     redirectToEditPost(postId) {
       this.$router.push({ name: 'EditPost', params: { postId: postId } });
     },

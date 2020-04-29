@@ -1,10 +1,18 @@
 <template>
   <div class="topic">
     <h2 class="teal-text topic-title">{{ this.topicInCaps }}</h2>
+    <div class="search-bar">
+      <input type="text" v-model="searchTerm" placeholder="Search" />
+    </div>
     <div class="post-card-container">
-      <div class="card post-card" v-for="post in posts" :key="post.id">
+      <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
         <div class="card-content">
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <i
+            v-if="admin"
+            class="material-icons edit"
+            @click="redirectToEditPost(post.id)"
+            >edit</i
+          >
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
@@ -24,6 +32,7 @@ export default {
   name: 'Topic',
   data() {
     return {
+      searchTerm: '',
       admin: null,
       posts: [],
       topic: this.$route.params.topicName,
@@ -35,6 +44,20 @@ export default {
       this.updateTopic();
     },
   },
+  computed: {
+    filteredPosts: function() {
+      let postsFilteredByTitle = this.posts.filter(post => {
+        return post.title.toLowerCase().match(this.searchTerm.toLowerCase());
+      });
+      let postsFilteredByContent = this.posts.filter(post => {
+        return post.text.toLowerCase().match(this.searchTerm.toLowerCase());
+      });
+
+      const combinedArr = [...postsFilteredByTitle, ...postsFilteredByContent];
+      return combinedArr;
+    },
+  },
+
   methods: {
     redirectToEditPost(postId) {
       this.$router.push({ name: 'EditPost', params: { postId: postId } });
