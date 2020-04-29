@@ -44,7 +44,7 @@ export default {
       let postsFilteredByContent = this.posts.filter(post => {
         return post.text.toLowerCase().match(this.searchTerm.toLowerCase());
       });
-      let combinedArr = [...postsFilteredByTitle, postsFilteredByContent];
+      let combinedArr = postsFilteredByTitle.concat(postsFilteredByContent);
       let deduplicatedArr = this.deduplicateById(combinedArr);
       return deduplicatedArr;
     },
