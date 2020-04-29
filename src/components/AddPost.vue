@@ -179,7 +179,6 @@ export default {
           createdAt: Date.now(),
         })
         .then(docRef => {
-          debugger;
           this.$router.push({ name: 'Post', params: { postId: docRef.id } });
         })
         .catch(error => {

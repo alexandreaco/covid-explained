@@ -14,7 +14,7 @@
         <div class="author-and-date">
           <p v-if="this.post.author">By {{ post.author }}</p>
           <p v-if="this.post.createdAt">
-            Posted on {{ new Date(post.createdAt.seconds) }}
+            Posted on {{ new Date(post.createdAt) }}
           </p>
         </div>
         <div class="text-and-img">

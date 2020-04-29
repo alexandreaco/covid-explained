@@ -3,23 +3,31 @@
     <ul>
       <li>
         <a href="#" class="brand-logo">
-          <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">
+          <router-link
+            :to="{ name: 'Topic', params: { topicName: 'questions' } }"
+          >
             <p class="white-text">QUESTIONS</p>
           </router-link>
         </a>
       </li>
       <li>
-        <router-link :to="{ name: 'Topic', params: { topicName: 'scenarios' } }">
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'scenarios' } }"
+        >
           <p class="white-text">SCENARIOS</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
+        >
           <p class="white-text">DEFINITIONS</p>
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
+        >
           <p class="white-text">EXPLAINERS</p>
         </router-link>
       </li>
@@ -32,12 +40,27 @@
     <ul>
       <li v-if="!admin">
         <a href="#">
-          <router-link class="white-text admin-links" :to="{ name: 'AdminLogin' }">Admin Log In</router-link>
+          <router-link
+            class="white-text admin-links"
+            :to="{ name: 'AdminLogin' }"
+            >Admin Log In</router-link
+          >
         </a>
       </li>
       <li v-if="!admin">
         <a href="#">
-          <router-link class="white-text admin-links" :to="{ name: 'AdminSignup' }">Admin Sign Up</router-link>
+          <router-link
+            class="white-text admin-links"
+            :to="{ name: 'AdminSignup' }"
+            >Admin Sign Up</router-link
+          >
+        </a>
+      </li>
+      <li v-if="admin">
+        <a href="#">
+          <a class="white-text admin-links" @click="redirectToAddPost"
+            >Create New Post</a
+          >
         </a>
       </li>
       <li v-if="admin">
@@ -66,6 +89,9 @@ export default {
         .then(() => {
           this.$router.push(-1);
         });
+    },
+    redirectToAddPost() {
+      this.$router.push({ name: 'AddPost' });
     },
   },
   created() {

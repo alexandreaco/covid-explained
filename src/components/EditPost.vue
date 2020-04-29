@@ -192,7 +192,7 @@ export default {
     updatePost() {
       db.collection('posts')
         .doc(this.postId)
-        .set({
+        .update({
           title: this.title,
           text: this.text,
           topic: this.topic,

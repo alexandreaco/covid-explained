@@ -1,73 +1,24 @@
 <template>
   <div class="home">
-    <div class="card topic-card teal lighten-5">
-      <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">
-        <h2 class="teal-text topic-title">QUESTIONS</h2>
-      </router-link>
-      <div class="card post-card" v-for="post in questionPosts" :key="post.id">
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">{{ post.text | createSnippet }}</p>
-          </div>
-        </router-link>
-      </div>
+    <h2 class="teal-text topic-title">HOME</h2>
+    <div class="search-bar">
+      <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
-    <div class="card topic-card teal lighten-5">
-      <router-link :to="{ name: 'Topic', params: { topicName: 'scenarios' } }">
-        <h2 class="teal-text">SCENARIOS</h2>
-      </router-link>
-      <div class="card post-card" v-for="post in scenarioPosts" :key="post.id">
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
+    <div class="post-card-container">
+      <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
+        <div class="card-content">
+          <i
+            v-if="admin"
+            class="material-icons edit"
+            @click="redirectToEditPost(post.id)"
+            >edit</i
+          >
+          <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author">By {{ post.author }}</p>
             <p class="text-snippet">{{ post.text | createSnippet }}</p>
-          </div>
-        </router-link>
-      </div>
-    </div>
-    <div class="card topic-card teal lighten-5">
-      <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">
-        <h2 class="teal-text">DEFINITIONS</h2>
-      </router-link>
-      <div class="card post-card" v-for="post in definitionPosts" :key="post.id">
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">{{ post.text | createSnippet }}</p>
-          </div>
-        </router-link>
-      </div>
-    </div>
-    <div class="card topic-card teal lighten-5">
-      <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">
-        <h2 class="teal-text">EXPLAINERS</h2>
-      </router-link>
-      <div class="card post-card" v-for="post in explainersPosts" :key="post.id">
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">{{ post.text | createSnippet }}</p>
-          </div>
-        </router-link>
-      </div>
-    </div>
-    <div class="card topic-card teal lighten-5">
-      <router-link :to="{ name: 'Topic', params: { topicName: 'news' } }">
-        <h2 class="teal-text">IN THE NEWS</h2>
-      </router-link>
-      <div class="card post-card" v-for="post in newsPosts" :key="post.id">
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-author">By {{ post.author }}</p>
-            <p class="text-snippet">{{ post.text | createSnippet }}</p>
-          </div>
-        </router-link>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -80,52 +31,45 @@ export default {
   name: 'Home',
   data() {
     return {
-      posts: [],
+      posts: null,
+      searchTerm: '',
+      admin: null,
     };
   },
   computed: {
-    questionPosts: function() {
-      let questionPosts = this.posts.filter(post => {
-        if (post.topic === 'questions') {
-          return post;
-        }
+    filteredPosts: function() {
+      return this.posts.filter(post => {
+        return post.title.toLowerCase().match(this.searchTerm.toLowerCase());
       });
-      return questionPosts.slice(0, 2);
-    },
-    scenarioPosts: function() {
-      let scenarioPosts = this.posts.filter(post => {
-        if (post.topic === 'scenarios') {
-          return post;
-        }
-      });
-      return scenarioPosts.slice(0, 2);
-    },
-    definitionPosts: function() {
-      let definitionPosts = this.posts.filter(post => {
-        if (post.topic === 'definitions') {
-          return post;
-        }
-        definitionPosts;
-      });
-      return definitionPosts.slice(0, 2);
-    },
-    explainersPosts: function() {
-      let explainersPosts = this.posts.filter(post => {
-        if (post.topic === 'explainers') {
-          return post;
-        }
-      });
-      return explainersPosts.slice(0, 2);
-    },
-    newsPosts: function() {
-      let newsPosts = this.posts.filter(post => {
-        if (post.topic === 'news') {
-          return post;
-        }
-      });
-      return newsPosts.slice(0, 2);
     },
   },
+  methods: {
+    getPosts() {
+      if (this.posts === null) {
+        this.posts = [];
+      }
+      db.collection('posts')
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            let post = doc.data();
+            post.id = doc.id;
+            this.posts.push(post);
+          });
+        });
+    },
+    setAdminIfLoggedIn() {
+      let admin = firebase.auth().currentUser;
+      firebase.auth().onAuthStateChanged(admin => {
+        if (admin) {
+          this.admin = admin;
+        } else {
+          this.admin = null;
+        }
+      });
+    },
+  },
+
   filters: {
     createSnippet: function(value) {
       if (!value) {
@@ -137,75 +81,38 @@ export default {
     },
   },
   created() {
-    console.log('AUTH:', firebase.auth().currentUser);
-    db.collection('posts')
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let post = doc.data();
-          post.id = doc.id;
-          this.posts.push(post);
-        });
-      });
+    this.getPosts();
+    this.setAdminIfLoggedIn();
   },
 };
 </script>
 
 <style scoped>
 .home {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 10px;
-  margin-top: 30px;
-  margin: 10px;
-  padding-left: 150px;
-}
-.home h2 {
-  font-size: 1.5em;
   text-align: center;
-  margin-top: 0;
-}
-.home h2:hover {
-  opacity: 0.5;
-}
-.card.post-card .card-content {
-  padding: 0px;
-}
-.card.post-card {
-  background-color: rgb(185, 220, 218);
-  border-radius: 10px;
-  margin: 0px 10px 15px 10px;
-  padding: 0px;
-}
-.card.post-card:hover {
-  opacity: 0.5;
+  margin-left: 150px;
+  padding: 20px;
 }
 
-.card.topic-card h2 {
-  font-size: 25px;
-  padding: 8px;
-  margin: 0px;
-  margin-bottom: 15px;
-  background-color: rgb(166, 221, 219);
-  box-shadow: 1px 1px 4px 1px teal;
-}
-.card .card-content .card-title {
-  font-size: 18px;
-  background-color: rgb(66, 142, 143);
-  border-radius: 10px 10px 0px 0px;
-  margin: 0;
-  padding: 5px;
-  text-align: center;
+.post-card-container {
+  align-items: top;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.card .card-content .card-title {
-  color: white;
+.post-card {
+  max-width: 350px;
+  min-width: 200px;
+  margin: 25px;
 }
-.text-author {
-  font-size: 10px;
+.edit {
+  position: absolute;
+  top: 4px;
+  right: 4px;
 }
-.card .card-content p {
-  padding: 5px;
-  color: rgb(52, 121, 122);
+.edit:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 </style>
