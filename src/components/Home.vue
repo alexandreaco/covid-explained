@@ -5,7 +5,7 @@
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
     <div class="post-card-container">
-      <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
+      <div class="card post-card" v-for="(post, i) in filteredPosts" :key="i">
         <div class="card-content">
           <i
             v-if="admin"
@@ -38,12 +38,21 @@ export default {
   },
   computed: {
     filteredPosts: function() {
-      return this.posts.filter(post => {
+      let postsFilteredByTitle = this.posts.filter(post => {
         return post.title.toLowerCase().match(this.searchTerm.toLowerCase());
       });
+      let postsFilteredByContent = this.posts.filter(post => {
+        return post.text.toLowerCase().match(this.searchTerm.toLowerCase());
+      });
+
+      const combinedArr = [...postsFilteredByTitle, ...postsFilteredByContent];
+      return combinedArr;
     },
   },
   methods: {
+    redirectToEditPost(postId) {
+      this.$router.push({ name: 'EditPost', params: { postId: postId } });
+    },
     getPosts() {
       if (this.posts === null) {
         this.posts = [];
