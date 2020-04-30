@@ -30,7 +30,6 @@ export default {
 };
 </script>
 
-
 <script>
 import firebase from 'firebase';
 import db from '@/firebase/init';
@@ -55,11 +54,13 @@ export default {
           .then(cred => {
             console.log(cred.user);
             db.collection('users')
-              .add({
+              .doc(cred.user.uid)
+              .set({
                 name: this.name,
                 email: this.email,
                 password: this.password,
                 userId: cred.user.uid,
+                isApproved: false,
               })
               .then(docRef => {
                 console.log('Document written with ID: ', docRef.id);

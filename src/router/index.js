@@ -12,6 +12,7 @@ import AdminSignup from '@/components/AdminSignup';
 import AdminLogin from '@/components/AdminLogin';
 import EditPost from '@/components/EditPost';
 import AddPost from '@/components/AddPost';
+import AdminApproval from '@/components/AdminApproval';
 
 import CKEditor from '@ckeditor/ckeditor5-vue';
 
@@ -69,6 +70,14 @@ const router = new Router({
       path: '/post/edit/:postId',
       name: 'EditPost',
       component: EditPost,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/admin-approval',
+      name: 'AdminApproval',
+      component: AdminApproval,
       meta: {
         requiresAuth: true,
       },

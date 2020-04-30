@@ -15,7 +15,11 @@
           <div class="row">
             <div class="field">
               <label class="active" for="textarea1">Message</label>
-              <textarea v-model="sender.message" id="textarea1" class="materialize-textarea"></textarea>
+              <textarea
+                v-model="message"
+                id="textarea1"
+                class="materialize-textarea"
+              ></textarea>
             </div>
           </div>
         </form>
@@ -35,11 +39,9 @@ export default {
   name: 'ContactUs',
   data() {
     return {
-      sender: {
-        name: null,
-        email: null,
-        message: null,
-      },
+      name: null,
+      email: null,
+      message: null,
     };
   },
 };

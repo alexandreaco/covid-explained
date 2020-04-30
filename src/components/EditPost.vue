@@ -2,8 +2,12 @@
   <div class="edit-post container">
     <form class="card-panel" @submit.prevent>
       <h2 class="center teal-text">Edit Post</h2>
+      <p v-if="feedback" class="required">{{ feedback }}</p>
       <div class="field">
-        <label for="title">Title</label>
+        <label for="title">
+          <p class="required">*</p>
+          <p>Title</p>
+        </label>
         <input id="title" type="text" v-model="title" />
       </div>
       <div class="field">
@@ -11,7 +15,10 @@
         <input id="author" type="text" v-model="author" />
       </div>
       <div class="field">
-        <label for="topic">Topic</label>
+        <label for="topic">
+          <p class="required">*</p>
+          <p>Topic</p>
+        </label>
         <p>
           <label>
             <input
@@ -83,7 +90,10 @@
         <form class="col s12">
           <div class="row">
             <div class="field">
-              <label class="active" for="textarea1">Text</label>
+              <label class="active" for="textarea1">
+                <p class="required">*</p>
+                <p>Text</p>
+              </label>
               <textarea
                 v-model="text"
                 id="textarea1"
@@ -123,6 +133,7 @@ export default {
       text: null,
       author: null,
       topic: null,
+      feedback: null,
     };
   },
   watch: {
@@ -190,23 +201,32 @@ export default {
         });
     },
     updatePost() {
-      db.collection('posts')
-        .doc(this.postId)
-        .update({
-          title: this.title,
-          text: this.text,
-          topic: this.topic,
-          author: this.author,
-          imgUrl: this.imgUrl,
-          updatedAt: Date.now(),
-        })
-        .then(() => {
-          console.log('Document successfully written!');
-          this.$router.push({ name: 'Post', params: { postId: this.postId } });
-        })
-        .catch(error => {
-          console.error('Error writing document: ', error);
-        });
+      if (this.title && this.topic && this.text) {
+        db.collection('posts')
+          .doc(this.postId)
+          .update({
+            title: this.title,
+            text: this.text,
+            topic: this.topic,
+            author: this.author,
+            imgUrl: this.imgUrl,
+            updatedAt: Date.now(),
+          })
+          .then(() => {
+            console.log('Document successfully written!');
+            this.$router.push({
+              name: 'Post',
+              params: { postId: this.postId },
+            });
+          })
+          .catch(error => {
+            console.error('Error writing document: ', error);
+          });
+      } else {
+        this.feedback =
+          'Please make sure that all required feilds are completed.';
+        window.scrollTo(0, 0);
+      }
     },
   },
   created() {
@@ -228,6 +248,9 @@ export default {
 .edit-post .field {
   margin-bottom: 16px;
 }
+label {
+  display: flex;
+}
 #textarea1 {
   height: 300px;
 }
@@ -246,5 +269,8 @@ img {
 
 .image-buttons {
   padding: 5px 10px 10px 0px;
+}
+.required {
+  color: red;
 }
 </style>

@@ -2,8 +2,13 @@
   <div class="add-post container">
     <form class="card-panel" @submit.prevent>
       <h2 class="center teal-text">Add Post</h2>
+      <p v-if="feedback" class="required">{{ feedback }}</p>
       <div class="field">
-        <label for="title">Title</label>
+        <label for="title">
+          <p class="required">*</p>
+          <p>Title</p>
+        </label>
+
         <input id="title" type="text" v-model="title" />
       </div>
       <div class="field">
@@ -11,7 +16,10 @@
         <input id="author" type="text" v-model="author" />
       </div>
       <div class="field">
-        <label for="topic">Topic</label>
+        <label for="topic" class="title">
+          <p class="required">*</p>
+          <p>Topic</p>
+        </label>
         <p>
           <label>
             <input
@@ -64,10 +72,10 @@
         </p>
       </div>
       <div class="field">
-        <label for="imgUrl"
-          >Image: Be sure to first choose the file and then upload the image
-          before submitting changes.</label
-        >
+        <label for="imgUrl">
+          Image: Be sure to first choose the file and then upload the image
+          before submitting changes.
+        </label>
         <br />
         <div class="image-buttons">
           1. <input type="file" @change="onFileSelected" accept="image/*" /> 2.
@@ -83,7 +91,10 @@
         <form class="col s12">
           <div class="row">
             <div class="field">
-              <label class="active" for="textarea1">Text</label>
+              <label class="active" for="textarea1">
+                <p class="required">*</p>
+                <p>Text</p>
+              </label>
               <textarea
                 v-model="text"
                 id="textarea1"
@@ -123,6 +134,7 @@ export default {
       text: null,
       author: null,
       topic: null,
+      feedback: null,
     };
   },
   methods: {
@@ -161,7 +173,6 @@ export default {
         .delete()
         .then(() => {
           console.log('Document successfully deleted!');
-
           this.$router.push({ name: 'Home' });
         })
         .catch(error => {
@@ -169,21 +180,27 @@ export default {
         });
     },
     createPost() {
-      db.collection('posts')
-        .add({
-          title: this.title,
-          text: this.text,
-          topic: this.topic,
-          author: this.author,
-          imgUrl: this.imgUrl,
-          createdAt: Date.now(),
-        })
-        .then(docRef => {
-          this.$router.push({ name: 'Post', params: { postId: docRef.id } });
-        })
-        .catch(error => {
-          console.error('Error adding document: ', error);
-        });
+      if (this.title && this.text && this.topic) {
+        db.collection('posts')
+          .add({
+            title: this.title,
+            text: this.text,
+            topic: this.topic,
+            author: this.author,
+            imgUrl: this.imgUrl,
+            createdAt: Date.now(),
+          })
+          .then(docRef => {
+            this.$router.push({ name: 'Post', params: { postId: docRef.id } });
+          })
+          .catch(error => {
+            console.error('Error adding document: ', error);
+          });
+      } else {
+        this.feedback =
+          'Please make sure that all required feilds are completed.';
+        window.scrollTo(0, 0);
+      }
     },
   },
 };
@@ -195,6 +212,9 @@ export default {
   /* max-width: 600px;
   margin-top: 60px;
   margin-left: 150px; */
+}
+label {
+  display: flex;
 }
 .add-post h2 {
   font-size: 2.4em;
@@ -220,5 +240,8 @@ img {
 
 .image-buttons {
   padding: 5px 10px 10px 0px;
+}
+.required {
+  color: red;
 }
 </style>

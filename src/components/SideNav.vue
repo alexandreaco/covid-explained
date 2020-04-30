@@ -56,6 +56,15 @@
           >
         </a>
       </li>
+      <li v-if="admin && isSuperAdmin">
+        <a href="#">
+          <router-link
+            class="white-text admin-links"
+            :to="{ name: 'AdminApproval' }"
+            >Admin Approval</router-link
+          >
+        </a>
+      </li>
       <li v-if="admin">
         <a href="#">
           <a class="white-text admin-links" @click="redirectToAddPost"
@@ -74,11 +83,14 @@
 
 <script>
 import firebase from 'firebase';
-
+import db from '@/firebase/init';
 export default {
   data: () => {
     return {
       admin: null,
+      adminFromDb: null,
+      isSuperAdmin: false,
+      isApproved: false,
     };
   },
   methods: {
@@ -93,12 +105,40 @@ export default {
     redirectToAddPost() {
       this.$router.push({ name: 'AddPost' });
     },
+
+    checkApprovalStatus(adminId) {
+      console.log('adminId:', adminId);
+      db.collection('users')
+        .doc(adminId)
+        .get()
+        .then(doc => {
+          console.log('doc:', doc.data());
+          // let adminFromDb = doc.data();
+          // adminFromDb.id = doc.id;
+          // this.adminFromDb = adminFromDb;
+        })
+        .then(() => {
+          console.log('this.adminFromDb:', this.adminFromDb);
+          // if (this.adminFromDb.isApproved === true) {
+          //   this.isApproved = true;
+          // }
+        });
+    },
+
+    checkIfAdminIsSuperAdmin() {
+      if (this.admin.email === 'liv@someemail.com') {
+        this.isSuperAdmin = true;
+      }
+    },
   },
   created() {
-    let admin = firebase.auth().currentUser;
-    firebase.auth().onAuthStateChanged(user => {
+    //let admin = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged(admin => {
       if (admin) {
         this.admin = admin;
+        console.log('this.admin:', this.admin.id);
+        //this.checkApprovalStatus(this.admin.id);
+        this.checkIfAdminIsSuperAdmin();
       } else {
         this.admin = null;
       }

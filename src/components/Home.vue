@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <h2 class="teal-text topic-title">HOME</h2>
+    <h3 class="teal-text topic-title">Welcome!</h3>
+    <p>
+      Blah blah blah Blah blah blahBlah blah blah Blah blah blahBlah blah
+      blahBlah blah blah Blah blah blahBlah blah blah Blah blah blahBlah blah
+      blahBlah blah blahBlah blah blahBlah blah blahBlah blah blahBlah blah
+      blahBlah blah blah
+    </p>
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
