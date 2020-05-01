@@ -1,12 +1,54 @@
 <template>
   <div class="home">
-    <h3 class="teal-text topic-title">Welcome!</h3>
-    <p>
-      Blah blah blah Blah blah blahBlah blah blah Blah blah blahBlah blah
-      blahBlah blah blah Blah blah blahBlah blah blah Blah blah blahBlah blah
-      blahBlah blah blahBlah blah blahBlah blah blahBlah blah blahBlah blah
-      blahBlah blah blah
-    </p>
+    <div class="preamble">
+      <h5 class="teal-text topic-title">Welcome!</h5>
+      <p>
+        COVID-19 is confusing. There's a lot of conflicting information out
+        there -- Can you get the virus from food? Is there such a thing as
+        immunity? What kind of tests are really out there? Who is most at risk?
+        And all the conflicting information can make it hard to make decisions,
+        from whether to go to the grocery store to when to send your kids back
+        to day care.
+      </p>
+      <p>
+        We believe that the key to breaking through this confusion is
+        understanding. If we really know how the virus works, and how testing
+        works, and what we mean by "immunity" or "infected", that empowers us to
+        cut through the noise and make better choices.
+      </p>
+      <h5 class="teal-text topic-title">Where to start</h5>
+      <p>
+        Wondering Where to Start? Try one of our
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
+        >
+          explainers
+        </router-link>
+
+        - on testing, or the path of the virus. Or check out our
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
+        >
+          definitions
+        </router-link>
+        , or
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'questions' } }"
+        >
+          questions
+        </router-link>
+        . Or find out more
+        <router-link :to="{ name: 'AboutUs' }">
+          our team
+        </router-link>
+        , and
+        <router-link :to="{ name: 'ContactUs' }">
+          contact us
+        </router-link>
+        with ideas!
+      </p>
+    </div>
+
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
@@ -143,5 +185,10 @@ export default {
 .edit:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.preamble {
+  max-width: 800px;
+  margin: auto;
 }
 </style>

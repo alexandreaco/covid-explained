@@ -47,7 +47,7 @@
           >
         </a>
       </li>
-      <li v-if="!admin">
+      <!-- <li v-if="!admin">
         <a href="#">
           <router-link
             class="white-text admin-links"
@@ -55,8 +55,8 @@
             >Admin Sign Up</router-link
           >
         </a>
-      </li>
-      <li v-if="admin && isSuperAdmin">
+      </li> -->
+      <!-- <li v-if="admin && isSuperAdmin">
         <a href="#">
           <router-link
             class="white-text admin-links"
@@ -64,7 +64,7 @@
             >Admin Approval</router-link
           >
         </a>
-      </li>
+      </li> -->
       <li v-if="admin">
         <a href="#">
           <a class="white-text admin-links" @click="redirectToAddPost"

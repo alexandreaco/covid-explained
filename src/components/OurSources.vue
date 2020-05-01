@@ -1,9 +1,8 @@
 <template>
-  <div class="about-us">
-    <h3>About Us</h3>
+  <div class="our-sources">
+    <h3>Our Sources</h3>
     <p>
-      We are team of researchers and students at Brown, MIT, Harvard, Mass
-      General and elsewhere. We care about getting information out there.
+      These are a list of the sources we used to...
     </p>
     <p>Contributors</p>
     <table>
