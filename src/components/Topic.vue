@@ -15,7 +15,7 @@
           >
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
-            <p class="text-author">By {{ post.author }}</p>
+            <p class="text-author" v-if="post.author">By {{ post.author }}</p>
             <p class="text-snippet">{{ post.text | createSnippet }}</p>
           </router-link>
         </div>
