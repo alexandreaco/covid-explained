@@ -7,6 +7,7 @@ import Home from '@/components/Home';
 import Post from '@/components/Post';
 import Topic from '@/components/Topic';
 import AboutUs from '@/components/AboutUs';
+import OurSources from '@/components/OurSources.vue';
 import ContactUs from '@/components/ContactUs';
 import AdminSignup from '@/components/AdminSignup';
 import AdminLogin from '@/components/AdminLogin';
@@ -32,6 +33,11 @@ const router = new Router({
       path: '/about-us',
       name: 'AboutUs',
       component: AboutUs,
+    },
+    {
+      path: '/our-sources',
+      name: 'OurSources',
+      component: OurSources,
     },
     {
       path: '/admin-signup',

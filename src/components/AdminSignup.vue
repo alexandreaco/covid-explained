@@ -59,11 +59,10 @@ export default {
                 name: this.name,
                 email: this.email,
                 password: this.password,
-                userId: cred.user.uid,
+                id: cred.user.uid,
                 isApproved: false,
               })
               .then(docRef => {
-                console.log('Document written with ID: ', docRef.id);
                 this.$router.push({ name: 'Home' });
               })
               .catch(error => {

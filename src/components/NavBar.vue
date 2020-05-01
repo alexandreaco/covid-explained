@@ -13,6 +13,13 @@
           </li>
           <li>
             <a href="#">
+              <router-link :to="{ name: 'OurSources' }"
+                >Our Sources</router-link
+              >
+            </a>
+          </li>
+          <li>
+            <a href="#">
               <router-link :to="{ name: 'ContactUs' }">Contact Us</router-link>
             </a>
           </li>

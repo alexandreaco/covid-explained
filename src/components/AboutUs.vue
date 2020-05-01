@@ -1,11 +1,11 @@
 <template>
   <div class="about-us">
-    <h3>About Us</h3>
+    <h4>About Us</h4>
     <p>
       We are team of researchers and students at Brown, MIT, Harvard, Mass
       General and elsewhere. We care about getting information out there.
     </p>
-    <p>Contributors</p>
+    <h4>Contributors</h4>
     <table>
       <tbody>
         <tr>

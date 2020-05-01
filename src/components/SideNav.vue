@@ -99,7 +99,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push(-1);
+          this.$router.push({ name: 'AdminLogin' });
         });
     },
     redirectToAddPost() {
