@@ -19,33 +19,11 @@
       <h5 class="teal-text topic-title">Where to start</h5>
       <p>
         Wondering Where to Start? Try one of our
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
-        >
-          explainers
-        </router-link>
-
-        - on testing, or the path of the virus. Or check out our
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
-        >
-          definitions,
-        </router-link>
-        or
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'questions' } }"
-        >
-          questions
-        </router-link>
-        . Or find out more
-        <router-link :to="{ name: 'AboutUs' }">
-          about our team,
-        </router-link>
-        and
-        <router-link :to="{ name: 'ContactUs' }">
-          contact us
-        </router-link>
-        with ideas!
+        <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link>- on testing, or the path of the virus. Or check out our
+        <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link>or
+        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
+        <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
+        <router-link :to="{ name: 'ContactUs' }">contact us</router-link>with ideas!
       </p>
     </div>
 
@@ -55,16 +33,12 @@
     <div class="post-card-container">
       <div class="card post-card" v-for="(post, i) in filteredPosts" :key="i">
         <div class="card-content">
-          <i
-            v-if="admin"
-            class="material-icons edit"
-            @click="redirectToEditPost(post.id)"
-            >edit</i
-          >
+          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-snippet">{{ post.text | createSnippet }}</p>
+            <p class="text-snippet" v-if="post.subtitle">{{post.subtitle}}</p>
+            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
           </router-link>
         </div>
       </div>
