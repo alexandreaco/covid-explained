@@ -22,45 +22,25 @@
         </label>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="questions"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="questions" v-model="topic" />
             <span>QUESTIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="scenarios"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="scenarios" v-model="topic" />
             <span>SCENARIOS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="definitions"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="definitions" v-model="topic" />
             <span>DEFINITIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="explainers"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="explainers" v-model="topic" />
             <span>EXPLAINERS</span>
           </label>
         </p>
@@ -78,14 +58,20 @@
         </label>
         <br />
         <div class="image-buttons">
-          1. <input type="file" @change="onFileSelected" accept="image/*" /> 2.
+          1.
+          <input type="file" @change="onFileSelected" accept="image/*" /> 2.
           <button @click="onUpload">Upload Image</button>
         </div>
-
-        <br />
-        <label for="imgUrl">Image Preview</label>
-        <br />
-        <img :src="this.imgUrl" v-if="this.imgUrl" />
+        <div class="image-preview" v-if="imgUrl">
+          <div class="preview-section">
+            <label for="imgUrl">Image URL:</label>
+            <p v-if="imgUrl">{{ imgUrl }}</p>
+          </div>
+          <div class="preview-section">
+            <label for="imgUrl">Image Preview</label>
+            <img :src="this.imgUrl" v-if="this.imgUrl" />
+          </div>
+        </div>
       </div>
       <div class="row">
         <form class="col s12">
@@ -95,11 +81,10 @@
                 <p class="required">*</p>
                 <p>Text</p>
               </label>
-              <textarea
-                v-model="text"
-                id="textarea1"
-                class="materialize-textarea"
-              ></textarea>
+              <textarea v-model="text" id="textarea1" class="materialize-textarea"></textarea>
+              <button @click="displayCKEditorContent(text)">Run Ck Pare</button>
+              <div id="ck-output">hello</div>
+              <ckeditor v-model="text" :config="editorConfig"></ckeditor>
             </div>
           </div>
         </form>
@@ -131,13 +116,44 @@ export default {
       postId: this.$route.params.postId,
       title: null,
       imgUrl: null,
-      text: null,
+      text: '<p>Content of the editor.</p>',
       author: null,
       topic: null,
       feedback: null,
+      // ckeditor:
+      editorData: '<p>Content of the editor.</p>',
+      editorConfig: {
+        // The configuration of the editor.
+      },
     };
   },
+  // computed: {
+  //   libText: function() {
+  //     var element = document.getElementById('ck-output');
+  //     console.log('element:', element);
+  //     var div = document.createElement('div');
+  //     if (this.text) {
+  //       div.innerHTML = this.text;
+  //       element.appendChild.div;
+
+  //       return dom;
+  //     } else {
+  //       return dom;
+  //     }
+  //   },
+  // },
   methods: {
+    displayCKEditorContent(string) {
+      console.log('string:', string, typeof string);
+      var element = document.getElementById('ck-output');
+      element.innerHTML = '';
+      console.log('element:', element, typeof element);
+      var div = document.createElement('div');
+      console.log('div:', div, typeof div);
+      div.innerHTML = this.text;
+      element.appendChild(div);
+      console.log('2. element:', element, typeof element);
+    },
     onFileSelected(event) {
       this.selectedFile = event.target.files[0];
     },
@@ -243,5 +259,19 @@ img {
 }
 .required {
   color: red;
+}
+
+.image-preview {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.preview-section {
+  margin: 15px;
+}
+
+#ck-outputck-output[data-v-ee2bb33e] {
+  width: 200px;
+  background-color: bisque;
 }
 </style>

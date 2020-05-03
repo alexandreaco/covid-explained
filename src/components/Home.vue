@@ -29,9 +29,9 @@
         <router-link
           :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
         >
-          definitions
+          definitions,
         </router-link>
-        , or
+        or
         <router-link
           :to="{ name: 'Topic', params: { topicName: 'questions' } }"
         >
@@ -39,9 +39,9 @@
         </router-link>
         . Or find out more
         <router-link :to="{ name: 'AboutUs' }">
-          our team
+          about our team,
         </router-link>
-        , and
+        and
         <router-link :to="{ name: 'ContactUs' }">
           contact us
         </router-link>
@@ -188,7 +188,7 @@ export default {
 }
 
 .preamble {
-  max-width: 800px;
+  max-width: 1100px;
   margin: auto;
 }
 </style>

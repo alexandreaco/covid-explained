@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
+import CKEditor from 'ckeditor4-vue';
 
 // Views:
 import Home from '@/components/Home';
@@ -14,8 +15,6 @@ import AdminLogin from '@/components/AdminLogin';
 import EditPost from '@/components/EditPost';
 import AddPost from '@/components/AddPost';
 import AdminApproval from '@/components/AdminApproval';
-
-import CKEditor from '@ckeditor/ckeditor5-vue';
 
 Vue.use(Router);
 

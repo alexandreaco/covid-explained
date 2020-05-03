@@ -2,6 +2,20 @@
   <div class="container">
     <ul>
       <li>
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
+        >
+          <p class="white-text">EXPLAINERS</p>
+        </router-link>
+      </li>
+      <li>
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
+        >
+          <p class="white-text">DEFINITIONS</p>
+        </router-link>
+      </li>
+      <li>
         <a href="#" class="brand-logo">
           <router-link
             :to="{ name: 'Topic', params: { topicName: 'questions' } }"
@@ -15,20 +29,6 @@
           :to="{ name: 'Topic', params: { topicName: 'scenarios' } }"
         >
           <p class="white-text">SCENARIOS</p>
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
-        >
-          <p class="white-text">DEFINITIONS</p>
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
-        >
-          <p class="white-text">EXPLAINERS</p>
         </router-link>
       </li>
       <li>
