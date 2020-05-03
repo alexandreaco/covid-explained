@@ -7,16 +7,12 @@
     <div class="post-card-container">
       <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
         <div class="card-content">
-          <i
-            v-if="admin"
-            class="material-icons edit"
-            @click="redirectToEditPost(post.id)"
-            >edit</i
-          >
+          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-snippet">{{ post.text | createSnippet }}</p>
+            <p class="text-snippet" v-if="post.subtitle">{{post.subtitle}}</p>
+            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
           </router-link>
         </div>
       </div>
@@ -111,8 +107,8 @@ export default {
     createSnippet: function(value) {
       if (!value) {
         value = '';
-      } else if (value.length > 100) {
-        value = value.substring(0, 100) + '...';
+      } else if (value.length > 50) {
+        value = value.substring(0, 50) + '...';
       }
       return value;
     },
@@ -139,9 +135,9 @@ export default {
 }
 
 .post-card {
-  max-width: 350px;
-  min-width: 200px;
-  margin: 25px;
+  width: 350px;
+  height: 200px;
+  margin: 15px;
 }
 .edit {
   position: absolute;
@@ -151,5 +147,14 @@ export default {
 .edit:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+.card-title {
+  font-size: 30px;
+}
+.text-author {
+  font-size: 12px;
+}
+.text-snippet {
+  font-size: 22px;
 }
 </style>

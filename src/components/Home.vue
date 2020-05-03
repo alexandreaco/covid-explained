@@ -119,8 +119,8 @@ export default {
     createSnippet: function(value) {
       if (!value) {
         value = '';
-      } else if (value.length > 100) {
-        value = value.substring(0, 100) + '...';
+      } else if (value.length > 50) {
+        value = value.substring(0, 50) + '...';
       }
       return value;
     },
@@ -147,9 +147,9 @@ export default {
 }
 
 .post-card {
-  max-width: 350px;
-  min-width: 200px;
-  margin: 25px;
+  width: 350px;
+  height: 180px;
+  margin: 15px;
 }
 .edit {
   position: absolute;
@@ -164,5 +164,14 @@ export default {
 .preamble {
   max-width: 1100px;
   margin: auto;
+}
+.card-title {
+  font-size: 30px;
+}
+.text-author {
+  font-size: 12px;
+}
+.text-snippet {
+  font-size: 22px;
 }
 </style>
