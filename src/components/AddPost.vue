@@ -8,8 +8,12 @@
           <p class="required">*</p>
           <p>Title</p>
         </label>
-
         <input id="title" type="text" v-model="title" />
+        <label for="subtitle">
+          <p class="required">*</p>
+          <p>Subtitle</p>
+        </label>
+        <input id="subtitle" type="text" v-model="title" />
       </div>
       <div class="field">
         <label for="author">Author</label>
@@ -51,35 +55,45 @@
           </label>
         </p>
       </div>
-      <div class="field">
-        <label
-          for="imgUrl"
-        >Image: If you want to upload an image from your computer, first click 'Choose File' and then click 'Get Image URL' to get the image URl. You can then use the image URL in the text editor.</label>
-        <br />
-        <div class="image-buttons">
-          1.
-          <input type="file" @change="onFileSelected" accept="image/*" /> 2.
-          <button @click="onUpload">Get Image Url From</button>
-        </div>
-        <div class="image-preview" v-if="imgUrl">
-          <div class="preview-section">
-            <label for="imgUrl">Image URL:</label>
-            <p v-if="imgUrl">{{ imgUrl }}</p>
-          </div>
-          <div class="preview-section">
-            <label for="imgUrl">Image Preview</label>
-            <img :src="this.imgUrl" v-if="this.imgUrl" />
-          </div>
-        </div>
-      </div>
+
       <div class="row">
         <form class="col s12">
           <div class="row">
             <div class="field">
               <label class="active" for="textarea1">
                 <p class="required">*</p>
-                <p>Text</p>
+                <p>Body of Post</p>
               </label>
+              <div class="image-instructions">
+                <p>Using Images</p>
+                <br />
+                <p>Images can be used by clicking the image icon in the text editor and then entering the image url. If you'd like to upload an image from your computer and it does not have a url, follow these steps to generate a url:</p>
+                <ol>
+                  <li>Click the 'Choose File' button.</li>
+                  <li>Select your file.</li>
+                  <li>Click 'Get Image Url' button. A url and an image preview should pop up.</li>
+                  <li>Copy the url</li>
+                  <li>Click the image icon in the text editor. A pop-up will open.</li>
+                  <li>Paste your url into the url feild.</li>
+                </ol>
+              </div>
+              <div class="field">
+                <div class="image-buttons">
+                  1.
+                  <input type="file" @change="onFileSelected" accept="image/*" /> 2.
+                  <button @click="onUpload">Get Image Url From</button>
+                </div>
+                <div class="image-preview" v-if="imgUrl">
+                  <div class="preview-section">
+                    <label for="imgUrl">Image URL:</label>
+                    <p v-if="imgUrl">{{ imgUrl }}</p>
+                  </div>
+                  <div class="preview-section">
+                    <label for="imgUrl">Image Preview</label>
+                    <img :src="this.imgUrl" v-if="this.imgUrl" />
+                  </div>
+                </div>
+              </div>
               <ckeditor v-model="text" :config="editorConfig"></ckeditor>
             </div>
           </div>
@@ -111,8 +125,9 @@ export default {
       picture: null,
       postId: this.$route.params.postId,
       title: null,
+      subtitle: null,
       imgUrl: null,
-      text: '<p>Content of the editor.</p>',
+      text: '<p>Body of post.</p>',
       author: null,
       topic: null,
       feedback: null,
@@ -166,10 +181,11 @@ export default {
         });
     },
     createPost() {
-      if (this.title && this.text && this.topic) {
+      if (this.title && this.text && this.subtitle && this.topic) {
         db.collection('posts')
           .add({
             title: this.title,
+            subtitle: this.subtitle,
             text: this.text,
             topic: this.topic,
             author: this.author,
@@ -214,10 +230,6 @@ label {
 .btn {
   margin: 5px;
 }
-select {
-  z-index: 1;
-  background-color: thistle;
-}
 
 img {
   max-width: 150px;
@@ -240,8 +252,13 @@ img {
   margin: 15px;
 }
 
-#ck-outputck-output[data-v-ee2bb33e] {
-  width: 200px;
-  background-color: bisque;
+.image-instructions {
+  max-width: 600px;
+  background-color: rgb(249, 217, 217);
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.image-instructions p {
+  margin: 0;
 }
 </style>
