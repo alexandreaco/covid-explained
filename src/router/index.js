@@ -18,6 +18,11 @@ import AdminApproval from '@/components/AdminApproval';
 
 Vue.use(Router);
 
+CKEditor.editorConfig = function(config) {
+  config.language = 'fr';
+  config.uiColor = '#AADC6E';
+  // debugger;
+};
 Vue.use(CKEditor);
 
 const router = new Router({
