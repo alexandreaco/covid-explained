@@ -8,7 +8,9 @@
           <p class="required">*</p>
           <p>Title</p>
         </label>
-        <input id="title" type="text" v-model="title" />
+        <input id="title" type="text" v-model="subtitle" />
+      </div>
+      <div class="field">
         <label for="subtitle">
           <p class="required">*</p>
           <p>Subtitle</p>
@@ -104,10 +106,6 @@
           Create Post
           <i class="material-icons right">send</i>
         </button>
-        <button class="btn red" @click="deletePost(postId)">
-          Delete Post
-          <i class="material-icons right">delete</i>
-        </button>
       </div>
     </form>
   </div>
@@ -168,18 +166,6 @@ export default {
       );
     },
 
-    deletePost(postId) {
-      db.collection('posts')
-        .doc(postId)
-        .delete()
-        .then(() => {
-          console.log('Document successfully deleted!');
-          this.$router.push({ name: 'Home' });
-        })
-        .catch(error => {
-          console.error('Error removing document: ', error);
-        });
-    },
     createPost() {
       if (this.title && this.text && this.subtitle && this.topic) {
         db.collection('posts')

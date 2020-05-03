@@ -11,6 +11,13 @@
         <input id="title" type="text" v-model="title" />
       </div>
       <div class="field">
+        <label for="subtitle">
+          <p class="required">*</p>
+          <p>Subtitle</p>
+        </label>
+        <input id="subtitle" type="text" v-model="subtitle" />
+      </div>
+      <div class="field">
         <label for="author">Author</label>
         <input id="author" type="text" v-model="author" />
       </div>
@@ -21,45 +28,25 @@
         </label>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="questions"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="questions" v-model="topic" />
             <span>QUESTIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="scenarios"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="scenarios" v-model="topic" />
             <span>SCENARIOS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="definitions"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="definitions" v-model="topic" />
             <span>DEFINITIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="explainers"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="explainers" v-model="topic" />
             <span>EXPLAINERS</span>
           </label>
         </p>
@@ -71,37 +58,41 @@
         </p>
       </div>
       <div class="field">
-        <label for="imgUrl"
-          >Image: Be sure to first choose the file and then upload the image
-          before submitting changes.</label
-        >
-        <br />
-        <div class="image-buttons">
-          1. <input type="file" @change="onFileSelected" accept="image/*" /> 2.
-          <button @click="onUpload">Upload Image</button>
+        <label class="active" for="textarea1">
+          <p class="required">*</p>
+          <p>Body of Post</p>
+        </label>
+        <div class="image-instructions">
+          <p>Using Images</p>
+          <br />
+          <p>Images can be used by clicking the image icon in the text editor and then entering the image url. If you'd like to upload an image from your computer and it does not have a url, follow these steps to generate a url:</p>
+          <ol>
+            <li>Click the 'Choose File' button.</li>
+            <li>Select your file.</li>
+            <li>Click 'Get Image Url' button. A url and an image preview should pop up.</li>
+            <li>Copy the url</li>
+            <li>Click the image icon in the text editor. A pop-up will open.</li>
+            <li>Paste your url into the url feild.</li>
+          </ol>
         </div>
-
-        <br />
-        <label for="imgUrl">Image Preview</label>
-        <br />
-        <img :src="this.imgUrl" v-if="this.imgUrl" />
-      </div>
-      <div class="row">
-        <form class="col s12">
-          <div class="row">
-            <div class="field">
-              <label class="active" for="textarea1">
-                <p class="required">*</p>
-                <p>Text</p>
-              </label>
-              <textarea
-                v-model="text"
-                id="textarea1"
-                class="materialize-textarea"
-              ></textarea>
+        <div class="field">
+          <div class="image-buttons">
+            1.
+            <input type="file" @change="onFileSelected" accept="image/*" /> 2.
+            <button @click="onUpload">Get Image Url From</button>
+          </div>
+          <div class="image-preview" v-if="imgUrl">
+            <div class="preview-section">
+              <label for="imgUrl">Image URL:</label>
+              <p v-if="imgUrl">{{ imgUrl }}</p>
+            </div>
+            <div class="preview-section">
+              <label for="imgUrl">Image Preview</label>
+              <img :src="this.imgUrl" v-if="this.imgUrl" />
             </div>
           </div>
-        </form>
+        </div>
+        <ckeditor v-model="text" :config="editorConfig"></ckeditor>
       </div>
       <div class="field center">
         <button class="btn teal" @click="updatePost">
@@ -129,11 +120,16 @@ export default {
       picture: null,
       postId: this.$route.params.postId,
       title: null,
+      subtitle: null,
       imgUrl: null,
-      text: null,
+      text: '<p>Body of post.</p>',
       author: null,
       topic: null,
       feedback: null,
+      // ckeditor:
+      editorConfig: {
+        // The configuration of the editor.
+      },
     };
   },
   watch: {
@@ -194,18 +190,20 @@ export default {
         .get()
         .then(doc => {
           this.title = doc.data().title;
+          this.subtitle = doc.data().subtitle;
           this.text = doc.data().text;
           this.author = doc.data().author;
           this.topic = doc.data().topic;
-          this.imgUrl = doc.data().imgUrl;
+          this.imgUrl = null;
         });
     },
     updatePost() {
-      if (this.title && this.topic && this.text) {
+      if (this.title && this.subtitle && this.topic && this.text) {
         db.collection('posts')
           .doc(this.postId)
           .update({
             title: this.title,
+            subtitle: this.subtitle,
             text: this.text,
             topic: this.topic,
             author: this.author,
@@ -272,5 +270,24 @@ img {
 }
 .required {
   color: red;
+}
+
+.image-preview {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.preview-section {
+  margin: 15px;
+}
+
+.image-instructions {
+  max-width: 600px;
+  background-color: rgb(249, 217, 217);
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.image-instructions p {
+  margin: 0;
 }
 </style>
