@@ -4,23 +4,13 @@
       <div v-if="this.post">
         <div class="post-title">
           <h3>{{ post.title }}</h3>
-          <i
-            v-if="admin"
-            class="material-icons edit"
-            @click="redirectToEditPost(post.id)"
-            >edit</i
-          >
+          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
         </div>
         <div class="author-and-date">
           <p v-if="this.post.author">By {{ post.author }}</p>
-          <p v-if="this.post.createdAt">
-            Posted on {{ new Date(post.createdAt) }}
-          </p>
+          <p v-if="this.post.createdAt">Posted on {{ new Date(post.createdAt) }}</p>
         </div>
-        <div class="text-and-img">
-          <img :src="this.post.imgUrl" v-if="this.post.imgUrl" />
-          {{ post.text }}
-        </div>
+        <div id="ck-output"></div>
       </div>
     </div>
   </div>
@@ -39,15 +29,31 @@ export default {
       post: null,
     };
   },
-  computed: {
-    htmlText: function() {
-      console.log('this.post.text:', this.post.text);
-      var el = document.createElement('html');
-      el.innerHTML = this.post.text;
-      return 0;
-    },
-  },
   methods: {
+    getData: function() {
+      return this.$http.get('<div>').then(response => {
+        // return the Promise so .then() above works.
+        this.data = response.body;
+        return response;
+      });
+    },
+    displayCKEditorContent(string) {
+      // console.log('string:', string, typeof string);
+
+      //Get element:
+      var element = document.getElementById('ck-output');
+      console.log('1. element:', element, typeof element);
+
+      // Make Child Component:
+      var div = document.createElement('div');
+      div.innerHTML = string;
+      console.log('div:', div, typeof div);
+
+      // Attach child component to element:
+      element.innerHTML = '';
+      element.appendChild(div);
+      console.log('2. element:', element, typeof element);
+    },
     redirectToEditPost(postId) {
       this.$router.push({ name: 'EditPost', params: { postId: postId } });
     },
@@ -70,9 +76,17 @@ export default {
         let post = doc.data();
         post.id = doc.id;
         this.post = post;
+        console.log('CREATED this.post:', this.post);
+        console.log('CREATED this.post.text:', this.post.text);
+        this.$nextTick(function() {
+          // DOM is now updated
+          // `this` is bound to the current instance
+          this.displayCKEditorContent(this.post.text);
+        });
       });
     this.setAdminIfLoggedIn();
   },
+  mounted() {},
 };
 </script>
 <style scoped>

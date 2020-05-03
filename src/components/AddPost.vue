@@ -127,21 +127,7 @@ export default {
       },
     };
   },
-  // computed: {
-  //   libText: function() {
-  //     var element = document.getElementById('ck-output');
-  //     console.log('element:', element);
-  //     var div = document.createElement('div');
-  //     if (this.text) {
-  //       div.innerHTML = this.text;
-  //       element.appendChild.div;
 
-  //       return dom;
-  //     } else {
-  //       return dom;
-  //     }
-  //   },
-  // },
   methods: {
     displayCKEditorContent(string) {
       console.log('string:', string, typeof string);
