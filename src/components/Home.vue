@@ -6,7 +6,7 @@
         <router-link
           :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
           >explainers</router-link
-        >- on testing, or the path of the virus. Or check out our
+        > on testing, or the path of the virus. Or check out our
         <router-link
           :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
           >definitions,</router-link
@@ -15,7 +15,7 @@
           >questions</router-link
         >. Or find out more
         <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
-        <router-link :to="{ name: 'ContactUs' }">contact us</router-link>with
+        <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with
         ideas!
       </p>
     </div>
@@ -24,7 +24,7 @@
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
     <div class="post-card-container">
-      <div class="card post-card" v-for="(post, i) in filteredPosts" :key="i">
+      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredPosts" :key="i">
         <i
           v-if="admin"
           class="material-icons edit"
@@ -34,6 +34,7 @@
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
+            <span class="card-topic capitalize">{{ post.topic }}</span>
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
             <p class="text-author" v-else></p>
@@ -132,25 +133,19 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .home {
-  text-align: center;
-  margin-left: 150px;
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .post-card-container {
   align-items: top;
-  justify-content: center;
   display: flex;
   flex-wrap: wrap;
 }
 
-.post-card {
-  width: 450px;
-  height: 300px;
-  margin: 0px;
-}
+
 .edit {
   position: absolute;
   top: 4px;
@@ -162,13 +157,22 @@ export default {
 }
 
 .preamble {
-  max-width: 1100px;
-  margin: auto;
+  max-width: 900px;
+  font-weight:100;
+  font-size:32px;
+  padding:1rem 0 2rem 0;
+}
+.preamble a{
+  text-decoration: underline;
+  text-decoration-style: solid;
+}
+.card-topic{
+  font-size:11px;
 }
 .card-title {
-  font-size: 40px;
-  height: 70px;
-  padding: 10px;
+  font-size: 32px;
+  line-height:32px;
+  padding: 10px 0;
 }
 .card-content {
   display: flex;
@@ -176,10 +180,11 @@ export default {
   justify-content: space-around;
 }
 .text-author {
-  font-size: 12px;
-  padding: 10px;
+  font-size: 11px;
+  padding: .5rem 0;
 }
 .text-snippet {
-  font-size: 30px;
+  font-size: 18px;
+  line-height:24px;
 }
 </style>

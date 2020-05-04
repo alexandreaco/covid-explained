@@ -1,11 +1,11 @@
 <template>
   <div class="topic">
-    <h2 class="teal-text topic-title">{{ this.topicInCaps }}</h2>
+    <h2 class="topic-title capitalize">{{ this.topic }}</h2>
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
     <div class="post-card-container">
-      <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
+      <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredPosts" :key="post.id">
         <div class="card-content">
           <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
@@ -122,21 +122,28 @@ export default {
 
 <style scoped>
 .topic {
-  text-align: center;
-  margin-left: 150px;
   padding: 20px;
+
+}
+h2 {
+  margin: 0px;
+  font-size:96px;
+  line-height:100px;
+
+}
+
+.topic-title{
+  font-size: 64px;
 }
 
 .post-card-container {
   align-items: top;
-  justify-content: center;
   display: flex;
   flex-wrap: wrap;
 }
 
 .post-card {
   width: 350px;
-  height: 200px;
   margin: 15px;
 }
 .edit {
