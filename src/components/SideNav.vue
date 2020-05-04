@@ -299,8 +299,9 @@ export default {
 
 .container .if-admin{
   position: fixed;
-   bottom:0px;
+  bottom:0px;
   left:0px;
+  z-index:5;
 }
 
 ul {
@@ -309,7 +310,7 @@ ul {
 }
 
 .container li:hover {
-  opacity: 0.5;
+  opacity: 0.75;
 }
 .container li {
   padding: 5px 0px;
@@ -317,5 +318,7 @@ ul {
 }
 .admin-links {
   font-size: 12px;
+  background: #fff;
+  padding:1rem;
 }
 </style>
