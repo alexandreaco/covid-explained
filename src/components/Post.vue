@@ -31,7 +31,7 @@
             Last updated on {{ new Date(post.updatedAt) }}
           </p>
         </div>
-        <div id="ck-output"></div>
+        <div id="ck-output" class="post-body"></div>
       </div>
     </div>
   </div>
@@ -111,26 +111,25 @@ export default {
 .post {
   display: flex;
   justify-content: center;
-  margin-left: 150px;
-  padding: 10px 150px;
   top: 64px;
+  max-width:900px;
+}
+.post-body{
+  font-size:18px;
+  line-height:24px;
 }
 .transparent-background {
   align-content: center;
-  /* background-image: linear-gradient(45deg, #d7f5e3, #b8f7f6); */
   padding: 50px;
   margin: 50px 0px 00px 0px;
   min-height: 600px;
 }
 img {
   max-height: 300px;
-  max-width: 300px;
-  margin: 5px 20px 0px 0px;
-  float: left;
+  width: 100%;
+  margin: auto;
 }
-h3 {
-  margin: 0px;
-}
+
 p {
   margin: 0;
 }
