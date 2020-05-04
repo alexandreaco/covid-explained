@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import firebase from 'firebase';
 import CKEditor from 'ckeditor4-vue';
+// import CKEditor from '@ckeditor/ckeditor5-vue';
+import SocialSharing from 'vue-social-sharing';
 
 // Views:
 import Home from '@/components/Home';
@@ -17,8 +19,7 @@ import AddPost from '@/components/AddPost';
 import AdminApproval from '@/components/AdminApproval';
 
 Vue.use(Router);
-
-
+Vue.use(SocialSharing);
 Vue.use(CKEditor);
 
 const router = new Router({

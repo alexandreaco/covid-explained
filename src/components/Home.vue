@@ -1,29 +1,22 @@
 <template>
   <div class="home">
     <div class="preamble">
-      <h5 class="teal-text topic-title">Welcome!</h5>
-      <p>
-        COVID-19 is confusing. There's a lot of conflicting information out
-        there -- Can you get the virus from food? Is there such a thing as
-        immunity? What kind of tests are really out there? Who is most at risk?
-        And all the conflicting information can make it hard to make decisions,
-        from whether to go to the grocery store to when to send your kids back
-        to day care.
-      </p>
-      <p>
-        We believe that the key to breaking through this confusion is
-        understanding. If we really know how the virus works, and how testing
-        works, and what we mean by "immunity" or "infected", that empowers us to
-        cut through the noise and make better choices.
-      </p>
-      <h5 class="teal-text topic-title">Where to start</h5>
       <p>
         Wondering Where to Start? Try one of our
-        <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link>- on testing, or the path of the virus. Or check out our
-        <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link>or
-        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
+          >explainers</router-link
+        >- on testing, or the path of the virus. Or check out our
+        <router-link
+          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
+          >definitions,</router-link
+        >or
+        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }"
+          >questions</router-link
+        >. Or find out more
         <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
-        <router-link :to="{ name: 'ContactUs' }">contact us</router-link>with ideas!
+        <router-link :to="{ name: 'ContactUs' }">contact us</router-link>with
+        ideas!
       </p>
     </div>
 
@@ -32,15 +25,22 @@
     </div>
     <div class="post-card-container">
       <div class="card post-card" v-for="(post, i) in filteredPosts" :key="i">
-        <div class="card-content">
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
-          <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+        <i
+          v-if="admin"
+          class="material-icons edit"
+          @click="redirectToEditPost(post.id)"
+          >edit</i
+        >
+
+        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+          <div class="card-content">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-snippet" v-if="post.subtitle">{{post.subtitle}}</p>
+            <p class="text-author" v-else></p>
+            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
             <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
-          </router-link>
-        </div>
+          </div>
+        </router-link>
       </div>
     </div>
   </div>
@@ -147,9 +147,9 @@ export default {
 }
 
 .post-card {
-  width: 350px;
-  height: 180px;
-  margin: 15px;
+  width: 450px;
+  height: 300px;
+  margin: 0px;
 }
 .edit {
   position: absolute;
@@ -166,12 +166,20 @@ export default {
   margin: auto;
 }
 .card-title {
-  font-size: 30px;
+  font-size: 40px;
+  height: 70px;
+  padding: 10px;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .text-author {
   font-size: 12px;
+  padding: 10px;
 }
 .text-snippet {
-  font-size: 22px;
+  font-size: 30px;
 }
 </style>

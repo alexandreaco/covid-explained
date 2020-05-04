@@ -1,14 +1,35 @@
 <template>
   <div class="post">
     <div class="transparent-background">
-      <div v-if="this.post">
+      <div v-if="post">
         <div class="post-title">
           <h3>{{ post.title }}</h3>
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <i
+            v-if="admin"
+            class="material-icons edit"
+            @click="redirectToEditPost(post.id)"
+            >edit</i
+          >
         </div>
+        <br />
+        <social-sharing :url="this.postId" inline-template>
+          <div>
+            <network network="facebook">
+              <i class="fa fa-facebook"></i> Facebook
+            </network>
+            <network network="linkedin">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </network>
+            <network network="twitter">
+              <i class="fa fa-twitter"></i> Twitter
+            </network>
+          </div>
+        </social-sharing>
         <div class="author-and-date">
           <p v-if="this.post.author">By {{ post.author }}</p>
-          <p v-if="this.post.createdAt">Posted on {{ new Date(post.createdAt) }}</p>
+          <p v-if="this.post.createdAt">
+            Last updated on {{ new Date(post.updatedAt) }}
+          </p>
         </div>
         <div id="ck-output"></div>
       </div>
@@ -30,6 +51,9 @@ export default {
     };
   },
   methods: {
+    createSocialMediaLinks() {
+      var element = document.getElementById('links');
+    },
     getData: function() {
       return this.$http.get('<div>').then(response => {
         // return the Promise so .then() above works.
@@ -42,17 +66,14 @@ export default {
 
       //Get element:
       var element = document.getElementById('ck-output');
-      console.log('1. element:', element, typeof element);
 
       // Make Child Component:
       var div = document.createElement('div');
       div.innerHTML = string;
-      console.log('div:', div, typeof div);
 
       // Attach child component to element:
       element.innerHTML = '';
       element.appendChild(div);
-      console.log('2. element:', element, typeof element);
     },
     redirectToEditPost(postId) {
       this.$router.push({ name: 'EditPost', params: { postId: postId } });
@@ -69,6 +90,7 @@ export default {
     },
   },
   created() {
+    console.log('this.$route:', this.$route.fullPath);
     db.collection('posts')
       .doc(this.postId)
       .get()
@@ -76,11 +98,7 @@ export default {
         let post = doc.data();
         post.id = doc.id;
         this.post = post;
-        console.log('CREATED this.post:', this.post);
-        console.log('CREATED this.post.text:', this.post.text);
         this.$nextTick(function() {
-          // DOM is now updated
-          // `this` is bound to the current instance
           this.displayCKEditorContent(this.post.text);
         });
       });
@@ -91,17 +109,15 @@ export default {
 </script>
 <style scoped>
 .post {
+  display: flex;
+  justify-content: center;
   margin-left: 150px;
   padding: 10px 150px;
-  background-color: #60a09e;
-  position: absolute;
   top: 64px;
-  bottom: 0;
-  position: absolute;
 }
 .transparent-background {
   align-content: center;
-  background-color: rgb(240, 255, 255, 0.25);
+  /* background-image: linear-gradient(45deg, #d7f5e3, #b8f7f6); */
   padding: 50px;
   margin: 50px 0px 00px 0px;
   min-height: 600px;
@@ -128,6 +144,12 @@ p {
 .post-title {
   display: flex;
   justify-content: space-between;
+}
+.post-title h3 {
+  /* color: white;
+  font-size: 70px;
+  text-shadow: -1px 0 rgb(87, 143, 127), 0 1px black, 3px 0 rgb(87, 143, 127),
+    0 -1px rgb(87, 143, 127); */
 }
 
 .edit:hover {

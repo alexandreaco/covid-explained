@@ -2,7 +2,14 @@
   <div class="about-us">
     <h4>About Us</h4>
     <p>
-      We are team of researchers and students at Brown, MIT, Harvard, Mass
+      COVID-19 is confusing. There's a lot of conflicting information out there
+      -- Can you get the virus from food? Is there such a thing as immunity?
+      What kind of tests are really out there? Who is most at risk? And all the
+      conflicting information can make it hard to make decisions, from whether
+      to go to the grocery store to when to send your kids back to day care.
+    </p>
+    <p>
+      We are a team of researchers and students at Brown, MIT, Harvard, Mass
       General and elsewhere. We care about getting information out there.
     </p>
     <h4>Contributors</h4>
@@ -62,6 +69,10 @@ export default {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+.about-us p {
+  text-align: center;
+  width: 800px;
 }
 .cell {
   padding: 10px;

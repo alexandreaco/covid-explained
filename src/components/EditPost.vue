@@ -15,6 +15,7 @@
           <p class="required">*</p>
           <p>Subtitle</p>
         </label>
+
         <input id="subtitle" type="text" v-model="subtitle" />
       </div>
       <div class="field">
@@ -28,25 +29,45 @@
         </label>
         <p>
           <label>
-            <input name="topic" type="radio" value="questions" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="questions"
+              v-model="topic"
+            />
             <span>QUESTIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="scenarios" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="scenarios"
+              v-model="topic"
+            />
             <span>SCENARIOS</span>
           </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="definitions" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="definitions"
+              v-model="topic"
+            />
             <span>DEFINITIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="explainers" v-model="topic" />
+            <input
+              name="topic"
+              type="radio"
+              value="explainers"
+              v-model="topic"
+            />
             <span>EXPLAINERS</span>
           </label>
         </p>
@@ -65,13 +86,23 @@
         <div class="image-instructions">
           <p>Using Images</p>
           <br />
-          <p>Images can be used by clicking the image icon in the text editor and then entering the image url. If you'd like to upload an image from your computer and it does not have a url, follow these steps to generate a url:</p>
+          <p>
+            Images can be used by clicking the image icon in the text editor and
+            then entering the image url. If you'd like to upload an image from
+            your computer and it does not have a url, follow these steps to
+            generate a url:
+          </p>
           <ol>
             <li>Click the 'Choose File' button.</li>
             <li>Select your file.</li>
-            <li>Click 'Get Image Url' button. A url and an image preview should pop up.</li>
+            <li>
+              Click 'Get Image Url' button. A url and an image preview should
+              pop up.
+            </li>
             <li>Copy the url</li>
-            <li>Click the image icon in the text editor. A pop-up will open.</li>
+            <li>
+              Click the image icon in the text editor. A pop-up will open.
+            </li>
             <li>Paste your url into the url feild.</li>
           </ol>
         </div>
@@ -92,7 +123,11 @@
             </div>
           </div>
         </div>
-        <ckeditor v-model="text" :config="editorConfig"></ckeditor>
+        <ckeditor
+          :editor="editor"
+          v-model="text"
+          :config="editorConfig"
+        ></ckeditor>
       </div>
       <div class="field center">
         <button class="btn teal" @click="updatePost">
@@ -110,6 +145,7 @@
 <script>
 import db from '@/firebase/init';
 import firebase from 'firebase';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
   name: 'EditPost',
@@ -127,6 +163,8 @@ export default {
       topic: null,
       feedback: null,
       // ckeditor:
+      editor: ClassicEditor,
+      //editorData: '<p>Content of the editor.</p>',
       editorConfig: {
         // The configuration of the editor.
       },
