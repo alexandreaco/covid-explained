@@ -13,7 +13,7 @@
         </div>
         <br />
         <social-sharing :url="this.postId" inline-template>
-          <div>
+          <div class="social-icons">
             <network network="facebook">
               <i class="fa fa-facebook"></i> Facebook
             </network>
@@ -140,15 +140,13 @@ p {
   font-size: 10px;
 }
 
+.social-icons {
+  font-size:11px;
+}
+
 .post-title {
   display: flex;
   justify-content: space-between;
-}
-.post-title h3 {
-  /* color: white;
-  font-size: 70px;
-  text-shadow: -1px 0 rgb(87, 143, 127), 0 1px black, 3px 0 rgb(87, 143, 127),
-    0 -1px rgb(87, 143, 127); */
 }
 
 .edit:hover {
