@@ -66,8 +66,6 @@ export default {
   margin-left: 150px;
   padding: 50px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 }
 .about-us p {
