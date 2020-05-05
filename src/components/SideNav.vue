@@ -37,15 +37,11 @@
           <router-link class="white-text admin-links" :to="{ name: 'AdminLogin' }">Admin Log In</router-link>
         </a>
       </li>
-      <!-- <li v-if="!admin">
+      <li v-if="!authAdmin">
         <a href="#">
-          <router-link
-            class="white-text admin-links"
-            :to="{ name: 'AdminSignup' }"
-            >Admin Sign Up</router-link
-          >
+          <router-link class="white-text admin-links" :to="{ name: 'AdminSignup' }">Admin Sign Up</router-link>
         </a>
-      </li>-->
+      </li>
     </ul>
     <ul v-if="authAdmin">
       <li v-if="dbAdmin.isApproved && isSuperAdmin">

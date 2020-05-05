@@ -45,6 +45,14 @@ export default {
     };
   },
   methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: 'Home' });
+        });
+    },
     signup() {
       this.feedback = null;
       if (this.name && this.email && this.password) {
@@ -63,7 +71,11 @@ export default {
                 isApproved: false,
               })
               .then(docRef => {
-                this.$router.push({ name: 'Home' });
+                alert(
+                  'Thanks for signing up! You will not be able to log in until your account is approved.'
+                );
+                this.logout();
+                // this.$router.push({ name: 'Home' });
               })
               .catch(error => {
                 console.error('Error adding document: ', error);
