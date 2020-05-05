@@ -10,11 +10,10 @@
       <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
         <div class="card-content">
           <i
-            v-if="admin"
+            v-if="authAdmin && dbAdmin.isApproved"
             class="material-icons edit"
             @click="redirectToEditPost(post.id)"
-            >edit</i
-          >
+          >edit</i>
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
@@ -36,7 +35,8 @@ export default {
   data() {
     return {
       searchTerm: '',
-      admin: null,
+      authAdmin: null,
+      dbAdmin: {},
       posts: [],
       topic: this.$route.params.topicName,
       topicInCaps: this.$route.params.topicName.toUpperCase(),
@@ -99,13 +99,24 @@ export default {
           });
         });
     },
+    checkApprovalStatus(adminId) {
+      db.collection('users')
+        .doc(adminId)
+        .get()
+        .then(doc => {
+          let dbAdmin = doc.data();
+          dbAdmin.id = doc.id;
+          this.dbAdmin = dbAdmin;
+        });
+    },
     setAdminIfLoggedIn() {
-      let admin = firebase.auth().currentUser;
+      let authAdmin = firebase.auth().currentUser;
       firebase.auth().onAuthStateChanged(admin => {
         if (admin) {
-          this.admin = admin;
+          this.authAdmin = admin;
+          this.checkApprovalStatus(this.authAdmin.uid);
         } else {
-          this.admin = null;
+          this.authAdmin = null;
         }
       });
     },

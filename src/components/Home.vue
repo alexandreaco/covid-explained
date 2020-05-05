@@ -3,17 +3,9 @@
     <div class="preamble">
       <p>
         Wondering Where to Start? Try one of our
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
-          >explainers</router-link
-        >- on testing, or the path of the virus. Or check out our
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
-          >definitions,</router-link
-        >or
-        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }"
-          >questions</router-link
-        >. Or find out more
+        <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link>- on testing, or the path of the virus. Or check out our
+        <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link>or
+        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
         <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
         <router-link :to="{ name: 'ContactUs' }">contact us</router-link>with
         ideas!
@@ -26,11 +18,10 @@
     <div class="post-card-container">
       <div class="card post-card" v-for="(post, i) in filteredPosts" :key="i">
         <i
-          v-if="admin"
+          v-if="authAdmin && dbAdmin.isApproved"
           class="material-icons edit"
           @click="redirectToEditPost(post.id)"
-          >edit</i
-        >
+        >edit</i>
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
@@ -55,7 +46,8 @@ export default {
     return {
       posts: null,
       searchTerm: '',
-      admin: null,
+      authAdmin: {},
+      dbAdmin: {},
     };
   },
   computed: {
@@ -104,14 +96,25 @@ export default {
         });
     },
     setAdminIfLoggedIn() {
-      let admin = firebase.auth().currentUser;
+      let authAdmin = firebase.auth().currentUser;
       firebase.auth().onAuthStateChanged(admin => {
         if (admin) {
-          this.admin = admin;
+          this.authAdmin = admin;
+          this.checkApprovalStatus(this.authAdmin.uid);
         } else {
-          this.admin = null;
+          this.authAdmin = null;
         }
       });
+    },
+    checkApprovalStatus(adminId) {
+      db.collection('users')
+        .doc(adminId)
+        .get()
+        .then(doc => {
+          let dbAdmin = doc.data();
+          dbAdmin.id = doc.id;
+          this.dbAdmin = dbAdmin;
+        });
     },
   },
 
