@@ -23,8 +23,25 @@
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
+    <div class="questions-module">
+      <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
+      <div  class="question-carousel">
+      <div v-if="post.topic === 'questions'" v-for="(post, i) in filteredPosts" :key="i">
+        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+          <span class="question-list">{{ post.title }}</span>
+        </router-link>
+      </div>
+      </div>
+    </div>
+
+    <p class="py-6"><span class="explainers bullet"></span>Latest Explainers</p>
+
     <div class="post-card-container">
-      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredPosts" :key="i">
+
+
+      <!-- <div class="card post-card" v-bind:class="post.topic"  v-if="post.topic === 'defintions'|post.topic === 'scenarios'|post.topic === 'explainers'" v-for="(post, i) in filteredPosts" :key="i"> -->
+
+      <div class="card post-card" v-bind:class="post.topic"  v-if="post.topic === 'explainers'" v-for="(post, i) in filteredPosts" :key="i">
         <i
           v-if="admin"
           class="material-icons edit"
@@ -166,6 +183,33 @@ export default {
   text-decoration: underline;
   text-decoration-style: solid;
 }
+.questions-module{
+
+  border-top:1px solid gray;
+  border-bottom:1px solid gray;
+  margin-bottom:1rem;
+}
+.question-carousel {
+  width:100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: scroll;
+
+}
+.question-carousel div{
+  min-width:800px;
+  background: #F8E1DB;
+  color:#371A13;
+  padding:1rem;
+  margin-right:1rem;
+  margin-bottom:1rem;
+}
+.question-list{
+  font-size:64px;
+  line-height: 64px;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+}
 .card-topic{
   font-size:11px;
 }
@@ -187,4 +231,5 @@ export default {
   font-size: 18px;
   line-height:24px;
 }
+
 </style>
