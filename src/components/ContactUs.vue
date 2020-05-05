@@ -1,7 +1,7 @@
 <template>
   <div class="contact-us container">
     <form class="card-panel" @submit.prevent="signup">
-      <h2 class="center teal-text">Contact Us</h2>
+      <h3 class="center teal-text">Contact Us</h3>
       <div class="field">
         <label for="name">Name</label>
         <input id="name" type="text" v-model="name" />
@@ -25,7 +25,7 @@
         </form>
       </div>
       <div class="field center">
-        <button class="btn teal">
+        <button class="btn">
           Submit
           <i class="material-icons right">send</i>
         </button>
@@ -49,15 +49,28 @@ export default {
 
 <style scoped>
 .contact-us {
-  max-width: 400px;
+  max-width: 900px;
   margin-top: 60px;
+  padding:0 20px;
 }
-.contact-us h2 {
-  font-size: 2.4em;
+.contact-us h3 {
+  margin-bottom:1rem;
+}
+.contact-us label {
+  display: block;
+}
+.contact-us  input{
+    padding:.5rem;
 }
 .contact-us .field {
   margin-bottom: 16px;
 }
+
+.btn {
+  border:1px solid black;
+  padding:1rem;
+}
+
 #textarea1 {
   height: 100px;
 }
