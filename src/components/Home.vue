@@ -27,17 +27,7 @@
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
-    <div class="questions-module">
-      <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
-      <div class="question-carousel">
-        <div v-for="(post, i) in filteredQuestionPosts" :key="i">
-          <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-            <span class="question-list">{{ post.title }}</span>
-          </router-link>
-        </div>
-      </div>
 
-    </div>
 
     <p class="py-6"><span class="explainers bullet"></span> Explainers</p>
 
@@ -55,6 +45,18 @@
           </div>
         </router-link>
       </div>
+    </div>
+
+    <div class="questions-module">
+      <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
+      <div class="question-carousel">
+        <div v-for="(post, i) in filteredQuestionPosts" :key="i">
+          <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+            <span class="question-list">{{ post.title }}</span>
+          </router-link>
+        </div>
+      </div>
+
     </div>
 
     <p class="py-6"><span class="definitions bullet"></span> Definitions</p>
@@ -220,16 +222,6 @@
     text-decoration-style: solid;
   }
 
-  .questions-module {
-    width:100%;
-    margin-bottom: 1rem;
-
-  }
-
-  .question-carousel {
-    width: 100%;
-    display: flex;
-  }
   a.questionlink{
     text-decoration-color: #dd694a;
   }
@@ -245,21 +237,29 @@
       width:100%;
     }
 
+
+      .questions-module {
+        width:100%;
+        margin-bottom: 1rem;
+
+      }
+
+      .question-carousel {
+        width: 100%;
+
+      }
   .question-carousel div {
-    /* background: rgba(248, 225, 219, .25); */
-    background: #dd694a;
-    color: #fff;
-    padding: 1rem;
-    /* border-radius: 100%; */
-    border-bottom: 1px solid #a64f38;
-    margin-right: 1rem;
+    color: #6f3525;
+    padding: 1rem 0;
+    text-decoration: underline;
+    text-decoration-color: #dd694a;
     margin-bottom: 1rem;
   }
 
   .question-list {
+    width:100%;
     font-size: 48px;
     line-height: 48px;
-    font-style: italic;
     font-family: 'Playfair Display', serif;
   }
 
