@@ -150,16 +150,7 @@
                 </router-link>
               </a>
             </li>
-            <li>
-              <router-link :to="{ name: 'Topic', params: { topicName: 'scenarios' } }">
-                <span class="scenarios bullet"></span> Scenarios
-              </router-link>
-            </li>
-            <li>
-              <router-link :to="{ name: 'Topic', params: { topicName: 'news' } }">
-                <span class="news bullet"></span> In the News
-              </router-link>
-            </li>
+            
           </ul>
           <ul>
 

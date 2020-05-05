@@ -3,6 +3,8 @@
   <div class="home">
     <div class="preamble">
       <p>
+        COVID-19 is confusing. There's a lot of conflicting information out there -- Can you get the virus from food? Is there such a thing as immunity? What kind of tests are really out there? Who is most at risk? And all the conflicting information can make it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.</p>
+      <p>
         Wondering Where to Start? Try one of our
         <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
         <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link>or
@@ -27,10 +29,12 @@
 
     </div>
 
-    <p class="py-6"><span class="explainers bullet"></span> Latest Explainers</p>
+    <p class="py-6"><span class="explainers bullet"></span> Explainers</p>
 
     <div class="post-card-container">
-      <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)">
+      <!-- <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)"> -->
+        <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
+
         <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
@@ -45,19 +49,16 @@
       </div>
     </div>
 
-    <p class="py-6"><span class="news bullet"></span> In the News</p>
+    <p class="py-6"><span class="definitions bullet"></span> Definitions</p>
 
     <div class="post-card-container">
-      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredNewsPosts" :key="i">
+      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredDefintionsPosts" :key="i">
         <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
             <span class="card-title">{{ post.title }}</span>
-            <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-author" v-else></p>
-            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
-            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
+
           </div>
         </router-link>
       </div>
@@ -94,8 +95,8 @@
       filteredExplainerPosts: function() {
         return this.filteredPosts.filter(post => post.topic === 'explainers')
       },
-      filteredNewsPosts: function() {
-        return this.filteredPosts.filter(post => post.topic === 'news')
+      filteredDefintionsPosts: function() {
+        return this.filteredPosts.filter(post => post.topic === 'definitions')
       },
       filteredQuestionPosts: function() {
         return this.filteredPosts.filter(post => post.topic === 'questions')
@@ -193,7 +194,7 @@
   }
 
   .preamble {
-    max-width: 900px;
+    max-width: 1200px;
     font-weight: 100;
     font-size: 32px;
     padding: 1rem 0 2rem 0;
@@ -212,12 +213,11 @@
   .question-carousel {
     width: 100%;
     display: flex;
-    flex-wrap: nowrap;
-    overflow: scroll;
+
   }
 
   .question-carousel div {
-    min-width: 500px;
+
     /* background: rgba(248, 225, 219, .25); */
     background: #dd694a;
     color: #fff;
