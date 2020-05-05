@@ -26,10 +26,13 @@
           </div>
         </social-sharing>
         <div class="author-and-date">
-          <p v-if="this.post.author">By {{ post.author }}</p>
-          <p v-if="this.post.createdAt">
-            Last updated on {{ new Date(post.updatedAt) }}
-          </p>
+          <p>
+          <span class="bullet" v-bind:class="post.topic"></span>
+          <span v-if="this.post.author">By {{ post.author }}</span>
+          <span v-if="this.post.createdAt">
+            {{ new Date(post.updatedAt) }}
+          </span>
+        </p>
         </div>
         <div id="ck-output" class="post-body"></div>
       </div>
