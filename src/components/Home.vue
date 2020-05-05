@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <p class="py-6"><span class="explainers bullet"></span>Latest Explainers</p>
+    <p class="py-6"><span class="explainers bullet"></span> Latest Explainers</p>
 
     <div class="post-card-container">
 
@@ -51,7 +51,7 @@
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
-            <span class="card-topic capitalize">{{ post.topic }}</span>
+            <!-- <span class="card-topic capitalize">{{ post.topic }}</span> -->
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
             <p class="text-author" v-else></p>
@@ -161,7 +161,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
-
 
 .edit {
   position: absolute;

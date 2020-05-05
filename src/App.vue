@@ -38,16 +38,15 @@ h3 {
 
 .post-card {
   position: relative;
-  width:30%;
+  width:33%;
   padding:1rem;
-  margin:0 1rem 1rem 0;
+  margin:.15%;
   /* transform: rotate(-1deg); */
   transition:.5s all;
 }
 .post-card:hover {
     transform: rotate(.5deg);
 }
-
 
 .bullet{
   display: inline-block;
@@ -84,12 +83,19 @@ h3 {
 }
 .post-card.explainers{
   color: #D1E3E4;
-  /* color:#197278; */
 }
+.post-card.news{
+  border: 1px solid #33322D;
+  color:#33322D;
+  background:#F4F3E9;
+}
+.text-snippet{
+  font-size:12px;
+}
+/*
 .post-card.questions .card-title{
-  /* font-family: 'Libre Franklin', sans-serif; */
+  font-family: 'Libre Franklin', sans-serif;
   font-style: italic;
-
 }
 .definitions a .card-title {
     font-size: 48px;
@@ -100,6 +106,7 @@ h3 {
 .explainers .text-author,.explainers .text-snippet{
   display: none;
 }
+*/
 
 .search-bar{
   position: fixed;

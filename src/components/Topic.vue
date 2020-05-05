@@ -142,10 +142,10 @@ h2 {
   flex-wrap: wrap;
 }
 
-.post-card {
+/* .post-card {
   width: 350px;
   margin: 15px;
-}
+} */
 .edit {
   position: absolute;
   top: 4px;
