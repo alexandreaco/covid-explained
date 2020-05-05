@@ -30,7 +30,25 @@
     <p class="py-6"><span class="explainers bullet"></span> Latest Explainers</p>
 
     <div class="post-card-container">
-      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
+      <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)">
+        <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+
+        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+          <div class="card-content">
+            <span class="card-title">{{ post.title }}</span>
+            <p class="text-author" v-if="post.author">By {{ post.author }}</p>
+            <p class="text-author" v-else></p>
+            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
+            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
+          </div>
+        </router-link>
+      </div>
+    </div>
+
+    <p class="py-6"><span class="news bullet"></span> In the News</p>
+
+    <div class="post-card-container">
+      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredNewsPosts" :key="i">
         <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
@@ -75,6 +93,9 @@
       },
       filteredExplainerPosts: function() {
         return this.filteredPosts.filter(post => post.topic === 'explainers')
+      },
+      filteredNewsPosts: function() {
+        return this.filteredPosts.filter(post => post.topic === 'news')
       },
       filteredQuestionPosts: function() {
         return this.filteredPosts.filter(post => post.topic === 'questions')
@@ -185,7 +206,6 @@
 
   .questions-module {
     border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
     margin-bottom: 1rem;
   }
 
@@ -197,17 +217,20 @@
   }
 
   .question-carousel div {
-    min-width: 800px;
-    background: #f8e1db;
-    color: #371a13;
+    min-width: 500px;
+    /* background: rgba(248, 225, 219, .25); */
+    background: #dd694a;
+    color: #fff;
     padding: 1rem;
+    /* border-radius: 100%; */
+    border-bottom: 1px solid #a64f38;
     margin-right: 1rem;
     margin-bottom: 1rem;
   }
 
   .question-list {
-    font-size: 64px;
-    line-height: 64px;
+    font-size: 48px;
+    line-height: 48px;
     font-style: italic;
     font-family: 'Playfair Display', serif;
   }

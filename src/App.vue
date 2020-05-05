@@ -31,11 +31,10 @@
     color: #33322d;
     margin: 120px 130px 100px 0;
   }
-  @media (max-width: 1024px){
+  @media (max-width: 1024px) {
     body {
-        margin: 120px 0px 100px 0;
+      margin: 120px 0px 100px 0;
     }
-
   }
 
   h1,
@@ -48,7 +47,13 @@
   h3 {
     margin: 0px;
     font-size: 96px;
-    line-height: 100px;
+    line-height: 96px;
+  }
+  @media (max-width: 1024px) {
+    h3 {
+      font-size: 48px;
+      line-height: 48px;
+    }
   }
 
   .post-card {
@@ -59,8 +64,15 @@
     /* transform: rotate(-1deg); */
     transition: 0.5s all;
   }
+  @media (max-width: 1024px) {
+    .post-card {
+      width: 100%;
+      margin: 0.25rem 0;
+    }
+  }
+
   .post-card:hover {
-    transform: rotate(0.5deg);
+    opacity: 0.75;
   }
 
   .bullet {
@@ -94,7 +106,9 @@
     background: #d9bdd7;
     color: #604e60;
   }
-  .post-card.definitions .text-author,
+  .post-card.definitions .text-author {
+    display: none;
+  }
   .post-card.definitions .text-snippet {
   }
   .post-card.explainers {
