@@ -25,8 +25,8 @@
     </div>
     <div class="questions-module">
       <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
-      <div  class="question-carousel">
-      <div v-if="post.topic === 'questions'" v-for="(post, i) in filteredPosts" :key="i">
+      <div  class="question-carousel"  v-if="post.topic === 'questions'">
+      <div v-for="(post, i) in filteredPosts" :key="i">
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <span class="question-list">{{ post.title }}</span>
         </router-link>
@@ -36,12 +36,12 @@
 
     <p class="py-6"><span class="explainers bullet"></span> Latest Explainers</p>
 
-    <div class="post-card-container">
+    <div class="post-card-container"  v-if="post.topic === 'explainers'">
 
 
       <!-- <div class="card post-card" v-bind:class="post.topic"  v-if="post.topic === 'defintions'|post.topic === 'scenarios'|post.topic === 'explainers'" v-for="(post, i) in filteredPosts" :key="i"> -->
 
-      <div class="card post-card" v-bind:class="post.topic"  v-if="post.topic === 'explainers'" v-for="(post, i) in filteredPosts" :key="i">
+      <div class="card post-card" v-bind:class="post.topic"  v-for="(post, i) in filteredPosts" :key="i">
         <i
           v-if="admin"
           class="material-icons edit"
