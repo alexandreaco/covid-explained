@@ -131,8 +131,12 @@ h2.topic-title {
   line-height:100px;
   margin-bottom:2rem;
 }
-
-
+.search-bar {
+  position: fixed;
+  z-index: 5;
+  left: 200px;
+  top: 20px;
+}
 
 .post-card-container {
   align-items: top;

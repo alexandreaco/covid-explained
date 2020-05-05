@@ -85,12 +85,13 @@
     background: #dd694a;
     color: #f8e1db;
   }
+
   .news {
     background: #33322d;
     color: #f4f3e9;
   }
   .definitions {
-    background: #604e60;
+    background: #6c446d;
     color: #fdffff;
   }
   .explainers {
@@ -104,7 +105,7 @@
   .post-card.definitions {
     word-wrap: break-word;
     background: #d9bdd7;
-    color: #604e60;
+    color: #6c446d;
   }
   .post-card.definitions .text-author {
     display: none;
@@ -125,12 +126,7 @@
     font-size: 12px;
   }
 
-  .search-bar {
-    position: fixed;
-    z-index: 5;
-    left: 200px;
-    top: 20px;
-  }
+  
   .search-bar input {
     padding: 1rem;
     border: 1px solid gray;

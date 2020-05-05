@@ -2,14 +2,24 @@
 
   <div class="home">
     <div class="preamble">
+      <p class="lead">
+        COVID-19 is confusing. There's a lot of conflicting information out there—<a href="#" class="questionlink">can you get the virus from food?</a> Is there such
+        a thing as <a href="#" class="defintionlink">immunity</a>? <a href="#" class="questionlink">What kind of tests are really out there?</a> <a href="#" class="questionlink">Who is most at risk?</a> And all the conflicting information
+        can make it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
+      </p>
       <p>
-        COVID-19 is confusing. There's a lot of conflicting information out there -- Can you get the virus from food? Is there such a thing as immunity? What kind of tests are really out there? Who is most at risk? And all the conflicting information can make it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.</p>
+        We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere. We care about getting information
+        out there. </p>
       <p>
-        Wondering Where to Start? Try one of our
-        <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
-        <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link>or
-        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
-        <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
+        <em>Emily Oster</em> is an American economist, professor at Brown Univeristy, and bestselling author. <em>Galit Alter</em> is a Professor of
+        Medicine at Harvard Medical School and a Group Leader at the Ragon Institute of MGH, MIT and Harvard.
+      </p>
+      <p>
+        Wondering where to Start? Try one of our
+        <router-link class="explainerlink" :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
+        <router-link class="defintionlink" :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link> or
+        <router-link class="questionlink" :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
+        <router-link :to="{ name: 'AboutUs' }">about our team,</router-link> and
         <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with ideas!
       </p>
     </div>
@@ -33,15 +43,13 @@
 
     <div class="post-card-container">
       <!-- <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)"> -->
-        <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
+      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
 
         <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
         <router-link :to="{ name: 'Post', params: { postId: post.id } }">
           <div class="card-content">
             <span class="card-title">{{ post.title }}</span>
-            <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-author" v-else></p>
             <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
             <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
           </div>
@@ -196,8 +204,15 @@
   .preamble {
     max-width: 1200px;
     font-weight: 100;
-    font-size: 32px;
+
     padding: 1rem 0 2rem 0;
+  }
+  .preamble p {
+    margin: 1rem 0;
+    font-size: 20px;
+  }
+  .preamble .lead {
+    font-size: 32px;
   }
 
   .preamble a {
@@ -206,18 +221,31 @@
   }
 
   .questions-module {
-    border-top: 1px solid gray;
+    width:100%;
     margin-bottom: 1rem;
+
   }
 
   .question-carousel {
     width: 100%;
     display: flex;
-
+  }
+  a.questionlink{
+    text-decoration-color: #dd694a;
+  }
+  a.defintionlink{
+    text-decoration-color: #6c446d;
+  }
+  a.explainerlink{
+    text-decoration-color: #197278;
   }
 
-  .question-carousel div {
 
+    .search-bar input{
+      width:100%;
+    }
+
+  .question-carousel div {
     /* background: rgba(248, 225, 219, .25); */
     background: #dd694a;
     color: #fff;
