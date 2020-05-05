@@ -35,8 +35,9 @@ export default {
   },
   methods: {
     checkIfAdminIsApproved() {
+      let lowerCaseEmail = this.email.toLowerCase();
       db.collection('users')
-        .where('email', '==', this.email)
+        .where('email', '==', lowerCaseEmail)
         .get()
         .then(snapshot => {
           let admin = {};

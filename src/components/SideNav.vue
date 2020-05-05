@@ -100,9 +100,15 @@ export default {
     },
 
     checkIfAdminIsSuperAdmin() {
+      console.log('this.isSuperAdmin :', this.isSuperAdmin);
       if (this.authAdmin.email === 'livmarks@someemail.com') {
         this.isSuperAdmin = true;
+        console.log('IN IF - this.isSuperAdmin :', this.isSuperAdmin);
+      } else {
+        this.isSuperAdmin = false;
+        console.log('IN ELSE - this.isSuperAdmin :', this.isSuperAdmin);
       }
+      console.log('AFTER CONDITIONAL - this.isSuperAdmin :', this.isSuperAdmin);
     },
   },
   created() {
