@@ -125,16 +125,14 @@ export default {
   padding: 20px;
 
 }
-h2 {
+h2.topic-title {
   margin: 0px;
   font-size:96px;
   line-height:100px;
-
+  margin-bottom:2rem;
 }
 
-.topic-title{
-  font-size: 64px;
-}
+
 
 .post-card-container {
   align-items: top;
