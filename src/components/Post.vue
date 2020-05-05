@@ -12,16 +12,26 @@
           >
         </div>
         <br />
-        <social-sharing :url="this.postId" inline-template>
-          <div>
-            <network network="facebook">
-              <i class="fa fa-facebook"></i> Facebook
+        <social-sharing
+          :url="postURL"
+          :title="postDescription"
+          :description="postDescription"
+          :quote="postDescription"
+          hashtags="covidexplained"
+          inline-template
+        >
+          <div class="social-links">
+            <network network="facebook" class="social-link">
+              <i class="fab fa-facebook-square"></i>
+              Facebook
             </network>
-            <network network="linkedin">
-              <i class="fa fa-linkedin"></i> LinkedIn
+            <network network="linkedin" class="social-link">
+              <i class="fa fa-linkedin social-links"></i>
+              LinkedIn
             </network>
-            <network network="twitter">
-              <i class="fa fa-twitter"></i> Twitter
+            <network network="twitter" class="social-link">
+              <i class="fa fa-twitter social-links"></i>
+              Twitter
             </network>
           </div>
         </social-sharing>
@@ -47,9 +57,12 @@ export default {
     return {
       admin: null,
       postId: this.$route.params.postId,
+      postURL: `https://covid-explained.firebaseapp.com/post/${this.$route.params.postId}`,
       post: null,
+      postDescription: null,
     };
   },
+
   methods: {
     createSocialMediaLinks() {
       var element = document.getElementById('links');
@@ -90,7 +103,7 @@ export default {
     },
   },
   created() {
-    console.log('this.$route:', this.$route.fullPath);
+    console.log('this.$route:', this.$route);
     db.collection('posts')
       .doc(this.postId)
       .get()
@@ -98,6 +111,7 @@ export default {
         let post = doc.data();
         post.id = doc.id;
         this.post = post;
+        this.postDescription = `${this.post.title}: ${this.post.subtitle}`;
         this.$nextTick(function() {
           this.displayCKEditorContent(this.post.text);
         });
@@ -155,5 +169,12 @@ p {
 .edit:hover {
   opacity: 0.5;
   cursor: pointer;
+}
+
+.social-links {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 </style>

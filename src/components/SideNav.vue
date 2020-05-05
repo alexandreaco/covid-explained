@@ -24,7 +24,7 @@
           </router-link>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <router-link
           :to="{ name: 'Topic', params: { topicName: 'scenarios' } }"
         >
@@ -35,7 +35,7 @@
         <router-link :to="{ name: 'Topic', params: { topicName: 'news' } }">
           <p class="white-text">IN THE NEWS</p>
         </router-link>
-      </li>
+      </li> -->
     </ul>
     <ul>
       <li v-if="!admin">

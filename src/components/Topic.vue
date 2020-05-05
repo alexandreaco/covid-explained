@@ -1,17 +1,24 @@
 <template>
   <div class="topic">
-    <h2 class="teal-text topic-title">{{ this.topicInCaps }}</h2>
+    <div class="header">
+      <h2 class="teal-text topic-title">{{ this.topicInCaps }}</h2>
+    </div>
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
     <div class="post-card-container">
       <div class="card post-card" v-for="post in filteredPosts" :key="post.id">
         <div class="card-content">
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <i
+            v-if="admin"
+            class="material-icons edit"
+            @click="redirectToEditPost(post.id)"
+            >edit</i
+          >
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="card-title">{{ post.title }}</span>
             <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-snippet" v-if="post.subtitle">{{post.subtitle}}</p>
+            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
             <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
           </router-link>
         </div>
@@ -156,5 +163,9 @@ export default {
 }
 .text-snippet {
   font-size: 22px;
+}
+
+.header {
+  /* background-image: image; */
 }
 </style>
