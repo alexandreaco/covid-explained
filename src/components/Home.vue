@@ -1,67 +1,50 @@
 <template>
-  <div class="home">
-    <div class="preamble">
-      <p>
-        Wondering Where to Start? Try one of our
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'explainers' } }"
-          >explainers</router-link
-        > on testing, or the path of the virus. Or check out our
-        <router-link
-          :to="{ name: 'Topic', params: { topicName: 'definitions' } }"
-          >definitions,</router-link
-        >or
-        <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }"
-          >questions</router-link
-        >. Or find out more
-        <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
-        <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with
-        ideas!
-      </p>
+<div class="home">
+  <div class="preamble">
+    <p>
+      Wondering Where to Start? Try one of our
+      <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
+      <router-link :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link>or
+      <router-link :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
+      <router-link :to="{ name: 'AboutUs' }">about our team,</router-link>and
+      <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with
+      ideas!
+    </p>
+  </div>
+
+  <div class="search-bar">
+    <input type="text" v-model="searchTerm" placeholder="Search" />
+  </div>
+  <div class="questions-module">
+    <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
+    <div class="question-carousel" >
+    <div v-for="(post, i) in filteredQuestionPosts" :key="i">
+      <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+        <span class="question-list">{{ post.title }}</span>
+      </router-link>
+    </div>
     </div>
 
-    <div class="search-bar">
-      <input type="text" v-model="searchTerm" placeholder="Search" />
-    </div>
-    <div class="questions-module">
-      <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
-      <div  class="question-carousel"  v-if="post.topic === 'questions'">
-      <div v-for="(post, i) in filteredPosts" :key="i">
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <span class="question-list">{{ post.title }}</span>
-        </router-link>
-      </div>
-      </div>
-    </div>
+  </div>
 
-    <p class="py-6"><span class="explainers bullet"></span> Latest Explainers</p>
+  <p class="py-6"><span class="explainers bullet"></span> Latest Explainers</p>
 
-    <div class="post-card-container"  v-if="post.topic === 'explainers'">
+  <div class="post-card-container">
+    <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
+      <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
-
-      <!-- <div class="card post-card" v-bind:class="post.topic"  v-if="post.topic === 'defintions'|post.topic === 'scenarios'|post.topic === 'explainers'" v-for="(post, i) in filteredPosts" :key="i"> -->
-
-      <div class="card post-card" v-bind:class="post.topic"  v-for="(post, i) in filteredPosts" :key="i">
-        <i
-          v-if="admin"
-          class="material-icons edit"
-          @click="redirectToEditPost(post.id)"
-          >edit</i
-        >
-
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <!-- <span class="card-topic capitalize">{{ post.topic }}</span> -->
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-author" v-else></p>
-            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
-            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
-          </div>
-        </router-link>
-      </div>
+      <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+        <div class="card-content">
+          <span class="card-title">{{ post.title }}</span>
+          <p class="text-author" v-if="post.author">By {{ post.author }}</p>
+          <p class="text-author" v-else></p>
+          <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
+          <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
+        </div>
+      </router-link>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -88,6 +71,12 @@ export default {
       let deduplicatedArr = this.deduplicateById(combinedArr);
       return deduplicatedArr;
     },
+    filteredExplainerPosts: function() {
+      return this.filteredPosts.filter((post) => post.topic === 'explainers')
+    },
+    filteredQuestionPosts: function() {
+      return this.filteredPosts.filter((post) => post.topic === 'questions')
+    },
   },
   methods: {
     deduplicateById(arr) {
@@ -105,7 +94,12 @@ export default {
       return arr2;
     },
     redirectToEditPost(postId) {
-      this.$router.push({ name: 'EditPost', params: { postId: postId } });
+      this.$router.push({
+        name: 'EditPost',
+        params: {
+          postId: postId
+        }
+      });
     },
     getPosts() {
       if (this.posts === null) {
@@ -167,6 +161,7 @@ export default {
   top: 4px;
   right: 4px;
 }
+
 .edit:hover {
   opacity: 0.5;
   cursor: pointer;
@@ -174,61 +169,68 @@ export default {
 
 .preamble {
   max-width: 900px;
-  font-weight:100;
-  font-size:32px;
-  padding:1rem 0 2rem 0;
+  font-weight: 100;
+  font-size: 32px;
+  padding: 1rem 0 2rem 0;
 }
-.preamble a{
+
+.preamble a {
   text-decoration: underline;
   text-decoration-style: solid;
 }
-.questions-module{
 
-  border-top:1px solid gray;
-  border-bottom:1px solid gray;
-  margin-bottom:1rem;
+.questions-module {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin-bottom: 1rem;
 }
+
 .question-carousel {
-  width:100%;
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
   overflow: scroll;
+}
 
-}
-.question-carousel div{
-  min-width:800px;
+.question-carousel div {
+  min-width: 800px;
   background: #F8E1DB;
-  color:#371A13;
-  padding:1rem;
-  margin-right:1rem;
-  margin-bottom:1rem;
+  color: #371A13;
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 }
-.question-list{
-  font-size:64px;
+
+.question-list {
+  font-size: 64px;
   line-height: 64px;
   font-style: italic;
   font-family: 'Playfair Display', serif;
 }
-.card-topic{
-  font-size:11px;
+
+.card-topic {
+  font-size: 11px;
 }
+
 .card-title {
   font-size: 32px;
-  line-height:32px;
+  line-height: 32px;
   padding: 10px 0;
 }
+
 .card-content {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
+
 .text-author {
   font-size: 11px;
   padding: .5rem 0;
 }
+
 .text-snippet {
   font-size: 18px;
-  line-height:24px;
+  line-height: 24px;
 }
-
 </style>
