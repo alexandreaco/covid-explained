@@ -9,24 +9,23 @@
         <br />
         <social-sharing
           :url="postURL"
-          :title="postDescription"
-          :description="postDescription"
-          :quote="postDescription"
+          :title="post.title"
+          :description="post.title"
+          :quote="post.title"
           hashtags="covidexplained"
           inline-template
         >
           <div class="social-links">
             <network network="facebook" class="social-link">
               <i class="fab fa-facebook-square"></i>
-              Facebook
             </network>
+            <span>-</span>
             <network network="linkedin" class="social-link">
               <i class="fa fa-linkedin social-links"></i>
-              LinkedIn
             </network>
+            <span>-</span>
             <network network="twitter" class="social-link">
               <i class="fa fa-twitter social-links"></i>
-              Twitter
             </network>
           </div>
         </social-sharing>
@@ -52,7 +51,6 @@ export default {
       postId: this.$route.params.postId,
       postURL: `https://covid-explained.firebaseapp.com/post/${this.$route.params.postId}`,
       post: null,
-      postDescription: null,
     };
   },
 
@@ -67,60 +65,24 @@ export default {
         return response;
       });
     },
-    methods: {
-      createSocialMediaLinks() {
-        var element = document.getElementById('links');
-      },
-      getData: function() {
-        return this.$http.get('<div>').then(response => {
-          // return the Promise so .then() above works.
-          this.data = response.body;
-          return response;
-        });
-      },
-      displayCKEditorContent(string) {
-        // console.log('string:', string, typeof string);
+    displayCKEditorContent(string) {
+      // console.log('string:', string, typeof string);
 
-        //Get element:
-        var element = document.getElementById('ck-output');
+      //Get element:
+      var element = document.getElementById('ck-output');
 
-        // Make Child Component:
-        var div = document.createElement('div');
-        div.innerHTML = string;
+      // Make Child Component:
+      var div = document.createElement('div');
+      div.innerHTML = string;
 
-        // Attach child component to element:
-        element.innerHTML = '';
-        element.appendChild(div);
-      },
-      redirectToEditPost(postId) {
-        this.$router.push({ name: 'EditPost', params: { postId: postId } });
-      },
-      setAdminIfLoggedIn() {
-        let admin = firebase.auth().currentUser;
-        firebase.auth().onAuthStateChanged(admin => {
-          if (admin) {
-            this.admin = admin;
-          } else {
-            this.admin = null;
-          }
-        });
-      },
+      // Attach child component to element:
+      element.innerHTML = '';
+      element.appendChild(div);
     },
-    created() {
-      console.log('this.$route:', this.$route.fullPath);
-      db.collection('posts')
-        .doc(this.postId)
-        .get()
-        .then(doc => {
-          let post = doc.data();
-          post.id = doc.id;
-          this.post = post;
-          this.$nextTick(function() {
-            this.displayCKEditorContent(this.post.text);
-          });
-        });
-      this.setAdminIfLoggedIn();
+    redirectToEditPost(postId) {
+      this.$router.push({ name: 'EditPost', params: { postId: postId } });
     },
+
     setAdminIfLoggedIn() {
       let admin = firebase.auth().currentUser;
       firebase.auth().onAuthStateChanged(admin => {
@@ -132,8 +94,8 @@ export default {
       });
     },
   },
+
   created() {
-    console.log('this.$route:', this.$route);
     db.collection('posts')
       .doc(this.postId)
       .get()
@@ -141,7 +103,6 @@ export default {
         let post = doc.data();
         post.id = doc.id;
         this.post = post;
-        this.postDescription = `${this.post.title}: ${this.post.subtitle}`;
         this.$nextTick(function() {
           this.displayCKEditorContent(this.post.text);
         });
@@ -191,8 +152,13 @@ p {
   font-size: 12px;
 }
 
-.social-icons {
-  font-size: 12px;
+.social-links {
+  font-size: 30px;
+  padding-bottom: 10px;
+}
+
+.social-links:hover {
+  cursor: pointer;
 }
 
 .post-title {

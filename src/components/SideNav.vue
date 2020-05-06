@@ -186,11 +186,11 @@
               <router-link :to="{ name: 'AboutUs' }">About Us</router-link>
             </a>
           </div>
-          <div>
+          <!-- <div>
             <a href="#">
               <router-link :to="{ name: 'OurSources' }">Our Sources</router-link>
             </a>
-          </div>
+          </div>-->
           <div>
             <a href="#">
               <router-link :to="{ name: 'ContactUs' }">Contact Us</router-link>
@@ -201,17 +201,22 @@
     </div>
 
     <ul class="if-admin">
-      <li v-if="!admin">
-        <a href="#">
-          <router-link class="white-text admin-links" :to="{ name: 'AdminLogin' }">Admin Log In</router-link>
+      <li v-if="adminFromDb && isSuperAdmin">
+        <a class="white-text admin-links">
+          <router-link :to="{ name: 'AdminApproval' }">Admin Approval</router-link>
         </a>
       </li>
-      <li v-if="admin">
+      <li v-if="adminFromDb && isSuperAdmin">
+        <a class="white-text admin-links">
+          <router-link :to="{ name: 'AdminApproval' }">Inbox</router-link>
+        </a>
+      </li>
+      <li v-if="adminFromDb">
         <a href="#">
           <a class="white-text admin-links" @click="redirectToAddPost">Create New Post</a>
         </a>
       </li>
-      <li v-if="admin">
+      <li v-if="adminFromDb">
         <a href="#">
           <a class="white-text admin-links" @click="logout">Log Out</a>
         </a>
@@ -246,34 +251,25 @@ export default {
     },
 
     checkApprovalStatus(adminId) {
-      console.log('adminId:', adminId);
       db.collection('users')
         .doc(adminId)
         .get()
         .then(doc => {
-          console.log('doc:', doc.data());
-          // let adminFromDb = doc.data();
-          // adminFromDb.id = doc.id;
-          // this.adminFromDb = adminFromDb;
-        })
-        .then(() => {
-          console.log('this.adminFromDb:', this.adminFromDb);
-          // if (this.adminFromDb.isApproved === true) {
-          //   this.isApproved = true;
-          // }
+          let adminFromDb = doc.data();
+          adminFromDb.id = doc.id;
+          this.adminFromDb = adminFromDb;
         });
     },
 
     checkIfAdminIsSuperAdmin() {
-      console.log('this.isSuperAdmin :', this.isSuperAdmin);
-      if (this.authAdmin.email === 'livmarks@someemail.com') {
+      if (
+        this.authAdmin.email === 'livmarks@someemail.com' ||
+        this.authAdmin.email === 'oehrenmarks@gmail.com'
+      ) {
         this.isSuperAdmin = true;
-        console.log('IN IF - this.isSuperAdmin :', this.isSuperAdmin);
       } else {
         this.isSuperAdmin = false;
-        console.log('IN ELSE - this.isSuperAdmin :', this.isSuperAdmin);
       }
-      console.log('AFTER CONDITIONAL - this.isSuperAdmin :', this.isSuperAdmin);
     },
   },
   created() {

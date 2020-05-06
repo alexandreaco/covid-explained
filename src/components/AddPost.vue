@@ -31,12 +31,12 @@
             <span>QUESTIONS</span>
           </label>
         </p>
-        <p>
+        <!-- <p>
           <label>
             <input name="topic" type="radio" value="scenarios" v-model="topic" />
             <span>SCENARIOS</span>
           </label>
-        </p>
+        </p>-->
         <p>
           <label>
             <input name="topic" type="radio" value="definitions" v-model="topic" />
@@ -49,12 +49,12 @@
             <span>EXPLAINERS</span>
           </label>
         </p>
-        <p>
+        <!-- <p>
           <label>
             <input name="topic" type="radio" value="news" v-model="topic" />
             <span>IN THE NEWS</span>
           </label>
-        </p>
+        </p>-->
       </div>
 
       <div class="row">
@@ -166,27 +166,36 @@ export default {
     },
 
     createPost() {
-      console.log(this.title)
-      console.log(this.topic)
-      console.log(this.text)
       if (this.title && this.text && this.topic) {
-        subtitle = this.subtitle || ''
-        db.collection('posts')
-          .add({
-            title: this.title,
-            subtitle: subtitle,
-            text: this.text,
-            topic: this.topic,
-            author: this.author,
-            imgUrl: this.imgUrl,
-            createdAt: Date.now(),
-          })
-          .then(docRef => {
-            this.$router.push({ name: 'Post', params: { postId: docRef.id } });
-          })
-          .catch(error => {
-            console.error('Error adding document: ', error);
-          });
+        if (
+          (this.topic === 'explainers' && this.subtitle === null) ||
+          this.subtitle === ''
+        ) {
+          this.feedback =
+            'Since you are posting an explainer, a subtitle is required.';
+          window.scrollTo(0, 0);
+        } else {
+          let subtitle = this.subtitle || '';
+          db.collection('posts')
+            .add({
+              title: this.title,
+              subtitle: subtitle,
+              text: this.text,
+              topic: this.topic,
+              author: this.author,
+              imgUrl: this.imgUrl,
+              createdAt: Date.now(),
+            })
+            .then(docRef => {
+              this.$router.push({
+                name: 'Post',
+                params: { postId: docRef.id },
+              });
+            })
+            .catch(error => {
+              console.error('Error adding document: ', error);
+            });
+        }
       } else {
         this.feedback =
           'Please make sure that all required feilds are completed.';
@@ -251,7 +260,8 @@ img {
   margin: 0;
 }
 
-input[type=text], textarea {
+input[type='text'],
+textarea {
   min-width: 400px;
 }
 </style>

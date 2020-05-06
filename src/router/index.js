@@ -36,11 +36,11 @@ const router = new Router({
       name: 'AboutUs',
       component: AboutUs,
     },
-    {
-      path: '/our-sources',
-      name: 'OurSources',
-      component: OurSources,
-    },
+    // {
+    //   path: '/our-sources',
+    //   name: 'OurSources',
+    //   component: OurSources,
+    // },
     {
       path: '/admin-signup',
       name: 'AdminSignup',

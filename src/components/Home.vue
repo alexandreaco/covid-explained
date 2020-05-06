@@ -50,7 +50,7 @@
           v-for="(post, i) in filteredQuestionPosts"
           :key="i"
         >
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <i v-if="authAdmin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
           <router-link :to="{ name: 'Post', params: { postId: post.id } }">
             <span class="question-title underline-orange">{{ post.title }}</span>
@@ -70,7 +70,11 @@
           :key="i"
         >
           <div class="explainer-item relative border-b mb-4 mr-16 py-2">
-            <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+            <i
+              v-if="authAdmin"
+              class="material-icons edit"
+              @click="redirectToEditPost(post.id)"
+            >edit</i>
 
             <router-link class="block" :to="{ name: 'Post', params: { postId: post.id } }">
               <p class="question-title mb-2 text-2xl underline-teal">{{ post.title }}</p>
@@ -106,9 +110,7 @@ export default {
         return post.text.toLowerCase().match(this.searchTerm.toLowerCase());
       });
       let combinedArr = postsFilteredByTitle.concat(postsFilteredByContent);
-      console.log('combinedArr:', combinedArr);
       let deduplicatedArr = this.deduplicateById(combinedArr);
-      console.log('deduplicatedArr:', deduplicatedArr);
       return deduplicatedArr;
     },
     filteredExplainerPosts: function() {
@@ -194,6 +196,7 @@ export default {
     },
   },
   created() {
+    console.log('admin -------> :', firebase.auth().currentUser);
     this.getPosts();
     this.setAdminIfLoggedIn();
   },

@@ -28,16 +28,11 @@
         </label>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="questions"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="questions" v-model="topic" />
             <span>QUESTIONS</span>
           </label>
         </p>
-        <p>
+        <!-- <p>
           <label>
             <input
               name="topic"
@@ -47,35 +42,25 @@
             />
             <span>SCENARIOS</span>
           </label>
-        </p>
+        </p>-->
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="definitions"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="definitions" v-model="topic" />
             <span>DEFINITIONS</span>
           </label>
         </p>
         <p>
           <label>
-            <input
-              name="topic"
-              type="radio"
-              value="explainers"
-              v-model="topic"
-            />
+            <input name="topic" type="radio" value="explainers" v-model="topic" />
             <span>EXPLAINERS</span>
           </label>
         </p>
-        <p>
+        <!-- <p>
           <label>
             <input name="topic" type="radio" value="news" v-model="topic" />
             <span>IN THE NEWS</span>
           </label>
-        </p>
+        </p>-->
       </div>
       <div class="field">
         <label class="active" for="textarea1">
@@ -99,9 +84,7 @@
               pop up.
             </li>
             <li>Copy the url</li>
-            <li>
-              Click the image icon in the text editor. A pop-up will open.
-            </li>
+            <li>Click the image icon in the text editor. A pop-up will open.</li>
             <li>Paste your url into the url feild.</li>
           </ol>
         </div>
@@ -122,11 +105,7 @@
             </div>
           </div>
         </div>
-        <ckeditor
-          :editor="editor"
-          v-model="text"
-          :config="editorConfig"
-        ></ckeditor>
+        <ckeditor :editor="editor" v-model="text" :config="editorConfig"></ckeditor>
       </div>
       <div class="field center">
         <button class="btn teal" @click="updatePost">
@@ -236,28 +215,37 @@ export default {
     },
     updatePost() {
       if (this.title && this.topic && this.text) {
-        subtitle = this.subtitle || ''
-        db.collection('posts')
-          .doc(this.postId)
-          .update({
-            title: this.title,
-            subtitle: subtitle,
-            text: this.text,
-            topic: this.topic,
-            author: this.author,
-            imgUrl: this.imgUrl,
-            updatedAt: Date.now(),
-          })
-          .then(() => {
-            console.log('Document successfully written!');
-            this.$router.push({
-              name: 'Post',
-              params: { postId: this.postId },
+        if (
+          (this.topic === 'explainers' && this.subtitle === null) ||
+          this.subtitle === ''
+        ) {
+          this.feedback =
+            'Since you are posting an explainer, a subtitle is required.';
+          window.scrollTo(0, 0);
+        } else {
+          let subtitle = this.subtitle || '';
+          db.collection('posts')
+            .doc(this.postId)
+            .update({
+              title: this.title,
+              subtitle: subtitle,
+              text: this.text,
+              topic: this.topic,
+              author: this.author,
+              imgUrl: this.imgUrl,
+              updatedAt: Date.now(),
+            })
+            .then(() => {
+              console.log('Document successfully written!');
+              this.$router.push({
+                name: 'Post',
+                params: { postId: this.postId },
+              });
+            })
+            .catch(error => {
+              console.error('Error writing document: ', error);
             });
-          })
-          .catch(error => {
-            console.error('Error writing document: ', error);
-          });
+        }
       } else {
         this.feedback =
           'Please make sure that all required feilds are completed.';
@@ -329,7 +317,8 @@ img {
   margin: 0;
 }
 
-input[type=text], textarea {
+input[type='text'],
+textarea {
   min-width: 400px;
 }
 </style>
