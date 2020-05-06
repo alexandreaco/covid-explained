@@ -32,7 +32,7 @@
   }
   @media (max-width: 1024px) {
     body {
-      /* margin: 120px 0px 100px 0; */
+      margin: 80px 20px 100px 20px;
     }
   }
 
@@ -46,24 +46,6 @@
 
   strong{
     font-weight:800;
-  }
-
-
-  @media (max-width: 1024px) {
-    .post-card {
-      width: 100%;
-      margin: 0.25rem 0;
-    }
-  }
-
-  .post-card:hover {
-    opacity: 0.75;
-  }
-
-  .bullet {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
   }
 
 
