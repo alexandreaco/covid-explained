@@ -4,7 +4,7 @@
     <div class="search-bar mb-16">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
-    <div class="definition" v-bind:class="post.topic" v-for="post in filteredPosts" :key="post.id">
+    <div class="definition relative" v-bind:class="post.topic" v-for="post in filteredPosts" :key="post.id">
       <div class="definition-content">
         <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
           <span class="definition-title">{{ post.title }}</span>
@@ -126,11 +126,7 @@ h2.topic-title {
   line-height:100px;
   margin-bottom:2rem;
 }
-/* .search-bar {
-  position: sticky;
-  z-index: 5;
-  top: 20px;
-} */
+
 .search-bar input{
   width:30%;
   min-width:300px;
