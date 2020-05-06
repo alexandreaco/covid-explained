@@ -1,19 +1,20 @@
 <template>
+
   <div class="add-post container">
     <form class="card-panel" @submit.prevent>
       <h2 class="center teal-text">Add Post</h2>
       <p v-if="feedback" class="required">{{ feedback }}</p>
       <div class="field">
         <label for="title">
-          <p class="required">*</p>
-          <p>Title</p>
-        </label>
+            <p class="required">*</p>
+            <p>Title</p>
+          </label>
         <input id="title" type="text" v-model="title" />
       </div>
       <div class="field">
         <label for="subtitle">
-          <p>Subtitle</p>
-        </label>
+            <p>Subtitle</p>
+          </label>
         <textarea id="subtitle" type="text" v-model="subtitle" />
       </div>
       <div class="field">
@@ -22,39 +23,39 @@
       </div>
       <div class="field">
         <label for="topic" class="title">
-          <p class="required">*</p>
-          <p>Topic</p>
-        </label>
+            <p class="required">*</p>
+            <p>Topic</p>
+          </label>
         <p>
           <label>
-            <input name="topic" type="radio" value="questions" v-model="topic" />
-            <span>QUESTIONS</span>
-          </label>
+              <input name="topic" type="radio" value="questions" v-model="topic" />
+              <span>QUESTIONS</span>
+            </label>
         </p>
         <!-- <p>
-          <label>
-            <input name="topic" type="radio" value="scenarios" v-model="topic" />
-            <span>SCENARIOS</span>
-          </label>
-        </p>-->
+            <label>
+              <input name="topic" type="radio" value="scenarios" v-model="topic" />
+              <span>SCENARIOS</span>
+            </label>
+          </p>-->
         <p>
           <label>
-            <input name="topic" type="radio" value="definitions" v-model="topic" />
-            <span>DEFINITIONS</span>
-          </label>
+              <input name="topic" type="radio" value="definitions" v-model="topic" />
+              <span>DEFINITIONS</span>
+            </label>
         </p>
         <p>
           <label>
-            <input name="topic" type="radio" value="explainers" v-model="topic" />
-            <span>EXPLAINERS</span>
-          </label>
+              <input name="topic" type="radio" value="explainers" v-model="topic" />
+              <span>EXPLAINERS</span>
+            </label>
         </p>
         <!-- <p>
-          <label>
-            <input name="topic" type="radio" value="news" v-model="topic" />
-            <span>IN THE NEWS</span>
-          </label>
-        </p>-->
+            <label>
+              <input name="topic" type="radio" value="news" v-model="topic" />
+              <span>IN THE NEWS</span>
+            </label>
+          </p>-->
       </div>
 
       <div class="row">
@@ -62,13 +63,14 @@
           <div class="row">
             <div class="field">
               <label class="active" for="textarea1">
-                <p class="required">*</p>
-                <p>Body of Post</p>
-              </label>
+                  <p class="required">*</p>
+                  <p>Body of Post</p>
+                </label>
               <div class="image-instructions">
                 <p>Using Images</p>
                 <br />
-                <p>Images can be used by clicking the image icon in the text editor and then entering the image url. If you'd like to upload an image from your computer and it does not have a url, follow these steps to generate a url:</p>
+                <p>Images can be used by clicking the image icon in the text editor and then entering the image url. If you'd
+                  like to upload an image from your computer and it does not have a url, follow these steps to generate a url:</p>
                 <ol>
                   <li>Click the 'Choose File' button.</li>
                   <li>Select your file.</li>
@@ -102,166 +104,163 @@
       </div>
       <div class="field center">
         <button class="btn teal" @click="createPost">
-          Create Post
-          <i class="material-icons right">send</i>
-        </button>
+            Create Post
+            <i class="material-icons right">send</i>
+          </button>
       </div>
     </form>
   </div>
+
 </template>
 <script>
-import db from '@/firebase/init';
-import firebase from 'firebase';
 
-export default {
-  name: 'AddPost',
-  data() {
-    return {
-      selectedFile: null,
-      uploadValue: 0,
-      picture: null,
-      postId: this.$route.params.postId,
-      title: null,
-      subtitle: null,
-      imgUrl: null,
-      text: '<p>Body of post.</p>',
-      author: null,
-      topic: null,
-      feedback: null,
-      // ckeditor:
-      editorConfig: {
-        // The configuration of the editor.
-      },
-    };
-  },
+  import db from '@/firebase/init'
+  import firebase from 'firebase'
 
-  methods: {
-    onFileSelected(event) {
-      this.selectedFile = event.target.files[0];
-    },
-
-    onUpload() {
-      const storageRef = firebase
-        .storage()
-        .ref(`images/${this.selectedFile.name}`);
-      const task = storageRef.put(this.selectedFile);
-      task.on(
-        'state_changed',
-        snapshot => {
-          let percentage =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          this.uploadValue = percentage;
-        },
-        error => {
-          console.error(error);
-        },
-        () => {
-          this.uploadValue = 100;
-          task.snapshot.ref.getDownloadURL().then(url => {
-            this.picture = url;
-            this.imgUrl = this.picture;
-          });
+  export default {
+    name: 'AddPost',
+    data() {
+      return {
+        selectedFile: null,
+        uploadValue: 0,
+        picture: null,
+        postId: this.$route.params.postId,
+        title: null,
+        subtitle: null,
+        imgUrl: null,
+        text: '<p>Body of post.</p>',
+        author: null,
+        topic: null,
+        feedback: null,
+        // ckeditor:
+        editorConfig: {
+          // The configuration of the editor.
         }
-      );
-    },
-
-    createPost() {
-      if (this.title && this.text && this.topic) {
-        if (
-          (this.topic === 'explainers' && this.subtitle === null) ||
-          this.subtitle === ''
-        ) {
-          this.feedback =
-            'Since you are posting an explainer, a subtitle is required.';
-          window.scrollTo(0, 0);
-        } else {
-          let subtitle = this.subtitle || '';
-          db.collection('posts')
-            .add({
-              title: this.title,
-              subtitle: subtitle,
-              text: this.text,
-              topic: this.topic,
-              author: this.author,
-              imgUrl: this.imgUrl,
-              createdAt: Date.now(),
-            })
-            .then(docRef => {
-              this.$router.push({
-                name: 'Post',
-                params: { postId: docRef.id },
-              });
-            })
-            .catch(error => {
-              console.error('Error adding document: ', error);
-            });
-        }
-      } else {
-        this.feedback =
-          'Please make sure that all required feilds are completed.';
-        window.scrollTo(0, 0);
       }
     },
-  },
-};
+
+    methods: {
+      onFileSelected(event) {
+        this.selectedFile = event.target.files[0]
+      },
+
+      onUpload() {
+        const storageRef = firebase.storage().ref(`images/${this.selectedFile.name}`)
+        const task = storageRef.put(this.selectedFile)
+        task.on(
+          'state_changed',
+          snapshot => {
+            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            this.uploadValue = percentage
+          },
+          error => {
+            console.error(error)
+          },
+          () => {
+            this.uploadValue = 100
+            task.snapshot.ref.getDownloadURL().then(url => {
+              this.picture = url
+              this.imgUrl = this.picture
+            })
+          }
+        )
+      },
+
+      createPost() {
+        if (this.title && this.text && this.topic) {
+          if ((this.topic === 'explainers' && this.subtitle === null) || this.subtitle === '') {
+            this.feedback = 'Since you are posting an explainer, a subtitle is required.'
+            window.scrollTo(0, 0)
+          } else {
+            let subtitle = this.subtitle || ''
+            db.collection('posts')
+              .add({
+                title: this.title,
+                subtitle: subtitle,
+                text: this.text,
+                topic: this.topic,
+                author: this.author,
+                imgUrl: this.imgUrl,
+                createdAt: Date.now()
+              })
+              .then(docRef => {
+                this.$router.push({
+                  name: 'Post',
+                  params: { postId: docRef.id }
+                })
+              })
+              .catch(error => {
+                console.error('Error adding document: ', error)
+              })
+          }
+        } else {
+          this.feedback = 'Please make sure that all required feilds are completed.'
+          window.scrollTo(0, 0)
+        }
+      }
+    }
+  }
+
 </script>
 <style scoped>
-.add-post {
-  margin-left: 150px;
-  padding: 50px 0px 10px 150px;
-  /* max-width: 600px;
-  margin-top: 60px;
-  margin-left: 150px; */
-}
-label {
-  display: flex;
-}
-.add-post h2 {
-  font-size: 2.4em;
-}
-.add-post .field {
-  margin-bottom: 16px;
-}
-#textarea1 {
-  height: 300px;
-}
-.btn {
-  margin: 5px;
-}
 
-img {
-  max-width: 150px;
-  padding: 10px 10px 10px 0px;
-}
+  .add-post {
+    padding: 20px;
+  }
+  label {
+    display: flex;
+  }
+  .add-post h2 {
+    font-size: 2.4em;
+  }
+  .add-post .field {
+    margin-bottom: 16px;
+  }
+  #textarea1 {
+    height: 300px;
+  }
+  .btn {
+    margin: 5px;
+  }
 
-.image-buttons {
-  padding: 5px 10px 10px 0px;
-}
-.required {
-  color: red;
-}
+  img {
+    max-width: 150px;
+    padding: 10px 10px 10px 0px;
+  }
 
-.image-preview {
-  display: flex;
-  justify-content: flex-start;
-}
+  .image-buttons {
+    padding: 5px 10px 10px 0px;
+  }
+  .required {
+    color: red;
+  }
 
-.preview-section {
-  margin: 15px;
-}
+  .image-preview {
+    display: flex;
+    justify-content: flex-start;
+  }
 
-.image-instructions {
-  max-width: 600px;
-  background-color: rgb(249, 217, 217);
-  padding: 10px;
-  margin-bottom: 5px;
-}
-.image-instructions p {
-  margin: 0;
-}
+  .preview-section {
+    margin: 15px;
+  }
 
-input[type='text'],
-textarea {
-  min-width: 400px;
-}
+  .image-instructions {
+    max-width: 600px;
+    background-color: rgb(249, 217, 217);
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  .image-instructions p {
+    margin: 0;
+  }
+
+  input[type='text'],
+  textarea {
+    min-width: 400px;
+  }
+.btn,button {
+    border: 1px solid black;
+    padding: 1rem;
+  }
+
 </style>
