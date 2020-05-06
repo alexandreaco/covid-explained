@@ -129,11 +129,11 @@ h2.topic-title {
 .search-bar {
   position: sticky;
   z-index: 5;
-  top: 80px;
+  top: 20px;
   margin-bottom:1rem;
 }
 .search-bar input{
-  width:100%;
+  width:30%;
 }
 
 

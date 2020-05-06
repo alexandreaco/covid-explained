@@ -134,10 +134,10 @@ h2.topic-title {
 .search-bar {
   position: sticky;
   z-index: 5;
-  top: 80px;
+  top: 20px;
 }
 .search-bar input{
-  width:100%;
+  width:30%;
 }
 
 .post-card-container {
