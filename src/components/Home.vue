@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="who md:ml-16 float-none md:float-right md:w-1/4">
+    <div class="p-5 bg-gray-100 lg:ml-16 float-none lg:float-right lg:w-1/4">
       <p>We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere.</p>
       <p>
         <strong>Emily Oster</strong> is an American economist, professor at Brown Univeristy, and bestselling author.
@@ -12,7 +12,7 @@
     </div>
 
     <div class="preamble">
-      <p class="lead">
+      <p class="text-2xl md:text-4xl">
         <strong>COVID-19 is confusing.</strong> There's a lot of conflicting information out there—
         <a
           href="#"
@@ -64,7 +64,7 @@
 
       <div class="flex flex-wrap">
         <div
-          class="w-1/2 bg-white"
+          class="w-full sm:w-1/2 bg-white"
           :class="post.topic"
           v-for="(post, i) in filteredExplainerPosts"
           :key="i"
@@ -222,25 +222,10 @@ export default {
   cursor: pointer;
 }
 
-.who {
-  background-color: #f7f9fc;
-  padding: 1rem;
-}
-
-.who p {
-  padding: 0.25rem;
-}
-
 .preamble {
   max-width: 1280px;
   font-weight: 100;
-
   padding: 1rem 0 2rem 0;
-}
-
-.preamble p {
-  margin: 1rem 0;
-  font-size: 20px;
 }
 
 .preamble img {
@@ -250,9 +235,6 @@ export default {
   display: inline-block;
 }
 
-.preamble .lead {
-  font-size: 32px;
-}
 
 .question-item {
   background-color: none;
