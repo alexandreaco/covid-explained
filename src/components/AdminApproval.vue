@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     updateApprovalStatus(adminId, approvalStatus) {
-      console.log('approvalStatus:', approvalStatus);
       db.collection('users')
         .doc(adminId)
         .update({

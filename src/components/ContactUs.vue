@@ -1,25 +1,21 @@
 <template>
   <div class="contact-us container">
-    <form class="card-panel" @submit.prevent="signup">
+    <form class="card-panel" @submit.prevent="createMessage">
       <h3 class="center teal-text">Contact Us</h3>
       <div class="field">
-        <label for="name">Name</label>
-        <input id="name" type="text" v-model="name" />
+        <label for="senderName">Name</label>
+        <input id="senderName" type="text" v-model="senderName" />
       </div>
       <div class="field">
-        <label for="email">Email</label>
-        <input id="email" type="email" v-model="email" />
+        <label for="senderEmail">Email</label>
+        <input id="senderEmail" type="email" v-model="senderEmail" />
       </div>
       <div class="row">
         <form class="col s12">
           <div class="row">
             <div class="field">
-              <label class="active" for="textarea1">Message</label>
-              <textarea
-                v-model="message"
-                id="textarea1"
-                class="materialize-textarea"
-              ></textarea>
+              <label class="active" for="message">Message</label>
+              <textarea v-model="message" id="message" class="materialize-textarea"></textarea>
             </div>
           </div>
         </form>
@@ -35,14 +31,35 @@
 </template>
 
 <script>
+import db from '@/firebase/init';
+
 export default {
   name: 'ContactUs',
   data() {
     return {
-      name: null,
-      email: null,
+      senderName: null,
+      senderEmail: null,
       message: null,
     };
+  },
+  methods: {
+    createMessage() {
+      db.collection('messages')
+        .add({
+          senderName: this.senderName,
+          senderEmail: this.senderEmail.toLowerCase(),
+          message: this.message,
+          createdAt: Date.now(),
+        })
+        .then(docRef => {
+          this.$router.push({
+            name: 'MessageSent',
+          });
+        })
+        .catch(error => {
+          console.error('Error adding document: ', error);
+        });
+    },
   },
 };
 </script>
@@ -53,22 +70,23 @@ export default {
   margin-top: 60px;
 }
 .contact-us h3 {
-  margin-bottom:1rem;
+  margin-bottom: 1rem;
 }
 .contact-us label {
   display: block;
 }
-.contact-us  input,.contact-us  textarea{
-    padding:.5rem;
-    background: #f7f9fc;
+.contact-us input,
+.contact-us textarea {
+  padding: 0.5rem;
+  background: #f7f9fc;
 }
 .contact-us .field {
   margin-bottom: 16px;
 }
 
 .btn {
-  border:1px solid black;
-  padding:1rem;
+  border: 1px solid black;
+  padding: 1rem;
 }
 
 #textarea1 {

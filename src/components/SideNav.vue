@@ -208,7 +208,7 @@
       </li>
       <li v-if="adminFromDb && isSuperAdmin">
         <a class="white-text admin-links">
-          <router-link :to="{ name: 'AdminApproval' }">Inbox</router-link>
+          <router-link :to="{ name: 'Inbox' }">Inbox</router-link>
         </a>
       </li>
       <li v-if="adminFromDb">
@@ -263,8 +263,9 @@ export default {
 
     checkIfAdminIsSuperAdmin() {
       if (
-        this.authAdmin.email === 'livmarks@someemail.com' ||
-        this.authAdmin.email === 'oehrenmarks@gmail.com'
+        this.authAdmin.email.toLowerCase() === 'livmarks@someemail.com' ||
+        this.authAdmin.email.toLowerCase() === 'oehrenmarks@gmail.com' ||
+        this.authAdmin.email.toLowerCase() === 'emily_oster@brown.edu'
       ) {
         this.isSuperAdmin = true;
       } else {

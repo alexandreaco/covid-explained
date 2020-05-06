@@ -196,7 +196,6 @@ export default {
     },
   },
   created() {
-    console.log('admin -------> :', firebase.auth().currentUser);
     this.getPosts();
     this.setAdminIfLoggedIn();
   },

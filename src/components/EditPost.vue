@@ -177,7 +177,6 @@ export default {
           this.uploadValue = 100;
           task.snapshot.ref.getDownloadURL().then(url => {
             this.picture = url;
-            console.log('this.picture:', this.picture);
             this.imgUrl = this.picture;
           });
         }

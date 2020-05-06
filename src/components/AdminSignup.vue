@@ -60,7 +60,6 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(this.email, this.password)
           .then(cred => {
-            console.log(cred.user);
             db.collection('users')
               .doc(cred.user.uid)
               .set({
