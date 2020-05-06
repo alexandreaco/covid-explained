@@ -64,7 +64,7 @@
 
       <div class="flex flex-wrap">
         <div
-          class="w-1/2 bg-white"
+          class="md:w-1/2 bg-white"
           :class="post.topic"
           v-for="(post, i) in filteredExplainerPosts"
           :key="i"
