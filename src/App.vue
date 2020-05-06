@@ -45,17 +45,7 @@
     /* font-family: 'Playfair Display', serif; */
     font-weight: 100;
   }
-  h3 {
-    margin: 0px;
-    font-size: 96px;
-    line-height: 96px;
-  }
-  @media (max-width: 1024px) {
-    h3 {
-      font-size: 48px;
-      line-height: 48px;
-    }
-  }
+
   strong{
     font-weight:800;
   }
@@ -79,49 +69,40 @@
   }
 
 
-  .post-card.definitions {
-    word-wrap: break-word;
-    background: #d9bdd7;
-    color: #6c446d;
-  }
   .post-card.definitions .text-author {
     display: none;
   }
-  .post-card.definitions .text-snippet {
-  }
-  .post-card.explainers,.post-card.explainers a {
-    background: none;
-    text-decoration: underline;
-    text-decoration-color: #197278;
-    padding: 1rem 0;
-  }
+
 
   .post-card.explainers{
     text-decoration: none;
   }
-  .post-card.explainers   .card-title {
-    text-decoration: underline;
-    text-decoration-color: #197278;
-  }
+
     .post-card.explainers .text-snippet {
     text-decoration: none;
   }
 
-  .post-card.questions,  .post-card.questions a{
-    background: none;
+  .underline-orange{
     text-decoration: underline;
     text-decoration-color: #dd694a;
-    transition: .5s all;
-    padding: 1rem 0;
   }
-  
+  .underline-orange:hover{
+    text-decoration: underline;
+    text-decoration-color: #33322d;
+  }
+  .underline-teal{
+    text-decoration: underline;
+    text-decoration-color: #197278;
+  }
+
   .text-snippet {
     font-size: 12px;
   }
 
-  .search-bar input {
+  input,textarea {
     padding: 1rem;
     border: 1px solid gray;
   }
+
 
 </style>

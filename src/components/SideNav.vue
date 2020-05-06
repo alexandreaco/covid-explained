@@ -101,7 +101,7 @@
               <div class="hidden lg:flex lg:items-center lg:w-auto w-full" id="menu">
                 <div class="nav">
 
-                  <div>
+                  <!-- <div>
                     <router-link :to="{ name: 'Topic', params: { topicName: 'explainers' } }">
                       <span class="explainers bullet"></span> The Science
                     </router-link>
@@ -113,7 +113,7 @@
                         <span class="questions bullet"></span> Your Questions
                       </router-link>
                     </a>
-                  </div>
+                  </div> -->
 
                   <div>
                     <router-link :to="{ name: 'Glossary'}">
@@ -266,8 +266,9 @@
   .container .if-admin {
     position: fixed;
     bottom: 0px;
-    left: 0px;
+    right: 0px;
     z-index: 105;
+    display: flex;
   }
 
   .nav div:hover {
@@ -284,8 +285,10 @@
 
   .admin-links {
     font-size: 12px;
-    background: #f7f9fc;
-    padding: 1rem;
+    background: black;
+    color:white;
+    padding: 1rem 1rem;
+    border:1px solid white;
   }
   .menu-wrapper {
     position: fixed;

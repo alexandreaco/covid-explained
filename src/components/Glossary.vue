@@ -1,7 +1,7 @@
 <template>
   <div class="topic">
     <!-- <h2 class="topic-title capitalize">Glossary</h2> -->
-    <div class="search-bar">
+    <div class="search-bar mb-16">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
     <div class="definition" v-bind:class="post.topic" v-for="post in filteredPosts" :key="post.id">
@@ -126,12 +126,11 @@ h2.topic-title {
   line-height:100px;
   margin-bottom:2rem;
 }
-.search-bar {
+/* .search-bar {
   position: sticky;
   z-index: 5;
   top: 20px;
-  margin-bottom:1rem;
-}
+} */
 .search-bar input{
   width:30%;
 }

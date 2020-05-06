@@ -119,10 +119,22 @@
 <style scoped>
 
   .post {
-    display: flex;
-
 
     padding: 0px 20px;
+  }
+
+  .post h3 {
+    margin: 0px;
+    font-size: 64px;
+    line-height: 64px;
+    max-width:700px;
+  }
+
+  @media (max-width: 1024px) {
+    h3 {
+      font-size: 48px;
+      line-height: 48px;
+    }
   }
   .post-body {
     font-size: 18px;
@@ -131,8 +143,8 @@
     max-width: 900px;
   }
 
-  img {
-    max-height: 300px;
+  .post-body img {
+    /* height: 300px; */
     width: 100%;
     margin: auto;
   }
