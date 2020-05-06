@@ -15,7 +15,7 @@
           <p>Subtitle</p>
         </label>
 
-        <input id="subtitle" type="text" v-model="subtitle" />
+        <textarea id="subtitle" type="text" v-model="subtitle" />
       </div>
       <div class="field">
         <label for="author">Author</label>
@@ -327,5 +327,9 @@ img {
 }
 .image-instructions p {
   margin: 0;
+}
+
+input[type=text], textarea {
+  min-width: 400px;
 }
 </style>
