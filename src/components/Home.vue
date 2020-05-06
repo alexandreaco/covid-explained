@@ -15,12 +15,12 @@
       <p class="lead">
         <strong>COVID-19 is confusing.</strong> There's a lot of conflicting information out there—
         <a
-          href="#"
+          href="/post/zRkgD1uKDkQrLT4PmVmK"
           class="underline-orange transition"
         >can you get the virus from food?</a>
-        <a href="#" class="underline-orange transition">Is there such a thing as immunity?</a>
-        <a href="#" class="underline-orange transition">What kind of tests are really out there?</a>
-        <a href="#" class="underline-orange transition">Who is most at risk?</a> And all the conflicting information can make
+        <a href="/post/2EUafbV3iwhUlflPxIqX" class="underline-orange transition">Is there such a thing as immunity?</a>
+        <a href="/post/0Gwwlk5kA4p3FqcYrWpr" class="underline-orange transition">What kind of tests are really out there?</a>
+        <a href="/post/HpswGzv13mdB2y8ki8t5" class="underline-orange transition">Who is most at risk?</a> And all the conflicting information can make
         it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
       </p>
 
