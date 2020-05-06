@@ -3,76 +3,70 @@
   <div class="home">
     <div class="preamble">
       <p class="lead">
-        COVID-19 is confusing. There's a lot of conflicting information out there—<a href="#" class="questionlink">can you get the virus from food?</a> Is there such
-        a thing as <a href="#" class="defintionlink">immunity</a>? <a href="#" class="questionlink">What kind of tests are really out there?</a> <a href="#" class="questionlink">Who is most at risk?</a> And all the conflicting information
-        can make it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
+        COVID-19 is confusing. There's a lot of conflicting information out there—<a href="#" class="questionlink">can you get the virus from food?</a>      Is there such a thing as <a href="#"
+           class="defintionlink">immunity</a>? <a href="#"
+           class="questionlink">What kind of tests are really out there?</a> <a href="#" class="questionlink">Who is most at risk?</a>      And all the conflicting information can make it hard to make decisions, from whether to go to the grocery store to
+        when to send your kids back to day care.
       </p>
       <p>
         We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere. We care about getting information
         out there. </p>
       <p>
-        <em>Emily Oster</em> is an American economist, professor at Brown Univeristy, and bestselling author. <em>Galit Alter</em> is a Professor of
-        Medicine at Harvard Medical School and a Group Leader at the Ragon Institute of MGH, MIT and Harvard.
+        <em>Emily Oster</em> is an American economist, professor at Brown Univeristy, and bestselling author. <em>Galit Alter</em>      is a Professor of Medicine at Harvard Medical School and a Group Leader at the Ragon Institute of MGH, MIT and Harvard.
       </p>
       <p>
         Wondering where to Start? Try one of our
-        <router-link class="explainerlink" :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
+        <router-link class="explainerlink"
+                     :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
         <router-link class="defintionlink" :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link> or
         <router-link class="questionlink" :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
         <router-link :to="{ name: 'AboutUs' }">about our team,</router-link> and
         <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with ideas!
       </p>
     </div>
-
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
 
+    <div class="block md:flex">
 
-    <p class="py-6"><span class="explainers bullet"></span> Explainers</p>
+      <div class="w-full md:w-1/2 mr-2">
+        <p class="py-6"><span class="explainers bullet"></span> The Science</p>
+        <div class="post-card-container">
+          <!-- <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)"> -->
+          <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
 
-    <div class="post-card-container">
-      <!-- <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)"> -->
-      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
+            <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
-        <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
-
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
-            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+              <div class="card-content">
+                <span class="card-title">{{ post.title }}</span>
+                <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
+                <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
+              </div>
+            </router-link>
           </div>
-        </router-link>
-      </div>
-    </div>
-
-    <div class="questions-module">
-      <p class="py-6"><span class="questions bullet"></span> Common Questions</p>
-      <div class="question-carousel">
-        <div v-for="(post, i) in filteredQuestionPosts" :key="i">
-          <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-            <span class="question-list">{{ post.title }}</span>
-          </router-link>
         </div>
       </div>
+      <div class="w-full md:w-1/2">
 
-    </div>
+        <p class="py-6"><span class="questions bullet"></span> The Questions</p>
 
-    <p class="py-6"><span class="definitions bullet"></span> Definitions</p>
+        <div class="post-card-container">
+          <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredQuestionPosts" :key="i">
+            <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
-    <div class="post-card-container">
-      <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredDefintionsPosts" :key="i">
-        <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+            <router-link :to="{ name: 'Post', params: { postId: post.id } }">
+              <div class="card-content">
+                <span class="card-title">{{ post.title }}</span>
 
-        <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-          <div class="card-content">
-            <span class="card-title">{{ post.title }}</span>
-
+              </div>
+            </router-link>
           </div>
-        </router-link>
+        </div>
       </div>
     </div>
+
   </div>
 
 </template>
@@ -187,9 +181,6 @@
   }
 
   .post-card-container {
-    align-items: top;
-    display: flex;
-    flex-wrap: wrap;
   }
 
   .edit {
@@ -222,45 +213,18 @@
     text-decoration-style: solid;
   }
 
-  a.questionlink{
+  a.questionlink {
     text-decoration-color: #dd694a;
   }
-  a.defintionlink{
+  a.defintionlink {
     text-decoration-color: #6c446d;
   }
-  a.explainerlink{
+  a.explainerlink {
     text-decoration-color: #197278;
   }
 
-
-    .search-bar input{
-      width:100%;
-    }
-
-
-      .questions-module {
-        width:100%;
-        margin-bottom: 1rem;
-
-      }
-
-      .question-carousel {
-        width: 100%;
-
-      }
-  .question-carousel div {
-    color: #6f3525;
-    padding: 1rem 0;
-    text-decoration: underline;
-    text-decoration-color: #dd694a;
-    margin-bottom: 1rem;
-  }
-
-  .question-list {
-    width:100%;
-    font-size: 48px;
-    line-height: 48px;
-    font-family: 'Playfair Display', serif;
+  .search-bar input {
+    width: 100%;
   }
 
   .card-topic {

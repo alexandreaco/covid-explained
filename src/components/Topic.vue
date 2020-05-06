@@ -144,10 +144,14 @@ h2.topic-title {
   flex-wrap: wrap;
 }
 
-/* .post-card {
-  width: 350px;
-  margin: 15px;
-} */
+  .post-card {
+    position: relative;
+    width: 33%;
+    padding: 1rem;
+    margin: 0.15%;
+    /* transform: rotate(-1deg); */
+    transition: 0.5s all;
+  }
 .edit {
   position: absolute;
   top: 4px;

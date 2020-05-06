@@ -158,8 +158,7 @@
   h1,
   h2,
   h3,
-  h4,
-  .card-title {
+  h4 {
     font-family: 'Playfair Display', serif;
   }
   h3 {
@@ -187,14 +186,6 @@
     height: auto;
   }
 
-  .post-card {
-    position: relative;
-    width: 33%;
-    padding: 1rem;
-    margin: 0.15%;
-    /* transform: rotate(-1deg); */
-    transition: 0.5s all;
-  }
   @media (max-width: 1024px) {
     .post-card {
       width: 100%;
@@ -243,15 +234,17 @@
   .post-card.definitions .text-snippet {
   }
   .post-card.explainers {
-    background: #d1e3e4;
+    background: none;
+    text-decoration: underline;
     color: #197278;
+    padding:1rem 0;
   }
-  .post-card.news {
-    border-bottom: 1px solid #33322d;
-    padding: 1rem 0;
-    color: #33322d;
-    background: #f4f3e9;
-    width: 100%;
+  .post-card.questions {
+    color: #dd694a;
+
+  background: none;
+  text-decoration: underline;text-decoration: underline;
+      padding:1rem 0;
   }
   .text-snippet {
     font-size: 12px;
