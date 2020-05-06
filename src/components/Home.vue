@@ -46,7 +46,7 @@
 
       <div class="flex flex-wrap bg-white">
 
-        <div class="question-item w-full  pl-4 border-l-2 md:w-1/2 bg-white my-2  md:pr-16"
+        <div class=" question-item  relative w-full  pl-4 border-l-2 md:w-1/2 bg-white my-2  md:pr-16"
              v-bind:class="post.topic"
              v-for="(post, i) in filteredQuestionPosts"
              :key="i">
@@ -71,7 +71,7 @@
              :class="post.topic"
              v-for="(post, i) in filteredExplainerPosts"
              :key="i">
-          <div class="explainer-item border-b mb-4 mr-16 py-2">
+          <div class=" explainer-item  relative border-b mb-4 mr-16 py-2">
             <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
             <router-link class="  block" :to="{ name: 'Post', params: { postId: post.id } }">
