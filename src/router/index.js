@@ -9,6 +9,7 @@ import SocialSharing from 'vue-social-sharing';
 import Home from '@/components/Home';
 import Post from '@/components/Post';
 import Topic from '@/components/Topic';
+import Glossary from '@/components/Glossary';
 import AboutUs from '@/components/AboutUs';
 import OurSources from '@/components/OurSources.vue';
 import ContactUs from '@/components/ContactUs';
@@ -72,6 +73,11 @@ const router = new Router({
       path: '/topic/:topicName',
       name: 'Topic',
       component: Topic,
+    },
+    {
+      path: '/glossary',
+      name: 'Glossary',
+      component: Glossary,
     },
     {
       path: '/post/edit/:postId',

@@ -1,6 +1,6 @@
 <template>
   <div class="login container">
-    <form class="card-panel" @submit.prevent="login">
+    <form class="card-panel" @submit.prevent="checkIfAdminIsApproved">
       <h2 class="center teal-text">Log In</h2>
       <div class="field">
         <label for="email">Email</label>
@@ -30,12 +30,34 @@ export default {
       email: null,
       password: null,
       feedback: null,
+      isApproved: false,
     };
   },
   methods: {
+    checkIfAdminIsApproved() {
+      let lowerCaseEmail = this.email.toLowerCase();
+      db.collection('users')
+        .where('email', '==', lowerCaseEmail)
+        .get()
+        .then(snapshot => {
+          let admin = {};
+          snapshot.forEach(doc => {
+            admin = doc.data();
+            admin.id = doc.id;
+          });
+          if (admin.isApproved === true) {
+            this.login();
+          } else {
+            alert(
+              'Your account has not been approved yet. Please try again later.'
+            );
+          }
+        });
+    },
     login() {
       if (this.email && this.password) {
         this.feedback = null;
+
         firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
