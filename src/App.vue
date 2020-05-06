@@ -117,12 +117,14 @@
     text-decoration: none;
   }
 
-  .post-card.questions,   .post-card.questions a{
+  .post-card.questions,  .post-card.questions a{
     background: none;
     text-decoration: underline;
     text-decoration-color: #dd694a;
+    transition: .5s all;
     padding: 1rem 0;
   }
+  
   .text-snippet {
     font-size: 12px;
   }
