@@ -12,11 +12,10 @@
       </div>
       <div class="field">
         <label for="subtitle">
-          <p class="required">*</p>
           <p>Subtitle</p>
         </label>
 
-        <input id="subtitle" type="text" v-model="subtitle" />
+        <textarea id="subtitle" type="text" v-model="subtitle" />
       </div>
       <div class="field">
         <label for="author">Author</label>
@@ -236,12 +235,13 @@ export default {
         });
     },
     updatePost() {
-      if (this.title && this.subtitle && this.topic && this.text) {
+      if (this.title && this.topic && this.text) {
+        subtitle = this.subtitle || ''
         db.collection('posts')
           .doc(this.postId)
           .update({
             title: this.title,
-            subtitle: this.subtitle,
+            subtitle: subtitle,
             text: this.text,
             topic: this.topic,
             author: this.author,
@@ -327,5 +327,9 @@ img {
 }
 .image-instructions p {
   margin: 0;
+}
+
+input[type=text], textarea {
+  min-width: 400px;
 }
 </style>

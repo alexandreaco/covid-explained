@@ -1,6 +1,6 @@
 <template>
   <div class="our-sources">
-    <h4>Our Sources</h4>
+    <h3>Our Sources</h3>
     <p>
       These are a list of the sources we used to...
     </p>
@@ -55,12 +55,13 @@ export default {
 
 <style scoped>
 .our-sources {
-  margin-left: 150px;
-  padding: 50px;
+  max-width: 900px;
+  padding: 0 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+}
+.our-sources p {
+  margin:2rem 0;
 }
 .cell {
   padding: 10px;

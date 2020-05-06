@@ -1,24 +1,14 @@
 <template>
   <div class="topic">
-    <!-- <h2 class="topic-title capitalize">{{ this.topic }}</h2> -->
-    <div class="search-bar">
+    <!-- <h2 class="topic-title capitalize">Glossary</h2> -->
+    <div class="search-bar mb-16">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
-    <div class="post-card-container">
-      <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredPosts" :key="post.id">
-        <div class="card-content">
-          <i
-            v-if="authAdmin && dbAdmin.isApproved"
-            class="material-icons edit"
-            @click="redirectToEditPost(post.id)"
-          >edit</i>
-          <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-            <span class="card-title">{{ post.title }}</span>
-            <p class="text-author" v-if="post.author">By {{ post.author }}</p>
-            <p class="text-snippet" v-if="post.subtitle">{{ post.subtitle }}</p>
-            <p class="text-snippet" v-else>{{ post.text | createSnippet }}</p>
-          </router-link>
-        </div>
+    <div class="definition" v-bind:class="post.topic" v-for="post in filteredPosts" :key="post.id">
+      <div class="definition-content">
+        <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <span class="definition-title">{{ post.title }}</span>
+          <p class="definition-text" v-html="post.text"></p>
       </div>
     </div>
   </div>
@@ -29,15 +19,14 @@ import db from '@/firebase/init';
 import firebase from 'firebase';
 
 export default {
-  name: 'Topic',
+  name: 'Glossary',
   data() {
     return {
       searchTerm: '',
-      authAdmin: null,
-      dbAdmin: {},
+      admin: null,
       posts: [],
-      topic: this.$route.params.topicName,
-      topicInCaps: this.$route.params.topicName.toUpperCase(),
+      topic: 'definitions',
+      topicInCaps: 'Glossary',
     };
   },
   watch: {
@@ -95,26 +84,16 @@ export default {
             post.id = doc.id;
             this.posts.push(post);
           });
-        });
-    },
-    checkApprovalStatus(adminId) {
-      db.collection('users')
-        .doc(adminId)
-        .get()
-        .then(doc => {
-          let dbAdmin = doc.data();
-          dbAdmin.id = doc.id;
-          this.dbAdmin = dbAdmin;
+          this.posts.sort((a, b) => (a.title > b.title) ? 1 : -1)
         });
     },
     setAdminIfLoggedIn() {
-      let authAdmin = firebase.auth().currentUser;
+      let admin = firebase.auth().currentUser;
       firebase.auth().onAuthStateChanged(admin => {
         if (admin) {
-          this.authAdmin = admin;
-          this.checkApprovalStatus(this.authAdmin.uid);
+          this.admin = admin;
         } else {
-          this.authAdmin = null;
+          this.admin = null;
         }
       });
     },
@@ -147,24 +126,16 @@ h2.topic-title {
   line-height:100px;
   margin-bottom:2rem;
 }
-.search-bar {
+/* .search-bar {
   position: sticky;
   z-index: 5;
   top: 20px;
-}
+} */
 .search-bar input{
   width:30%;
 }
 
-.post-card-container {
-  align-items: top;
-}
 
-  .post-card {
-    position: relative;
-    padding: 1rem 0;
-    transition: 0.5s all;
-  }
 .edit {
   position: absolute;
   top: 4px;
@@ -174,17 +145,26 @@ h2.topic-title {
   opacity: 0.5;
   cursor: pointer;
 }
-.card-title {
-  font-size: 30px;
-}
-.text-author {
-  font-size: 12px;
-}
-.text-snippet {
-  font-size: 22px;
+
+.definitions {
+  background: none;
+  max-width: 900px;
 }
 
-.header {
-  /* background-image: image; */
+.definition{
+  padding-bottom: 2em;
+}
+
+.definition-title {
+  font-size: 24px;
+  font-weight: bold;
+  background: #33322d;
+  color: white;
+  padding: 5px 10px;
+}
+
+.definition-text {
+  padding-top: 5px;
+  font-size: 16px;
 }
 </style>
