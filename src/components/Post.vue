@@ -120,7 +120,7 @@
 
   .post {
     display: flex;
-    justify-content: center;
+
 
     padding: 0px 20px;
   }
