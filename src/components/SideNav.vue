@@ -274,6 +274,14 @@
     opacity: 0.75;
   }
 
+  .questions {
+    background: #dd694a;
+  }
+
+  .explainers {
+    background: #197278;
+  }
+
   .admin-links {
     font-size: 12px;
     background: #f7f9fc;

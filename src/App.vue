@@ -78,16 +78,6 @@
     height: 10px;
   }
 
-  .questions {
-    background: #dd694a;
-  }
-
-  .definitions {
-    background: #6c446d;
-  }
-  .explainers {
-    background: #197278;
-  }
 
   .post-card.definitions {
     word-wrap: break-word;

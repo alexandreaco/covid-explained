@@ -298,7 +298,7 @@
         decisions, from whether to go to the grocery store to when to send your kids back to day care.
       </p>
 
-      <p>
+      <!-- <p>
         Wondering where to start? Try one of our
         <router-link class="explainerlink"
                      :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
@@ -306,18 +306,21 @@
         <router-link class="questionlink" :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
         <router-link :to="{ name: 'AboutUs' }">about our team,</router-link> and
         <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with ideas!
-      </p>
+      </p> -->
     </div>
-    <div class="search-bar">
+    <!-- <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
-    </div>
+    </div> -->
 
-    <div class="block md:flex">
+    <div class="block">
+      <h2>
+        We hear a lot of the same questions, we're here with answers.
+      </h2>
+      
 
-      <div class="w-full md:w-1/2 mr-2">
+      <!-- <div class="w-full md:w-1/2 mr-2">
         <p class="py-6"><span class="explainers bullet"></span> The Science</p>
         <div class="post-card-container">
-          <!-- <div class="card post-card" v-bind:class="post.topic" v-for="post in filteredExplainerPosts.slice(0, 3)"> -->
           <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
 
             <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
@@ -331,22 +334,15 @@
             </router-link>
           </div>
         </div>
-      </div>
-      <div class="w-full md:w-1/2">
+      </div> -->
+      <div class="flex flex-wrap bg-white">
 
-        <p class="py-6"><span class="questions bullet"></span> Your Questions</p>
-
-        <div class="post-card-container">
-          <div class="card post-card" v-bind:class="post.topic" v-for="(post, i) in filteredQuestionPosts" :key="i">
+          <div class="question-item w-1/2 bg-white" v-bind:class="post.topic" v-for="(post, i) in filteredQuestionPosts" :key="i">
             <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
             <router-link :to="{ name: 'Post', params: { postId: post.id } }">
-              <div class="card-content">
-                <span class="card-title">{{ post.title }}</span>
-
-              </div>
+                <span class="question-title underline bg-white">{{ post.title }}</span>
             </router-link>
-          </div>
         </div>
       </div>
     </div>
@@ -515,7 +511,9 @@
     transition: 0.5s all;
   }
 
-  a.questionlink {
+  .question-item {
+    background-color: none;
+    text-decoration: underline;
     text-decoration-color: #dd694a;
   }
   a.questionlink:hover {
