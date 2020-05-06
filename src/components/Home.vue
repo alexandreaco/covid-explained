@@ -19,24 +19,23 @@
         <a href="#" class="underline-orange transition">can you get the virus from food?</a>
         <a href="#" class="underline-orange transition">Is there such a thing as immunity?</a>
         <a href="#" class="underline-orange transition">What kind of tests are really out there?</a>
-        <a href="#"
-           class="underline-orange transition">Who is most at risk?</a> And all the conflicting information can make it
-        hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
+        <a href="#" class="underline-orange transition">Who is most at risk?</a> And all the conflicting information can make
+        it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
       </p>
 
       <!-- <p>
-            Wondering where to start? Try one of our
-            <router-link class="explainerlink"
-                         :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
-            <router-link class="defintionlink" :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link> or
-            <router-link class="questionlink" :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
-            <router-link :to="{ name: 'AboutUs' }">about our team,</router-link> and
-            <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with ideas!
-          </p> -->
+              Wondering where to start? Try one of our
+              <router-link class="explainerlink"
+                           :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
+              <router-link class="defintionlink" :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link> or
+              <router-link class="questionlink" :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
+              <router-link :to="{ name: 'AboutUs' }">about our team,</router-link> and
+              <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with ideas!
+            </p> -->
     </div>
     <!-- <div class="search-bar">
-          <input type="text" v-model="searchTerm" placeholder="Search" />
-        </div> -->
+            <input type="text" v-model="searchTerm" placeholder="Search" />
+          </div> -->
 
     <div class="block">
 
@@ -46,8 +45,7 @@
 
       <div class="flex flex-wrap bg-white">
 
-        <div class=" question-item  relative w-full  pl-4 border-l-2 md:w-1/2 bg-white my-2  md:pr-16"
-             v-bind:class="post.topic"
+        <div class=" question-item  relative w-full  pl-4 border-l-2 md:w-1/2 bg-white my-2  md:pr-16" v-bind:class="post.topic"
              v-for="(post, i) in filteredQuestionPosts"
              :key="i">
           <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
@@ -62,15 +60,12 @@
     <div class="block">
 
       <h2 class="text-2xl mt-24 mb-8 font-bold">
-        Getting more in depth
+        Getting more in depth.
       </h2>
 
       <div class="flex flex-wrap">
 
-        <div class="w-1/2 bg-white"
-             :class="post.topic"
-             v-for="(post, i) in filteredExplainerPosts"
-             :key="i">
+        <div class="w-1/2 bg-white" :class="post.topic" v-for="(post, i) in filteredExplainerPosts" :key="i">
           <div class=" explainer-item  relative border-b mb-4 mr-16 py-2">
             <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
 
@@ -217,6 +212,7 @@
     background-color: #f7f9fc;
     padding: 1rem;
   }
+
   .who p {
     padding: 0.25rem;
   }
@@ -249,6 +245,7 @@
     text-decoration: underline;
     text-decoration-color: #dd694a;
   }
+
   a.questionlink:hover {
     color: #dd694a;
   }

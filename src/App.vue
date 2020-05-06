@@ -86,13 +86,15 @@
     text-decoration: underline;
     text-decoration-color: #dd694a;
   }
-  .underline-orange:hover{
-    text-decoration: underline;
-    text-decoration-color: #33322d;
-  }
+
   .underline-teal{
     text-decoration: underline;
     text-decoration-color: #197278;
+  }
+
+  .underline-orange:hover,.underline-teal:hover{
+    text-decoration: underline;
+    text-decoration-color: #33322d;
   }
 
   .text-snippet {
