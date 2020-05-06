@@ -133,8 +133,8 @@ h2.topic-title {
 } */
 .search-bar input{
   width:30%;
+  min-width:300px;
 }
-
 
 .edit {
   position: absolute;
