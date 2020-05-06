@@ -8,14 +8,13 @@
           <p class="required">*</p>
           <p>Title</p>
         </label>
-        <input id="title" type="text" v-model="subtitle" />
+        <input id="title" type="text" v-model="title" />
       </div>
       <div class="field">
         <label for="subtitle">
-          <p class="required">*</p>
           <p>Subtitle</p>
         </label>
-        <input id="subtitle" type="text" v-model="title" />
+        <input id="subtitle" type="text" v-model="subtitle" />
       </div>
       <div class="field">
         <label for="author">Author</label>
@@ -167,11 +166,15 @@ export default {
     },
 
     createPost() {
-      if (this.title && this.text && this.subtitle && this.topic) {
+      console.log(this.title)
+      console.log(this.topic)
+      console.log(this.text)
+      if (this.title && this.text && this.topic) {
+        subtitle = this.subtitle || ''
         db.collection('posts')
           .add({
             title: this.title,
-            subtitle: this.subtitle,
+            subtitle: subtitle,
             text: this.text,
             topic: this.topic,
             author: this.author,
