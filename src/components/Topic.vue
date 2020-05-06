@@ -1,6 +1,6 @@
 <template>
   <div class="topic">
-    <h2 class="topic-title capitalize">{{ this.topic }}</h2>
+    <!-- <h2 class="topic-title capitalize">{{ this.topic }}</h2> -->
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
@@ -132,24 +132,21 @@ h2.topic-title {
   margin-bottom:2rem;
 }
 .search-bar {
-  position: fixed;
+  position: sticky;
   z-index: 5;
-  left: 200px;
-  top: 20px;
+  top: 80px;
+}
+.search-bar input{
+  width:100%;
 }
 
 .post-card-container {
   align-items: top;
-  display: flex;
-  flex-wrap: wrap;
 }
 
   .post-card {
     position: relative;
-    width: 33%;
-    padding: 1rem;
-    margin: 0.15%;
-    /* transform: rotate(-1deg); */
+    padding: 1rem 0;
     transition: 0.5s all;
   }
 .edit {

@@ -1,6 +1,6 @@
 <template>
   <div class="topic">
-    <h2 class="topic-title capitalize">Glossary</h2>
+    <!-- <h2 class="topic-title capitalize">Glossary</h2> -->
     <div class="search-bar">
       <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>
@@ -127,11 +127,15 @@ h2.topic-title {
   margin-bottom:2rem;
 }
 .search-bar {
-  position: fixed;
+  position: sticky;
   z-index: 5;
-  left: 200px;
-  top: 20px;
+  top: 80px;
+  margin-bottom:1rem;
 }
+.search-bar input{
+  width:100%;
+}
+
 
 .edit {
   position: absolute;
@@ -145,8 +149,7 @@ h2.topic-title {
 
 .definitions {
   background: none;
-  color: black;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .definition{
@@ -155,15 +158,14 @@ h2.topic-title {
 
 .definition-title {
   font-size: 24px;
-  font-family: 'Playfair Display', serif;
   font-weight: bold;
-  background: #6c446d;
+  background: #33322d;
   color: white;
   padding: 5px 10px;
 }
 
 .definition-text {
   padding-top: 5px;
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

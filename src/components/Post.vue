@@ -15,27 +15,29 @@
           <div class="author-and-date">
 
             <span class="bullet" v-bind:class="post.topic"></span>
-            <span v-if="this.post.author">By {{ post.author }}</span>
+            
+            <social-sharing :url="this.postId" inline-template>
+              <div class="social-icons">
+                <network network="facebook">
+                  <i class="fa fa-facebook"></i> Facebook
+            </network>
+            <network network="linkedin">
+              <i class="fa fa-linkedin"></i> LinkedIn
+            </network>
+            <network network="twitter">
+              <i class="fa fa-twitter"></i> Twitter
+            </network>
+          </div>
+          </social-sharing>
+            <!-- <span v-if="this.post.author">By {{ post.author }}</span>
             <span v-if="this.post.createdAt">
               {{ new Date(post.updatedAt) }}
-            </span>
+            </span> -->
 
           </div>
           <div id="ck-output" class="post-body"></div>
-          <br/>
-          <social-sharing :url="this.postId" inline-template>
-            <div class="social-icons">
-              <network network="facebook">
-                <i class="fa fa-facebook"></i> Facebook
-          </network>
-          <network network="linkedin">
-            <i class="fa fa-linkedin"></i> LinkedIn
-          </network>
-          <network network="twitter">
-            <i class="fa fa-twitter"></i> Twitter
-          </network>
-        </div>
-        </social-sharing>
+
+
       </div>
     </div>
   </div>

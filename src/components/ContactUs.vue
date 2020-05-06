@@ -51,7 +51,6 @@ export default {
 .contact-us {
   max-width: 900px;
   margin-top: 60px;
-  padding:0 20px;
 }
 .contact-us h3 {
   margin-bottom:1rem;
@@ -59,8 +58,9 @@ export default {
 .contact-us label {
   display: block;
 }
-.contact-us  input{
+.contact-us  input,.contact-us  textarea{
     padding:.5rem;
+    background: #f7f9fc;
 }
 .contact-us .field {
   margin-bottom: 16px;

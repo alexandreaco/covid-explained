@@ -1,13 +1,8 @@
 <template>
 
   <div class="about-us">
-    <h3>About Us</h3>
-    <p>
-      COVID-19 is confusing. There's a lot of conflicting information out there -- Can you get the virus from food? Is there such
-      a thing as immunity? What kind of tests are really out there? Who is most at risk? And all the conflicting information
-      can make it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
-    </p>
-    <p>
+
+    <p class="lead">
       We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere. We care about getting information
       out there.
     </p>
@@ -63,9 +58,14 @@
 
 <style scoped>
 
+.lead{
+  font-size:42px;
+  line-height: 48px;
+  font-weight: 100;
+}
+
   .about-us {
     max-width: 900px;
-    padding: 0 20px;
   }
   h3 {
     margin-bottom: 1rem;
