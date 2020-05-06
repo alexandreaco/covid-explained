@@ -12,7 +12,6 @@
       </div>
       <div class="field">
         <label for="subtitle">
-          <p class="required">*</p>
           <p>Subtitle</p>
         </label>
 
@@ -236,12 +235,13 @@ export default {
         });
     },
     updatePost() {
-      if (this.title && this.subtitle && this.topic && this.text) {
+      if (this.title && this.topic && this.text) {
+        subtitle = this.subtitle || ''
         db.collection('posts')
           .doc(this.postId)
           .update({
             title: this.title,
-            subtitle: this.subtitle,
+            subtitle: subtitle,
             text: this.text,
             topic: this.topic,
             author: this.author,
