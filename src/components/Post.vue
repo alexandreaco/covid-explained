@@ -15,7 +15,7 @@
           <div class="author-and-date">
 
             <span class="bullet" v-bind:class="post.topic"></span>
-            
+
             <social-sharing :url="this.postId" inline-template>
               <div class="social-icons">
                 <network network="facebook">
@@ -121,13 +121,14 @@
   .post {
     display: flex;
     justify-content: center;
-    max-width: 900px;
+
     padding: 0px 20px;
   }
   .post-body {
     font-size: 18px;
     line-height: 24px;
     padding: 0rem;
+    max-width: 900px;
   }
 
   img {
