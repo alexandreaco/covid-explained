@@ -106,7 +106,9 @@ export default {
         return post.text.toLowerCase().match(this.searchTerm.toLowerCase());
       });
       let combinedArr = postsFilteredByTitle.concat(postsFilteredByContent);
+      console.log('combinedArr:', combinedArr);
       let deduplicatedArr = this.deduplicateById(combinedArr);
+      console.log('deduplicatedArr:', deduplicatedArr);
       return deduplicatedArr;
     },
     filteredExplainerPosts: function() {
@@ -132,6 +134,7 @@ export default {
           arr2.push(obj[key]);
         }
       }
+      return arr2;
     },
 
     setAdminIfLoggedIn() {
