@@ -1,10 +1,10 @@
 <template>
   <div class="about-us">
-    <p class="lead">
+    <p class="mb-4 text-2xl md:text-4xl font-light">
       We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere. We care about getting information
       out there.
     </p>
-    <h4>Contributors</h4>
+    <h4 class="mb-4 text-xl md:text-3xl font-light">Contributors</h4>
     <table>
       <tbody>
         <tr>
@@ -114,29 +114,31 @@ export default {
 
 .about-us {
   max-width: 900px;
-}
-h3 {
-  margin-bottom: 1rem;
+  padding:0 20px;
 }
 
-h4 {
-  font-size: 24px;
-  margin: 1rem 0;
-}
 .about-us p {
   margin: 2rem 0;
 }
 .cell {
-  padding: 10px 0;
+  padding: 1rem 0;
 }
 .name {
   width: 150px;
   font-weight: 800;
+  vertical-align: top;
 }
 .creds {
-  width: 250px;
+  width: 500px;
 }
-.links {
-  width: 150px;
+
+@media (max-width: 640px) {
+  .name {
+    width: 30%;
+  }
+  .creds {
+    width: 70%;
+  }
 }
+
 </style>

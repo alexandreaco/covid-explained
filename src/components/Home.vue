@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="who md:ml-16 float-none md:float-right md:w-1/4">
+    <div class="hidden lg:block p-5 bg-gray-100 ml-16 float-right w-1/4">
       <p>We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere.</p>
       <p>
         <strong>Emily Oster</strong> is an American economist, professor at Brown Univeristy, and bestselling author.
@@ -12,30 +12,27 @@
     </div>
 
     <div class="preamble">
-      <p class="lead">
+      <p class="text-2xl md:text-3xl">
         <strong>COVID-19 is confusing.</strong> There's a lot of conflicting information out there—
-        <a
-          href="#"
-          class="underline-orange transition"
-        >can you get the virus from food?</a>
+        <a href="#" class="underline-orange transition">can you get the virus from food?</a>
         <a href="#" class="underline-orange transition">Is there such a thing as immunity?</a>
         <a href="#" class="underline-orange transition">What kind of tests are really out there?</a>
         <a href="#" class="underline-orange transition">Who is most at risk?</a> And all the conflicting information can make
         it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
       </p>
-
-      <!-- <p>
-              Wondering where to start? Try one of our
-              <router-link class="explainerlink"
-                           :to="{ name: 'Topic', params: { topicName: 'explainers' } }">explainers</router-link> on testing, or the path of the virus. Or check out our
-              <router-link class="defintionlink" :to="{ name: 'Topic', params: { topicName: 'definitions' } }">definitions,</router-link> or
-              <router-link class="questionlink" :to="{ name: 'Topic', params: { topicName: 'questions' } }">questions</router-link>. Or find out more
-              <router-link :to="{ name: 'AboutUs' }">about our team,</router-link> and
-              <router-link :to="{ name: 'ContactUs' }">contact us</router-link> with ideas!
-      </p>-->
+    </div>
+    <div class="block lg:hidden p-5 bg-gray-100 lg:w-1/4">
+      <p>We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere.</p>
+      <p>
+        <strong>Emily Oster</strong> is an American economist, professor at Brown Univeristy, and bestselling author.
+      </p>
+      <p>
+        <strong>Galit Alter</strong> is a Professor of Medicine at Harvard Medical School and a Group Leader at the Ragon Institute
+        of MGH, MIT and Harvard.
+      </p>
     </div>
     <!-- <div class="search-bar">
-            <input type="text" v-model="searchTerm" placeholder="Search" />
+              <input type="text" v-model="searchTerm" placeholder="Search" />
     </div>-->
 
     <div class="block">
@@ -64,12 +61,12 @@
 
       <div class="flex flex-wrap">
         <div
-          class="w-1/2 bg-white"
+          class="w-full sm:w-1/2 bg-white"
           :class="post.topic"
           v-for="(post, i) in filteredExplainerPosts"
           :key="i"
         >
-          <div class="explainer-item relative border-b mb-4 mr-16 py-2">
+          <div class="explainer-item relative border-b mb-4 md:mr-16 py-2">
             <i
               v-if="authAdmin"
               class="material-icons edit"
@@ -208,9 +205,6 @@ export default {
   padding: 0 20px;
 }
 
-.post-card-container {
-}
-
 .edit {
   position: absolute;
   top: 4px;
@@ -222,25 +216,10 @@ export default {
   cursor: pointer;
 }
 
-.who {
-  background-color: #f7f9fc;
-  padding: 1rem;
-}
-
-.who p {
-  padding: 0.25rem;
-}
-
 .preamble {
   max-width: 1280px;
   font-weight: 100;
-
   padding: 1rem 0 2rem 0;
-}
-
-.preamble p {
-  margin: 1rem 0;
-  font-size: 20px;
 }
 
 .preamble img {
@@ -248,10 +227,6 @@ export default {
   height: 30px;
   border: 100%;
   display: inline-block;
-}
-
-.preamble .lead {
-  font-size: 32px;
 }
 
 .question-item {
