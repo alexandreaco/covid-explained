@@ -7,17 +7,11 @@
 
 <script>
 import NavBar from '@/components/NavBar';
-
+require('dotenv').config();
 export default {
   name: 'App',
   components: {
     NavBar,
-  },
-  mounted() {
-    console.log(
-      'mouted:process.env.FIREBASE_API_KEY -->',
-      process.env.FIREBASE_API_KEY
-    );
   },
 };
 </script>
