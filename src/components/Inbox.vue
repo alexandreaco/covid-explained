@@ -10,6 +10,7 @@
           <td>Message</td>
           <td>Date Sent</td>
           <td>Replied Status</td>
+          <td></td>
         </tr>
         <tr v-for="message in messages" :key="message.id">
           <td class="name">{{ message.senderName }}</td>
@@ -25,6 +26,11 @@
               />
               <span></span>
             </label>
+          </td>
+          <td class="creds delete">
+            <button class="btn red" @click="deleteMessage(message.id)">
+              <i class="material-icons right">delete</i>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -64,6 +70,17 @@ export default {
         })
         .catch(error => {
           console.error('Error writing document: ', error);
+        });
+    },
+    deleteMessage(messageId) {
+      db.collection('messages')
+        .doc(messageId)
+        .delete()
+        .then(() => {
+          console.log('Document successfully deleted!');
+        })
+        .catch(error => {
+          console.error('Error removing document: ', error);
         });
     },
   },
