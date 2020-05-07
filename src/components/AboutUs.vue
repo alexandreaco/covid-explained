@@ -91,6 +91,31 @@
             [Other info? Social Media? Link to website?]
           </td>-->
         </tr>
+        <tr>
+          <td class="cell name">Nivea F. Luz</td>
+          <td class="cell creds">
+             Postdoctoral researcher at the Jamieson Lab in Brown University interested in understanding the inflammatory response in response to respiratory infections.
+          </td>
+          <!-- <td class="cell links">
+            [Other info? Social Media? Link to website?]
+          </td>-->
+        </tr>
+        <tr>
+          <td class="cell name">Nivea F. Luz</td>
+          <td class="cell creds">
+             Postdoctoral researcher at the Jamieson Lab in Brown University interested in understanding the inflammatory response in response to respiratory infections.
+          </td>
+          <!-- <td class="cell links">
+            [Other info? Social Media? Link to website?]
+          </td>-->
+        </tr>
+        <tr>
+          <td class="cell name">Township.agency</td>
+          <td class="cell creds">Design and Development Support</td>
+          <!-- <td class="cell links">
+            [Other info? Social Media? Link to website?]
+          </td>-->
+        </tr>
       </tbody>
     </table>
   </div>
@@ -114,7 +139,7 @@ export default {
 
 .about-us {
   max-width: 900px;
-  padding:0 20px;
+  padding: 0 20px;
 }
 
 .about-us p {
@@ -140,5 +165,4 @@ export default {
     width: 70%;
   }
 }
-
 </style>
