@@ -69,7 +69,7 @@
           v-for="(post, i) in filteredExplainerPosts"
           :key="i"
         >
-          <div class="explainer-item relative border-b mb-4 mr-16 py-2">
+          <div class="explainer-item relative border-b mb-4 md:mr-16 py-2">
             <i
               v-if="authAdmin"
               class="material-icons edit"
