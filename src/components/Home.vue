@@ -14,8 +14,7 @@
 
     <div class="preamble">
       <p class="text-2xl md:text-4xl">
-        <strong>COVID-19 is confusing.</strong> There's a lot of conflicting information out there—
-        <a href="#"
+        <strong>COVID-19 is confusing.</strong> There's a lot of conflicting information out there—<a href="#"
            class="underline-orange transition">can you get the virus from food?</a>
         <a href="#" class="underline-orange transition">Is there such a thing as immunity?</a>
         <a href="#" class="underline-orange transition">What kind of tests are really out there?</a>
