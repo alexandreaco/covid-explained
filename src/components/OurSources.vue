@@ -1,4 +1,5 @@
 <template>
+
   <div class="our-sources">
     <h3>Our Sources</h3>
     <p>
@@ -42,37 +43,42 @@
       </tbody>
     </table>
   </div>
+
 </template>
 
 <script>
-export default {
-  name: 'AboutUs',
-  data() {
-    return {};
-  },
-};
+
+  export default {
+    name: 'AboutUs',
+    data() {
+      return {}
+    }
+  }
+
 </script>
 
 <style scoped>
-.our-sources {
-  max-width: 900px;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-}
-.our-sources p {
-  margin:2rem 0;
-}
-.cell {
-  padding: 10px;
-}
-.name {
-  width: 150px;
-}
-.creds {
-  width: 250px;
-}
-.links {
-  width: 150px;
-}
+
+  .our-sources {
+    max-width: 900px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .our-sources p {
+    margin: 2rem 0;
+  }
+  .cell {
+    padding: 10px;
+  }
+  .name {
+    width: 150px;
+  }
+  .creds {
+    width: 250px;
+  }
+  .links {
+    width: 150px;
+  }
+
 </style>
