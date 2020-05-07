@@ -110,7 +110,7 @@
           </td>-->
         </tr>
         <tr>
-          <td class="cell name">Township.agency</td>
+          <td class="cell name"><a href="https://township.agency" target="_blank">Township</a></td>
           <td class="cell creds">Design and Development Support</td>
           <!-- <td class="cell links">
             [Other info? Social Media? Link to website?]
@@ -145,6 +145,11 @@ export default {
 .about-us p {
   margin: 2rem 0;
 }
+
+.about-us a {
+  text-decoration: underline;
+}
+
 .cell {
   padding: 1rem 0;
 }
