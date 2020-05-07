@@ -66,8 +66,6 @@ export default {
       });
     },
     displayCKEditorContent(string) {
-      // console.log('string:', string, typeof string);
-
       //Get element:
       var element = document.getElementById('ck-output');
 

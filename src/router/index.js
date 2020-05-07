@@ -18,6 +18,9 @@ import AdminLogin from '@/components/AdminLogin';
 import EditPost from '@/components/EditPost';
 import AddPost from '@/components/AddPost';
 import AdminApproval from '@/components/AdminApproval';
+import Inbox from '@/components/Inbox';
+import MessageSent from '@/components/MessageSent';
+import Message from '@/components/Message';
 
 Vue.use(Router);
 Vue.use(SocialSharing);
@@ -78,6 +81,21 @@ const router = new Router({
       path: '/glossary',
       name: 'Glossary',
       component: Glossary,
+    },
+    {
+      path: '/inbox',
+      name: 'Inbox',
+      component: Inbox,
+    },
+    {
+      path: '/sender-message',
+      name: 'Message',
+      component: Message,
+    },
+    {
+      path: '/message-sent',
+      name: 'MessageSent',
+      component: MessageSent,
     },
     {
       path: '/post/edit/:postId',
