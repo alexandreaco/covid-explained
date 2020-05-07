@@ -114,6 +114,7 @@ export default {
 
 .about-us {
   max-width: 900px;
+  padding:0 20px;
 }
 
 .about-us p {
