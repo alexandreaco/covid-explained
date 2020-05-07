@@ -4,7 +4,12 @@
       <div v-if="post">
         <div class="post-title">
           <h3>{{ post.title }}</h3>
-          <i v-if="admin" class="material-icons edit" @click="redirectToEditPost(post.id)">edit</i>
+          <i
+            v-if="admin"
+            class="material-icons edit"
+            @click="redirectToEditPost(post.id)"
+            >edit</i
+          >
         </div>
         <br />
         <social-sharing
@@ -49,7 +54,7 @@ export default {
     return {
       admin: null,
       postId: this.$route.params.postId,
-      postURL: `https://covid-explained.firebaseapp.com/post/${this.$route.params.postId}`,
+      postURL: `https://explaincovid.org/post/${this.$route.params.postId}`,
       post: null,
     };
   },
@@ -109,7 +114,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .post {

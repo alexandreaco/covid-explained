@@ -205,6 +205,10 @@ export default {
     },
   },
   created() {
+    console.log(
+      'process.env.FIREBASE_API_KEY ---',
+      process.env.FIREBASE_API_KEY
+    );
     this.getPosts();
     this.setAdminIfLoggedIn();
   },

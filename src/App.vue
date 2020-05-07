@@ -1,90 +1,87 @@
-
 <template>
-
   <div id="app">
-
     <NavBar />
     <router-view />
   </div>
-
 </template>
 
 <script>
+import NavBar from '@/components/NavBar';
 
-  import NavBar from '@/components/NavBar'
-
-  export default {
-    name: 'App',
-    components: {
-      NavBar
-    }
-  }
-
+export default {
+  name: 'App',
+  components: {
+    NavBar,
+  },
+  mounted() {
+    console.log(
+      'mouted:process.env.FIREBASE_API_KEY -->',
+      process.env.FIREBASE_API_KEY
+    );
+  },
+};
 </script>
 
 <style>
-
+body {
+  font-family: 'Libre Franklin', sans-serif;
+  background: #fff;
+  color: #33322d;
+  margin: 120px 20px 100px 20px;
+}
+@media (max-width: 1024px) {
   body {
-    font-family: 'Libre Franklin', sans-serif;
-    background: #fff;
-    color: #33322d;
-    margin: 120px 20px 100px 20px;
+    margin: 80px 20px 100px 20px;
   }
-  @media (max-width: 1024px) {
-    body {
-      margin: 80px 20px 100px 20px;
-    }
-  }
+}
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    /* font-family: 'Playfair Display', serif; */
-    font-weight: 100;
-  }
+h1,
+h2,
+h3,
+h4 {
+  /* font-family: 'Playfair Display', serif; */
+  font-weight: 100;
+}
 
-  strong{
-    font-weight:800;
-  }
+strong {
+  font-weight: 800;
+}
 
+.post-card.definitions .text-author {
+  display: none;
+}
 
-  .post-card.definitions .text-author {
-    display: none;
-  }
+.post-card.explainers {
+  text-decoration: none;
+}
 
+.post-card.explainers .text-snippet {
+  text-decoration: none;
+}
 
-  .post-card.explainers{
-    text-decoration: none;
-  }
+.underline-orange {
+  text-decoration: underline;
+  text-decoration-color: #dd694a;
+}
 
-    .post-card.explainers .text-snippet {
-    text-decoration: none;
-  }
+.underline-teal {
+  text-decoration: underline;
+  text-decoration-color: #197278;
+}
 
-  .underline-orange{
-    text-decoration: underline;
-    text-decoration-color: #dd694a;
-  }
+.underline-orange:hover,
+.underline-teal:hover {
+  text-decoration: underline;
+  text-decoration-color: #33322d;
+}
 
-  .underline-teal{
-    text-decoration: underline;
-    text-decoration-color: #197278;
-  }
+.text-snippet {
+  font-size: 12px;
+}
 
-  .underline-orange:hover,.underline-teal:hover{
-    text-decoration: underline;
-    text-decoration-color: #33322d;
-  }
-
-  .text-snippet {
-    font-size: 12px;
-  }
-
-  input,textarea {
-    padding: 1rem;
-    border: 1px solid gray;
-  }
-
-
+input,
+textarea {
+  padding: 1rem;
+  border: 1px solid gray;
+}
 </style>
