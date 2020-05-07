@@ -88,7 +88,7 @@ const router = new Router({
       component: Inbox,
     },
     {
-      path: '/sender-message',
+      path: '/message-details/:messageId',
       name: 'Message',
       component: Message,
     },

@@ -3,7 +3,7 @@
     <div class="hidden lg:block p-5 bg-gray-100 ml-16 float-right w-1/4">
       <p>We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere.</p>
       <p>
-        <strong>Emily Oster</strong> is an American economist, professor at Brown Univeristy, and bestselling author.
+        <strong>Emily Oster</strong> is an American economist, professor at Brown University, and bestselling author.
       </p>
       <p>
         <strong>Galit Alter</strong> is a Professor of Medicine at Harvard Medical School and a Group Leader at the Ragon Institute
@@ -14,17 +14,29 @@
     <div class="preamble">
       <p class="text-2xl md:text-3xl">
         <strong>COVID-19 is confusing.</strong> There's a lot of conflicting information out there—
-        <a href="#" class="underline-orange transition">can you get the virus from food?</a>
-        <a href="#" class="underline-orange transition">Is there such a thing as immunity?</a>
-        <a href="#" class="underline-orange transition">What kind of tests are really out there?</a>
-        <a href="#" class="underline-orange transition">Who is most at risk?</a> And all the conflicting information can make
+        <a
+          href="https://explaincovid.org/post/0TRoE2X1g4QuyA8BkgJ3"
+          class="underline-orange transition"
+        >can you get the virus from food?</a>
+        <a
+          href="https://explaincovid.org/post/2EUafbV3iwhUlflPxIqX"
+          class="underline-orange transition"
+        >Is there such a thing as immunity?</a>
+        <a
+          href="https://explaincovid.org/post/0Gwwlk5kA4p3FqcYrWpr"
+          class="underline-orange transition"
+        >What kind of tests are really out there?</a>
+        <a
+          href="https://explaincovid.org/post/HpswGzv13mdB2y8ki8t5"
+          class="underline-orange transition"
+        >Who is most at risk?</a> And all the conflicting information can make
         it hard to make decisions, from whether to go to the grocery store to when to send your kids back to day care.
       </p>
     </div>
     <div class="block lg:hidden p-5 bg-gray-100 lg:w-1/4">
       <p>We are a team of researchers and students at Brown, MIT, Harvard, Mass General and elsewhere.</p>
       <p>
-        <strong>Emily Oster</strong> is an American economist, professor at Brown Univeristy, and bestselling author.
+        <strong>Emily Oster</strong> is an American economist, professor at Brown University, and bestselling author.
       </p>
       <p>
         <strong>Galit Alter</strong> is a Professor of Medicine at Harvard Medical School and a Group Leader at the Ragon Institute

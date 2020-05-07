@@ -7,7 +7,6 @@
         <tr>
           <td>Name</td>
           <td>Email</td>
-          <td>Message</td>
           <td>Date Sent</td>
           <td>Replied Status</td>
           <td></td>
@@ -15,7 +14,6 @@
         <tr v-for="message in messages" :key="message.id">
           <td class="name">{{ message.senderName }}</td>
           <td class="creds">{{ message.senderEmail }}</td>
-          <td class="creds">{{ message.message }}</td>
           <td class="creds">{{ message.createdAt }}</td>
           <td class="creds">
             <label>
@@ -27,10 +25,8 @@
               <span></span>
             </label>
           </td>
-          <td class="creds delete">
-            <button class="btn red" @click="deleteMessage(message.id)">
-              <i class="material-icons right">delete</i>
-            </button>
+          <td class="creds ">
+            <button class="btn red" @click="redirectToEdit(message.id)">See Message</button>
           </td>
         </tr>
       </tbody>
@@ -72,17 +68,10 @@ export default {
           console.error('Error writing document: ', error);
         });
     },
-    deleteMessage(messageId) {
-      db.collection('messages')
-        .doc(messageId)
-        .delete()
-        .then(() => {
-          console.log('Document successfully deleted!');
-        })
-        .catch(error => {
-          console.error('Error removing document: ', error);
-        });
+    redirectToEdit(messageId) {
+      this.$router.push({ name: 'Message', params: { messageId: messageId } });
     },
+
   },
   created() {
     this.getMessages();

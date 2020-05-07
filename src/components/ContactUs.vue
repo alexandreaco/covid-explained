@@ -1,6 +1,6 @@
 <template>
   <div class="contact-us container">
-    <form class="card-panel" @submit.prevent="signup">
+    <form class="card-panel" @submit.prevent="createMessage">
       <h4 class="mb-4 text-xl md:text-3xl font-light">Contact Us</h4>
       <div class="field">
         <label for="senderName">Name</label>
